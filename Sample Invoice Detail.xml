@@ -1,0 +1,52 @@
+<?xml version="1.0" standalone="yes"?>
+<DATAPACKET Version="2.0">
+  <METADATA>
+    <FIELDS>
+      <FIELD attrname="DTLKEY" fieldtype="i4" required="true"/>
+      <FIELD attrname="DOCKEY" fieldtype="i4" required="true"/>
+      <FIELD attrname="SEQ" fieldtype="i4"/>
+      <FIELD attrname="STYLEID" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="10"/>
+      <FIELD attrname="NUMBER" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="10"/>
+      <FIELD attrname="ITEMCODE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="60"/>
+      <FIELD attrname="LOCATION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="BATCH" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="60"/>
+      <FIELD attrname="PROJECT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="DESCRIPTION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="DESCRIPTION2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="DESCRIPTION3" fieldtype="bin.hex" SUBTYPE="Binary" WIDTH="8"/>
+      <FIELD attrname="PERMITNO" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="QTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+      <FIELD attrname="UOM" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="RATE" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+      <FIELD attrname="SQTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+      <FIELD attrname="SUOMQTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+      <FIELD attrname="UNITPRICE" fieldtype="fixedFMT" DECIMALS="8" WIDTH="18"/>
+      <FIELD attrname="DELIVERYDATE" fieldtype="date"/>
+      <FIELD attrname="DISC" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="TAX" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="TARIFF" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="TAXRATE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="TAXAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="LOCALTAXAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="TAXINCLUSIVE" fieldtype="i2"/>
+      <FIELD attrname="AMOUNT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="LOCALAMOUNT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="TAXABLEAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="ACCOUNT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="PRINTABLE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="FROMDOCTYPE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="4"/>
+      <FIELD attrname="FROMDOCKEY" fieldtype="i4"/>
+      <FIELD attrname="FROMDTLKEY" fieldtype="i4"/>
+      <FIELD attrname="TRANSFERABLE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="REMARK1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="REMARK2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="INITIALPURCHASECOST" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="CHANGED" fieldtype="string.uni" required="true" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="CompanyItemCode" fieldtype="string.uni" WIDTH="60"/>
+    </FIELDS>
+    <PARAMS/>
+  </METADATA>
+  <ROWDATA>
+    <ROW DTLKEY="19" DOCKEY="18" SEQ="1000" ITEMCODE="OL/LED/Beige" LOCATION="----" BATCH="" PROJECT="----" DESCRIPTION="Solvin LED solar-powered pendant lamp, outdoor(Beige)" QTY="10.0000" UOM="UNIT" RATE="1.0000" SQTY="10.0000" SUOMQTY="0.0000" UNITPRICE="120.00000000" DELIVERYDATE="20240629" TAX="" TAXAMT="0.00" LOCALTAXAMT="0.00" TAXINCLUSIVE="0" AMOUNT="1200.00" LOCALAMOUNT="1200.00" TAXABLEAMT="1200.00" ACCOUNT="500-300" PRINTABLE="T" FROMDOCTYPE="DO" FROMDOCKEY="5" FROMDTLKEY="6" TRANSFERABLE="T" INITIALPURCHASECOST="0.00" CHANGED="F"/>
+  </ROWDATA>
+</DATAPACKET>

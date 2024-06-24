@@ -1,0 +1,123 @@
+<?xml version="1.0" standalone="yes"?>
+<DATAPACKET Version="2.0">
+  <METADATA>
+    <FIELDS>
+      <FIELD attrname="DOCKEY" fieldtype="i4"/>
+      <FIELD attrname="DOCNO" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="DOCNOEX" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="DOCDATE" fieldtype="date"/>
+      <FIELD attrname="POSTDATE" fieldtype="date"/>
+      <FIELD attrname="TAXDATE" fieldtype="date"/>
+      <FIELD attrname="CODE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="COMPANYNAME" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="200"/>
+      <FIELD attrname="ADDRESS1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="ADDRESS2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="ADDRESS3" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="ADDRESS4" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="PHONE1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="MOBILE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="FAX1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="ATTENTION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="140"/>
+      <FIELD attrname="AREA" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="AGENT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="PROJECT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+      <FIELD attrname="TERMS" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+      <FIELD attrname="CURRENCYCODE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="12"/>
+      <FIELD attrname="CURRENCYRATE" fieldtype="fixedFMT" DECIMALS="8" WIDTH="18"/>
+      <FIELD attrname="SHIPPER" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="60"/>
+      <FIELD attrname="DESCRIPTION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="600"/>
+      <FIELD attrname="COUNTRY" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="100"/>
+      <FIELD attrname="CANCELLED" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="DOCAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="LOCALDOCAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="D_AMOUNT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+      <FIELD attrname="VALIDITY" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="600"/>
+      <FIELD attrname="DELIVERYTERM" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="600"/>
+      <FIELD attrname="CC" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="600"/>
+      <FIELD attrname="DOCREF1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="DOCREF2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="DOCREF3" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="DOCREF4" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="BRANCHNAME" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="200"/>
+      <FIELD attrname="DADDRESS1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="DADDRESS2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="DADDRESS3" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="DADDRESS4" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="120"/>
+      <FIELD attrname="DATTENTION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="140"/>
+      <FIELD attrname="DPHONE1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="DMOBILE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="DFAX1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+      <FIELD attrname="TAXEXEMPTNO" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="100"/>
+      <FIELD attrname="ATTACHMENTS" fieldtype="bin.hex" SUBTYPE="Binary" WIDTH="8"/>
+      <FIELD attrname="NOTE" fieldtype="bin.hex" SUBTYPE="Binary" WIDTH="8"/>
+      <FIELD attrname="TRANSFERABLE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="UPDATECOUNT" fieldtype="i4"/>
+      <FIELD attrname="PRINTCOUNT" fieldtype="i4"/>
+      <FIELD attrname="DOCNOSETKEY" fieldtype="i8"/>
+      <FIELD attrname="NEXTDOCNO" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="80"/>
+      <FIELD attrname="CHANGED" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+      <FIELD attrname="sdsDocDetail" fieldtype="nested">
+        <FIELDS>
+          <FIELD attrname="DTLKEY" fieldtype="i4" required="true"/>
+          <FIELD attrname="DOCKEY" fieldtype="i4" required="true"/>
+          <FIELD attrname="SEQ" fieldtype="i4"/>
+          <FIELD attrname="STYLEID" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="10"/>
+          <FIELD attrname="NUMBER" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="10"/>
+          <FIELD attrname="ITEMCODE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="60"/>
+          <FIELD attrname="LOCATION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="BATCH" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="60"/>
+          <FIELD attrname="PROJECT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="DESCRIPTION" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+          <FIELD attrname="DESCRIPTION2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+          <FIELD attrname="DESCRIPTION3" fieldtype="bin.hex" SUBTYPE="Binary" WIDTH="8"/>
+          <FIELD attrname="PERMITNO" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="QTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+          <FIELD attrname="UOM" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+          <FIELD attrname="RATE" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+          <FIELD attrname="SQTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+          <FIELD attrname="SUOMQTY" fieldtype="fixedFMT" DECIMALS="4" WIDTH="18"/>
+          <FIELD attrname="UNITPRICE" fieldtype="fixedFMT" DECIMALS="8" WIDTH="18"/>
+          <FIELD attrname="DELIVERYDATE" fieldtype="date"/>
+          <FIELD attrname="DISC" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="TAX" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+          <FIELD attrname="TARIFF" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="TAXRATE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="40"/>
+          <FIELD attrname="TAXAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="LOCALTAXAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="TAXINCLUSIVE" fieldtype="i2"/>
+          <FIELD attrname="AMOUNT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="LOCALAMOUNT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="TAXABLEAMT" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="ACCOUNT" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="20"/>
+          <FIELD attrname="PRINTABLE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+          <FIELD attrname="FROMDOCTYPE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="4"/>
+          <FIELD attrname="FROMDOCKEY" fieldtype="i4"/>
+          <FIELD attrname="FROMDTLKEY" fieldtype="i4"/>
+          <FIELD attrname="TRANSFERABLE" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="2"/>
+          <FIELD attrname="REMARK1" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+          <FIELD attrname="REMARK2" fieldtype="string.uni" SUBTYPE="FixedChar" WIDTH="400"/>
+          <FIELD attrname="INITIALPURCHASECOST" fieldtype="fixedFMT" DECIMALS="2" WIDTH="18"/>
+          <FIELD attrname="CHANGED" fieldtype="string.uni" required="true" SUBTYPE="FixedChar" WIDTH="2"/>
+          <FIELD attrname="CompanyItemCode" fieldtype="string.uni" WIDTH="60"/>
+          <FIELD attrname="sdsSerialNumber" fieldtype="nested">
+            <FIELDS>
+              <FIELD attrname="SERIALNUMBER" fieldtype="string.uni" required="true" SUBTYPE="FixedChar" WIDTH="100"/>
+            </FIELDS>
+            <PARAMS/>
+          </FIELD>
+        </FIELDS>
+        <PARAMS/>
+      </FIELD>
+    </FIELDS>
+    <PARAMS/>
+  </METADATA>
+  <ROWDATA>
+    <ROW DOCKEY="18" DOCNO="IV-00005" DOCDATE="20240629" POSTDATE="20240629" TAXDATE="20240629" CODE="300-C0001" COMPANYNAME="C ART TECHNOLOGY HUB" ADDRESS1="189, East Fence Road," ADDRESS2="52000, KL" PHONE1="03-62412112" ATTENTION="Ms. Kate" AREA="KL" AGENT="Gabriel" PROJECT="----" TERMS="30 Days" CURRENCYCODE="----" CURRENCYRATE="1.00000000" SHIPPER="----" DESCRIPTION="Sales" CANCELLED="F" DOCAMT="1200.00" LOCALDOCAMT="1200.00" D_AMOUNT="0.00" BRANCHNAME="BILLING" DADDRESS1="189, East Fence Road," DADDRESS2="52000, KL" DATTENTION="Ms. Kate" DPHONE1="03-62412112" TRANSFERABLE="T" PRINTCOUNT="0" DOCNOSETKEY="0" CHANGED="F">
+      <sdsDocDetail>
+        <ROWsdsDocDetail DTLKEY="19" DOCKEY="18" SEQ="1000" ITEMCODE="OL/LED/Beige" LOCATION="----" BATCH="" PROJECT="----" DESCRIPTION="Solvin LED solar-powered pendant lamp, outdoor(Beige)" QTY="10.0000" UOM="UNIT" RATE="1.0000" SQTY="10.0000" SUOMQTY="0.0000" UNITPRICE="120.00000000" DELIVERYDATE="20240629" TAX="" TAXAMT="0.00" LOCALTAXAMT="0.00" TAXINCLUSIVE="0" AMOUNT="1200.00" LOCALAMOUNT="1200.00" TAXABLEAMT="1200.00" ACCOUNT="500-300" PRINTABLE="T" FROMDOCTYPE="DO" FROMDOCKEY="5" FROMDTLKEY="6" TRANSFERABLE="T" INITIALPURCHASECOST="0.00" CHANGED="F">
+          <sdsSerialNumber/>
+        </ROWsdsDocDetail>
+      </sdsDocDetail>
+    </ROW>
+  </ROWDATA>
+</DATAPACKET>

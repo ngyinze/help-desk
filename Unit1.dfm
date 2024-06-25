@@ -2,14 +2,17 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 745
-  ClientWidth = 1159
+  ClientHeight = 583
+  ClientWidth = 1182
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  DesignSize = (
+    1182
+    583)
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -19,15 +22,16 @@ object Form1: TForm1
     Caption = 'Customer'
   end
   object cxGrid1: TcxGrid
-    Left = 0
-    Top = 292
-    Width = 1159
-    Height = 453
-    Align = alBottom
+    AlignWithMargins = True
+    Left = -8
+    Top = 248
+    Width = 1182
+    Height = 342
+    Cursor = crArrow
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelKind = bkFlat
+    BevelWidth = 3
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 236
-    ExplicitWidth = 1098
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       ScrollbarAnnotations.CustomAnnotations = <>
@@ -259,7 +263,7 @@ object Form1: TForm1
   end
   object LabeledEdit1: TDBLabeledEdit
     Left = 1024
-    Top = 32
+    Top = 34
     Width = 125
     Height = 15
     BevelEdges = [beBottom]
@@ -282,9 +286,9 @@ object Form1: TForm1
   end
   object LabeledEdit2: TDBLabeledEdit
     Left = 1024
-    Top = 53
+    Top = 55
     Width = 125
-    Height = 15
+    Height = 21
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BorderStyle = bsNone
@@ -292,7 +296,7 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 6
     EditLabel.Width = 44
-    EditLabel.Height = 15
+    EditLabel.Height = 21
     EditLabel.Caption = 'Date :-  '
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clBlue
@@ -307,7 +311,7 @@ object Form1: TForm1
     Left = 1024
     Top = 82
     Width = 125
-    Height = 15
+    Height = 23
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BorderStyle = bsNone
@@ -315,7 +319,7 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 7
     EditLabel.Width = 45
-    EditLabel.Height = 15
+    EditLabel.Height = 23
     EditLabel.Caption = 'Agent :-'
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clBlue
@@ -330,7 +334,7 @@ object Form1: TForm1
     Left = 1024
     Top = 111
     Width = 125
-    Height = 15
+    Height = 23
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BorderStyle = bsNone
@@ -338,7 +342,7 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 8
     EditLabel.Width = 45
-    EditLabel.Height = 15
+    EditLabel.Height = 23
     EditLabel.Caption = 'Terms :-'
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clBlue
@@ -353,7 +357,7 @@ object Form1: TForm1
     Left = 1024
     Top = 140
     Width = 125
-    Height = 15
+    Height = 23
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BorderStyle = bsNone
@@ -361,7 +365,7 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 9
     EditLabel.Width = 44
-    EditLabel.Height = 15
+    EditLabel.Height = 23
     EditLabel.Caption = 'Ref 1.:- '
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clBlue
@@ -376,7 +380,7 @@ object Form1: TForm1
     Left = 1024
     Top = 169
     Width = 125
-    Height = 15
+    Height = 16
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BorderStyle = bsNone
@@ -384,7 +388,7 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 10
     EditLabel.Width = 51
-    EditLabel.Height = 15
+    EditLabel.Height = 16
     EditLabel.Caption = 'Ext. No :-'
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clBlue
@@ -428,17 +432,46 @@ object Form1: TForm1
     DataSource = DataSource1
     TabOrder = 13
   end
+  object cxButton1: TcxButton
+    Left = 1076
+    Top = 1
+    Width = 75
+    Height = 25
+    Caption = 'Need help?'
+    TabOrder = 14
+    OnClick = cxButton1Click
+  end
+  object cxButton2: TcxButton
+    Left = 8
+    Top = 203
+    Width = 25
+    Height = 25
+    Caption = #10133
+    TabOrder = 15
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
   object dxUIAdornerManager1: TdxUIAdornerManager
-    Badges.Active = True
+    Badges.Font.Charset = DEFAULT_CHARSET
+    Badges.Font.Color = clWindowText
+    Badges.Font.Height = -12
+    Badges.Font.Name = 'Segoe UI'
+    Badges.Font.Style = []
+    Badges.ParentFont = False
     Left = 528
     Top = 368
     object dxUIAdornerManager1Badge1: TdxBadge
       TargetElement.Control = cxDBComboBox1
-      Background.Color = clSteelblue
+      OnClick = dxUIAdornerManager1Badge1Click
+      Background.Color = clTomato
       Background.FitMode = ifmFit
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 22
+      Font.Color = clWhite
+      Font.Height = 23
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       Offset.X = 17
@@ -449,13 +482,14 @@ object Form1: TForm1
       Text = '1'
       TextMargins.All = 3
     end
-    object dxUIAdornerManager1Badge3: TdxBadge
+    object dxUIAdornerManager1Badge2: TdxBadge
       TargetElement.Control = LabeledEdit1
+      OnClick = dxUIAdornerManager1Badge2Click
       Alignment.Horz = taLeftJustify
-      Background.Color = clSteelblue
+      Background.Color = clTomato
       Background.FitMode = ifmFit
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clWhite
       Font.Height = 22
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
@@ -467,13 +501,14 @@ object Form1: TForm1
       Text = '2'
       TextMargins.All = 3
     end
-    object dxUIAdornerManager1Badge4: TdxBadge
+    object dxUIAdornerManager1Badge3: TdxBadge
       TargetElement.Control = DBLabeledEdit1
+      OnClick = dxUIAdornerManager1Badge3Click
       Alignment.Horz = taLeftJustify
-      Background.Color = clSteelblue
+      Background.Color = clTomato
       Background.FitMode = ifmFit
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clWhite
       Font.Height = 22
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
@@ -485,18 +520,19 @@ object Form1: TForm1
       Text = '3'
       TextMargins.All = 3
     end
-    object dxUIAdornerManager1Badge5: TdxBadge
-      TargetElement.Control = cxGrid1
+    object dxUIAdornerManager1Badge4: TdxBadge
+      TargetElement.Control = cxButton2
+      OnClick = dxUIAdornerManager1Badge4Click
       Alignment.Horz = taLeftJustify
-      Background.Color = clSteelblue
+      Background.Color = clTomato
       Background.FitMode = ifmFit
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clWhite
       Font.Height = 22
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
-      Offset.X = 10
-      Offset.Y = -15
+      Offset.X = 30
+      Offset.Y = -3
       ParentFont = False
       Size.Height = 30
       Size.Width = 30

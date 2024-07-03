@@ -131,6 +131,8 @@
             <Form>Form2</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="SliderUpdater.pas"/>
+        <DCCReference Include="ImageRetriever.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

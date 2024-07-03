@@ -462,8 +462,8 @@ object Form1: TForm1
     Badges.Font.Name = 'Segoe UI'
     Badges.Font.Style = []
     Badges.ParentFont = False
-    Left = 528
-    Top = 368
+    Left = 536
+    Top = 360
     object dxUIAdornerManager1Badge1: TdxBadge
       TargetElement.Control = cxDBComboBox1
       OnClick = dxUIAdornerManager1Badge1Click
@@ -1058,12 +1058,12 @@ object Form1: TForm1
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 312
-    Top = 368
+    Left = 320
+    Top = 360
   end
   object DataSource2: TDataSource
     DataSet = ClientDataSet2
     Left = 416
-    Top = 369
+    Top = 361
   end
 end

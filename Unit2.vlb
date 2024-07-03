@@ -3,5 +3,33 @@ Coordinates=10,10,104,36
 Visible=True
 
 []
-Coordinates=0,0,89,36
+Coordinates=72,77,72,58
+
+[cxImageCollection1Item3]
+Coordinates=182,1,159,36
+
+[cxButton1]
+Coordinates=91,1,72,58
+
+[cxImageCollection1Item1]
+Coordinates=182,56,159,36
+
+[cxImageCollection1Item4]
+Coordinates=379,1,159,36
+
+[cxImageCollection1]
+Coordinates=379,56,127,36
+
+[StaticText1]
+Coordinates=379,111,79,36
+
+[cxImageCollection1Item2]
+Coordinates=379,166,159,36
+
+[cxButton2]
+Coordinates=0,0,72,58
+Visible=True
+
+[Panel1]
+Coordinates=13,77,55,58
 

@@ -139,7 +139,7 @@ type
     LabeledEdit4: TDBLabeledEdit;
     LabeledEdit5: TDBLabeledEdit;
     LabeledEdit6: TDBLabeledEdit;
-    procedure createNewForm;
+    procedure createNewForm(aBadge: Integer);
     procedure cxButton1Click(Sender: TObject);
     procedure dxUIAdornerManager1Badge1Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxUIAdornerManager1Badge2Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
@@ -154,17 +154,16 @@ type
 var
   Form1: TForm1;
   Form2: TForm2;
-  aBadge: Integer;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.createNewForm;
+procedure TForm1.createNewForm(aBadge: Integer);
 begin
   Form2 := TForm2.Create(Application);
   try
-    Form2.BadgeValue := aBadge;
+    Form2.SetBadgeValue(aBadge);
     Form2.ShowModal;
   finally
     Form2.Free;
@@ -184,29 +183,25 @@ end;
 procedure TForm1.dxUIAdornerManager1Badge1Click(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  aBadge := 0;
-  createNewForm;
+  createNewForm(0);
 end;
 
 procedure TForm1.dxUIAdornerManager1Badge2Click(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  aBadge := 1;
-  createNewForm;
+  createNewForm(1);
 end;
 
 procedure TForm1.dxUIAdornerManager1Badge3Click(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  aBadge := 2;
-  createNewForm;
+  createNewForm(2);
 end;
 
 procedure TForm1.dxUIAdornerManager1Badge4Click(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  aBadge := 3;
-  createNewForm;
+  createNewForm(3);
 end;
 
 

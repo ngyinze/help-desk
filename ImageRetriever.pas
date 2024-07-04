@@ -4,14 +4,18 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Net.HttpClient, System.Net.HttpClientComponent,
-  cxGraphics, dxGDIPlusClasses, Vcl.Graphics;
-
+  cxGraphics, dxGDIPlusClasses, Vcl.Graphics, System.IOUtils;
 type
   TImageRetriever = class
   private
     FHttpClient: TNetHTTPClient;
+    FCachePath: string;
+    function GetCacheFileName(const URL: string): string;
+    function IsImageCached(const URL: string): Boolean;
+    procedure SaveImageToCache(const URL: string; Stream: TStream);
+    procedure LoadImageFromCache(const URL: string; Stream: TStream);
   public
-    constructor Create;
+    constructor Create(const CachePath: string);
     destructor Destroy; override;
     procedure RetrieveImage(const URL: string; AImageCollection: TcxImageCollection; const AImageIndex: Integer);
 end;
@@ -19,16 +23,44 @@ end;
 
 implementation
 
-constructor TImageRetriever.Create;
+constructor TImageRetriever.Create(const CachePath: string);
 begin
-  inherited;
+  inherited Create;
   FHttpClient := TNetHTTPClient.Create(nil);
+  FCachePath := CachePath;
+  ForceDirectories(FCachePath);
 end;
 
 destructor TImageRetriever.Destroy;
 begin
   FHttpClient.Free;
   inherited;
+end;
+
+function TImageRetriever.GetCacheFileName(const URL: string): string;
+var
+  IFileName: string;
+begin
+  IFileName := TPath.GetFileNameWithoutExtension(URl) + '.gif';
+  Result := TPath.Combine(FCachePath, IFileName);
+end;
+
+function TImageRetriever.IsImageCached(const URL: string): Boolean;
+begin
+  Result := FileExists(GetCacheFileName(URL));
+end;
+
+procedure TImageRetriever.LoadImageFromCache(const URL: string;
+  Stream: TStream);
+var
+  IFileStream: TFileStream;
+begin
+  IFileStream := TFileStream.Create(GetCacheFileName(URL), fmOpenRead);
+  try
+    Stream.CopyFrom(IFileStream, 0);
+  finally
+    IFileStream.Free;
+  end;
 end;
 
 procedure TImageRetriever.RetrieveImage(const URL: string; AImageCollection:
@@ -38,10 +70,19 @@ var
   LGraphic: TdxSmartImage;
   LStream: TMemoryStream;
 begin
-  try
     LStream := TMemoryStream.Create;
-    LResponse := FHttpClient.Get(URL, LStream);
-    if LResponse.StatusCode = 200 then begin
+    try
+      if IsImageCached(URL) then
+        LoadImageFromCache(URL, LStream)
+      else
+      begin
+         LResponse := FHttpClient.Get(URL, LStream);
+      if LResponse.StatusCode = 200 then
+        SaveImageToCache(URL, LStream)
+      else
+        raise Exception.CreateFmt('Error retrieving image: %d - %s', [LResponse.StatusCode, LResponse.StatusText]);
+      end;
+
       LStream.Position := 0;
       LGraphic := TdxSmartImage.Create;
       try
@@ -50,13 +91,22 @@ begin
       finally
         LGraphic.Free;
       end;
-    end
-    else
-      raise Exception.CreateFmt('Error retrieving image: %d - %s', [LResponse.StatusCode, LResponse.StatusText])
   finally
     LStream.Free;
   end;
+end;
 
+procedure TImageRetriever.SaveImageToCache(const URL: string; Stream: TStream);
+var
+  IFileStream: TFileStream;
+begin
+  IFileStream := TFileStream.Create(GetCacheFileName(URL), fmCreate);
+  try
+    Stream.Position := 0;
+    IFileStream.CopyFrom(Stream, Stream.Size);
+  finally
+    IFileStream.Free;
+  end;
 end;
 
 end.

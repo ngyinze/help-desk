@@ -23,6 +23,7 @@ object Form2: TForm2
     Align = alBottom
     Caption = 'Panel1'
     TabOrder = 4
+    ExplicitTop = 449
   end
   object dxImageSlider2: TdxImageSlider
     Left = 0
@@ -33,6 +34,7 @@ object Form2: TForm2
     AnimationTime = 8000
     Images = cxImageCollection1
     ItemIndex = 0
+    ExplicitTop = -6
   end
   object cxButton1: TcxButton
     Left = 24

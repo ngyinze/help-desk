@@ -3,7 +3,7 @@ unit SliderUpdater;
 interface
 
 uses
-  dxImageSlider, cxGraphics, Vcl.StdCtrls, dxGDIPlusClasses,
+  dxImageSlider, cxGraphics, Vcl.StdCtrls, dxGDIPlusClasses, dxCore,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes;
 
 type
@@ -16,7 +16,7 @@ type
       procedure UpdateSlider(aIndex: Integer);
     public
       constructor Create(ASlider: TdxImageSlider; AImageCollection: TcxImageCollection; AStaticText: TStaticText);
-      procedure SetBadgeValue(Value: Integer);
+      property BadgeValue: Integer write UpdateSlider;
       procedure Next;
       procedure Previous;
     end;
@@ -39,14 +39,10 @@ end;
 procedure TSliderUpdater.UpdateSlider(aIndex: Integer);
 begin
   FSlider.ItemIndex := FSlider.ItemIndex + aIndex;
+  TdxSmartImage(FImageCollection.Items[FSlider.ItemIndex].Picture.Graphic).AnimationLoop := bFalse;
   TdxSmartImage(FImageCollection.Items[FSlider.ItemIndex].Picture.Graphic).ActiveFrame := 0;
   TdxSmartImage(FImageCollection.Items[FSlider.ItemIndex].Picture.Graphic).StartAnimation;
   FStaticText.Caption := FStepDescriptions[FSlider.ItemIndex];
-end;
-
-procedure TSliderUpdater.SetBadgeValue(Value: Integer);
-begin
-  UpdateSlider(Value);
 end;
 
 procedure TSliderUpdater.Next;

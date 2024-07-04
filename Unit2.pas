@@ -8,7 +8,7 @@ uses
   Vcl.Menus, Vcl.StdCtrls, cxButtons,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   System.ImageList, Vcl.ImgList, cxImageList, cxContainer, cxEdit, cxLabel,
-  Vcl.ExtCtrls, SliderUpdater, ImageRetriever;
+  Vcl.ExtCtrls, SliderUpdater, ImageRetriever, System.IOUtils;
 
 type
   TForm2 = class(TForm)
@@ -24,14 +24,16 @@ type
     Panel1: TPanel;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
-    procedure SetBadgeValue(Value: Integer);
   private
     FImageRetriever: TImageRetriever;
     FSliderUpdater: TSliderUpdater;
+    FBadgeValue: Integer;
     procedure RetrieveImages;
+    procedure SetBadgeValue(Value: Integer);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    property BadgeValue: Integer read FBadgeValue write SetBadgeValue;
   end;
 
 
@@ -47,10 +49,13 @@ const
   'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/4.gif'];
 
 constructor TForm2.Create(AOwner: TComponent);
+var
+  CachePath: string;
 begin
   inherited Create(AOwner);
   FSliderUpdater := TSliderUpdater.Create(dxImageSlider2, cxImageCollection1, StaticText1);   //overwritten create
-  FImageRetriever := TImageRetriever.Create;  //default create
+  CachePath := TPath.Combine(TPath.GetHomePath, 'SQL', 'ImageCache');
+  FImageRetriever := TImageRetriever.Create(CachePath);  //default create
   RetrieveImages;
 end;
 
@@ -78,7 +83,7 @@ end;
 
 procedure TForm2.SetBadgeValue(Value: Integer);
 begin
-  FSliderUpdater.SetBadgeValue(Value);
+  FSliderUpdater.BadgeValue := Value;
 end;
 
 

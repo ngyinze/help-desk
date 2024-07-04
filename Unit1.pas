@@ -163,7 +163,7 @@ procedure TForm1.createNewForm(aBadge: Integer);
 begin
   Form2 := TForm2.Create(Application);
   try
-    Form2.SetBadgeValue(aBadge);
+    Form2.BadgeValue := aBadge;
     Form2.ShowModal;
   finally
     Form2.Free;

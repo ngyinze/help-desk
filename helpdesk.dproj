@@ -129,7 +129,6 @@
         </DCCReference>
         <DCCReference Include="Unit2.pas">
             <Form>Form2</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="SliderUpdater.pas"/>
         <DCCReference Include="ImageRetriever.pas"/>

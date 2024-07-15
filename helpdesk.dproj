@@ -132,10 +132,11 @@
         </DCCReference>
         <DCCReference Include="SliderUpdater.pas"/>
         <DCCReference Include="ImageRetriever.pas"/>
-        <DCCReference Include="Browser.pas">
+        <DCCReference Include="YTembed.pas">
             <Form>Form3</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Browser.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

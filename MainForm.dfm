@@ -433,15 +433,14 @@ object Form1: TForm1
     TabOrder = 13
   end
   object cxButton1: TcxButton
-    Left = 1064
-    Top = 1
-    Width = 87
+    Left = 1046
+    Top = 3
+    Width = 103
     Height = 25
     Caption = 'Need help?'
     DropDownMenu = PopupMenu1
-    Kind = cxbkDropDownButton
+    Kind = cxbkOfficeDropDown
     TabOrder = 14
-    OnClick = cxButton1Click
   end
   object cxButton2: TcxButton
     Left = 8
@@ -1070,6 +1069,10 @@ object Form1: TForm1
   end
   object PopupMenu1: TPopupMenu
     Left = 608
+    object Guides1: TMenuItem
+      Caption = 'Guide'
+      OnClick = Guide1Click
+    end
     object Video1: TMenuItem
       Caption = 'Video'
       OnClick = Video1Click

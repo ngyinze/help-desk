@@ -3,7 +3,7 @@ unit MainForm;
 interface
 
 uses
-  cxButtons, HelpScreen, Browser, Vcl.ToolWin, Vcl.ComCtrls, dxCoreGraphics, cxButtonEdit,
+  cxButtons, HelpScreen, YTEmbed, Vcl.ToolWin, Vcl.ComCtrls, dxCoreGraphics, cxButtonEdit,
   cxClasses, dxUIAdorners, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxDataStorage, cxEdit, cxNavigator, dxDateRanges, dxScrollbarAnnotations,
   cxGridTableView, cxGridDBTableView, cxGrid, dxLayoutContainer, Vcl.Buttons,
@@ -141,8 +141,9 @@ type
     LabeledEdit6: TDBLabeledEdit;
     PopupMenu1: TPopupMenu;
     Video1: TMenuItem;
+    Guides1: TMenuItem;
     procedure createNewForm(aBadge: Integer);
-    procedure cxButton1Click(Sender: TObject);
+    procedure Guide1Click(Sender: TObject);
     procedure dxUIAdornerManager1Badge1Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxUIAdornerManager1Badge2Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxUIAdornerManager1Badge3Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
@@ -174,7 +175,7 @@ begin
   end;
 end;
 
-procedure TForm1.cxButton1Click(Sender: TObject);
+procedure TForm1.Guide1Click(Sender: TObject);
 var
   aState: boolean;
   aBadges: TdxBadges;

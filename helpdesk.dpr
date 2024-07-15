@@ -6,12 +6,13 @@ uses
   HelpScreen in 'HelpScreen.pas' {Form2},
   SliderUpdater in 'SliderUpdater.pas',
   ImageRetriever in 'ImageRetriever.pas',
-  Browser in 'Browser.pas' {Form3};
+  YTembed in 'YTembed.pas' {Form3},
+  Browser in 'Browser.pas';
 
 {$R *.res}
 
 begin
-
+  ReportMemoryLeaksOnShutdown := True;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm1, Form1);

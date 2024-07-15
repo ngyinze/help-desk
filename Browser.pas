@@ -3,50 +3,41 @@ unit Browser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Winapi.WebView2, Winapi.ActiveX,
-  Vcl.Edge;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, VCL.Edge;
 
 type
-  TForm3 = class(TForm)
-    EdgeBrowser: TEdgeBrowser;
+  TBrowser = class
     procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
     procedure LoadVideoId(vidID: string);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FHTML: string;
+    FEdgeBrowser: TEdgeBrowser;
   public
     { Public declarations }
+    constructor Create (ABrowser: TEdgeBrowser);
   end;
 
-var
-  Form3: TForm3;
 
 implementation
 
-{$R *.dfm}
+{ Browser }
 
-procedure TForm3.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
+procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
   AResult: HRESULT);
 begin
   if Succeeded(AResult) then
-    EdgeBrowser.NavigateToString(FHTML)
-  else
-  begin
-    ShowMessage('Failed to start browser');
-  end;
+    FEdgeBrowser.NavigateToString(FHTML);
 end;
 
-procedure TForm3.FormCreate(Sender: TObject);
+constructor TBrowser.Create(ABrowser: TEdgeBrowser);
 begin
-  LoadVideoId('M7lc1UVf-VE');
-  EdgeBrowser.CreateWebView;
-  EdgeBrowser.OnCreateWebViewCompleted := ChkBrowserInitialized;
-
+  FEdgeBrowser := ABrowser;
+  FEdgeBrowser.CreateWebView;
+  FEdgeBrowser.OnCreateWebViewCompleted := ChkBrowserInitialized;
 end;
 
-procedure TForm3.LoadVideoId(vidID: string);
+procedure TBrowser.LoadVideoId(vidID: string);
 begin
   FHTML :=
   '''
@@ -69,7 +60,7 @@ begin
 
   <div class="yt">
     <iframe id="ytplayer" type="text/html" width="560" height="315"
-    src="https://www.youtube.com/embed/$vidID$?autoplay=1&fs=0&modestbranding=1"
+    src="https://www.youtube.com/embed/$vidID$?autoplay=1&mute=1&fs=0&modestbranding=1"
     frameborder="0" allowfullscreen>
   </div>
   ''';

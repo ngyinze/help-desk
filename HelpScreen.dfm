@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 527
-  ClientWidth = 821
+  ClientHeight = 623
+  ClientWidth = 904
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,23 +12,61 @@ object Form2: TForm2
   Font.Style = []
   Position = poDesigned
   DesignSize = (
-    821
-    527)
+    904
+    623)
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
-    Top = 446
-    Width = 821
-    Height = 81
+    Top = 495
+    Width = 904
+    Height = 128
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 4
+    ExplicitLeft = 88
+    ExplicitTop = 487
+    object cxCheckBox1: TcxCheckBox
+      Left = 819
+      Top = 7
+      Caption = 'Full Step'
+      Style.TransparentBorder = False
+      TabOrder = 0
+      OnClick = cxCheckBox1Click
+    end
+    object cxListView1: TcxListView
+      Left = 369
+      Top = 83
+      Width = 176
+      Height = 38
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      ColumnClick = False
+      Columns = <
+        item
+        end>
+      HideSelection = False
+      ParentFont = False
+      ReadOnly = True
+      ShowColumnHeaders = False
+      ShowWorkAreas = True
+      Style.BorderStyle = cbsNone
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = 27
+      Style.Font.Name = 'Segoe UI'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 1
+      OnSelectItem = cxListView1SelectItem
+    end
   end
   object imgSlider: TdxImageSlider
     Left = 0
     Top = 0
-    Width = 821
-    Height = 446
+    Width = 904
+    Height = 495
     Align = alClient
     AnimationTime = 0
     Enabled = False
@@ -38,8 +76,8 @@ object Form2: TForm2
     Visible = False
   end
   object btnLeft: TcxButton
-    Left = 22
-    Top = 475
+    Left = 8
+    Top = 527
     Width = 57
     Height = 25
     Anchors = [akBottom]
@@ -48,8 +86,8 @@ object Form2: TForm2
     OnClick = btnLeftClick
   end
   object btnRight: TcxButton
-    Left = 742
-    Top = 475
+    Left = 819
+    Top = 527
     Width = 57
     Height = 25
     Anchors = [akBottom]
@@ -59,8 +97,8 @@ object Form2: TForm2
   end
   object txtSteps: TStaticText
     AlignWithMargins = True
-    Left = 147
-    Top = 471
+    Left = 202
+    Top = 527
     Width = 518
     Height = 29
     Alignment = taCenter
@@ -76,8 +114,8 @@ object Form2: TForm2
     TabOrder = 2
   end
   object imgNoInternet: TcxImage
-    Left = 345
-    Top = 176
+    Left = 353
+    Top = 150
     Anchors = [akLeft, akRight]
     Picture.Data = {
       0D546478536D617274496D61676589504E470D0A1A0A0000000D494844520000
@@ -634,11 +672,11 @@ object Form2: TForm2
     Style.TransparentBorder = True
     TabOrder = 5
     Height = 89
-    Width = 144
+    Width = 227
   end
   object btnRetry: TcxButton
-    Left = 404
-    Top = 268
+    Left = 447
+    Top = 275
     Width = 33
     Height = 34
     Margins.Left = 0
@@ -656,6 +694,17 @@ object Form2: TForm2
     Font.Style = []
     ParentFont = False
     OnClick = btnRetryClick
+  end
+  object EdgeBrowser1: TEdgeBrowser
+    Left = 0
+    Top = 0
+    Width = 904
+    Height = 495
+    Align = alClient
+    TabOrder = 7
+    AllowSingleSignOnUsingOSPrimaryAccount = False
+    TargetCompatibleBrowserVersion = '117.0.2045.28'
+    UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
   end
   object imgCollection: TcxImageCollection
     Left = 656

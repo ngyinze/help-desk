@@ -28,7 +28,7 @@ constructor TForm3.Create(AOwner: TComponent);
 begin
   inherited;
   FBrowser := TBrowser.Create(EdgeBrowser);
-  FBrowser.LoadVideoId('M7lc1UVf-VE');
+  FBrowser.LoadVideoId('M7lc1UVf-VE', '0.25');
 end;
 
 destructor TForm3.Destroy;

@@ -118,7 +118,7 @@ begin
   imgNoInternet.Visible := False;
   btnRetry.Visible := False;
   FBrowser := TBrowser.Create(EdgeBrowser1);
-  FBrowser.LoadVideoId('y40HNPCtRDI');
+  FBrowser.LoadVideoId('y40HNPCtRDI', '0.25');
   EdgeBrowser1.Visible := False;
 end;
 

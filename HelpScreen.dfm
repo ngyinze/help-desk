@@ -23,8 +23,6 @@ object Form2: TForm2
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 4
-    ExplicitLeft = 88
-    ExplicitTop = 487
     object cxCheckBox1: TcxCheckBox
       Left = 819
       Top = 7

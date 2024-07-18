@@ -15,31 +15,34 @@ type
       FStaticText: TStaticText;
       FStepDescriptions: TArray<String>;
       procedure SetSlider(aIndex: Integer);
-      procedure UpdateSlider(aIndex: Integer);
+      function GetSlider(): Integer;
       procedure AnimateImage;
     public
-      constructor Create(ASlider: TdxImageSlider; AImageCollection: TcxImageCollection;
-                      AListView: TcxListView; AStaticText: TStaticText);
-      property BadgeValue: Integer write SetSlider;
+      constructor Create(ASlider: TdxImageSlider; AImageCollection:
+          TcxImageCollection; AListView: TcxListView; AStaticText: TStaticText;
+          AStepDescription: TArray<string>);
+      property BadgeValue: Integer read GetSlider write SetSlider;
       procedure Next;
       procedure Previous;
+      procedure UpdateSlider(aIndex: Integer);
     end;
 
 implementation
 
-constructor TSliderUpdater.Create(ASlider: TdxImageSlider; AImageCollection: TcxImageCollection;
-              AListView: TcxListView; AStaticText: TStaticText);
+constructor TSliderUpdater.Create(ASlider: TdxImageSlider; AImageCollection:
+    TcxImageCollection; AListView: TcxListView; AStaticText: TStaticText;
+    AStepDescription: TArray<string>);
 begin
   FSlider := ASlider;
   FImageCollection := AImageCollection;
   FListView := AListView;
   FStaticText := AStaticText;
-  FStepDescriptions := [
-    'Step 1: Select Customer',
-    'Step 2: Enter relevant details',
-    'Step 3: Write description for this invoice',
-    'Step 4: Click to add a new item record'
-  ];
+  FStepDescriptions := AStepDescription;
+end;
+
+function TSliderUpdater.GetSlider;
+begin
+  Result := FSlider.ItemIndex;
 end;
 
 procedure TSliderUpdater.AnimateImage;

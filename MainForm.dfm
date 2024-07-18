@@ -15,8 +15,8 @@ object Form1: TForm1
     583)
   TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 27
+    Left = 0
+    Top = 43
     Width = 52
     Height = 15
     Caption = 'Customer'
@@ -206,8 +206,8 @@ object Form1: TForm1
     end
   end
   object Address: TDBLabeledEdit
-    Left = 80
-    Top = 82
+    Left = 72
+    Top = 98
     Width = 853
     Height = 23
     BorderStyle = bsNone
@@ -222,8 +222,8 @@ object Form1: TForm1
     LabelSpacing = 16
   end
   object DBEdit1: TDBEdit
-    Left = 80
-    Top = 53
+    Left = 72
+    Top = 69
     Width = 853
     Height = 23
     BorderStyle = bsNone
@@ -233,8 +233,8 @@ object Form1: TForm1
     TabOrder = 2
   end
   object DBLabeledEdit1: TDBLabeledEdit
-    Left = 80
-    Top = 175
+    Left = 72
+    Top = 191
     Width = 853
     Height = 23
     BevelEdges = [beBottom]
@@ -248,8 +248,8 @@ object Form1: TForm1
     LabelSpacing = 8
   end
   object cxDBComboBox1: TcxDBComboBox
-    Left = 80
-    Top = 24
+    Left = 72
+    Top = 40
     DataBinding.DataField = 'CODE'
     DataBinding.DataSource = DataSource1
     ParentShowHint = False
@@ -262,8 +262,8 @@ object Form1: TForm1
     Width = 117
   end
   object LabeledEdit1: TDBLabeledEdit
-    Left = 1024
-    Top = 34
+    Left = 1016
+    Top = 50
     Width = 125
     Height = 15
     BevelEdges = [beBottom]
@@ -285,8 +285,8 @@ object Form1: TForm1
     LabelSpacing = 20
   end
   object LabeledEdit2: TDBLabeledEdit
-    Left = 1024
-    Top = 55
+    Left = 1016
+    Top = 71
     Width = 125
     Height = 21
     BevelEdges = [beBottom]
@@ -308,8 +308,8 @@ object Form1: TForm1
     LabelSpacing = 20
   end
   object LabeledEdit3: TDBLabeledEdit
-    Left = 1024
-    Top = 82
+    Left = 1016
+    Top = 98
     Width = 125
     Height = 23
     BevelEdges = [beBottom]
@@ -331,8 +331,8 @@ object Form1: TForm1
     LabelSpacing = 20
   end
   object LabeledEdit4: TDBLabeledEdit
-    Left = 1024
-    Top = 111
+    Left = 1016
+    Top = 127
     Width = 125
     Height = 23
     BevelEdges = [beBottom]
@@ -354,8 +354,8 @@ object Form1: TForm1
     LabelSpacing = 20
   end
   object LabeledEdit5: TDBLabeledEdit
-    Left = 1024
-    Top = 140
+    Left = 1016
+    Top = 156
     Width = 125
     Height = 23
     BevelEdges = [beBottom]
@@ -377,8 +377,8 @@ object Form1: TForm1
     LabelSpacing = 20
   end
   object LabeledEdit6: TDBLabeledEdit
-    Left = 1024
-    Top = 169
+    Left = 1016
+    Top = 185
     Width = 125
     Height = 16
     BevelEdges = [beBottom]
@@ -400,8 +400,8 @@ object Form1: TForm1
     LabelSpacing = 14
   end
   object Edit1: TDBEdit
-    Left = 80
-    Top = 105
+    Left = 72
+    Top = 121
     Width = 853
     Height = 23
     BorderStyle = bsNone
@@ -411,8 +411,8 @@ object Form1: TForm1
     TabOrder = 11
   end
   object DBEdit2: TDBEdit
-    Left = 80
-    Top = 126
+    Left = 72
+    Top = 142
     Width = 853
     Height = 23
     BorderStyle = bsNone
@@ -422,8 +422,8 @@ object Form1: TForm1
     TabOrder = 12
   end
   object DBEdit3: TDBEdit
-    Left = 80
-    Top = 148
+    Left = 72
+    Top = 164
     Width = 853
     Height = 23
     BorderStyle = bsNone
@@ -433,8 +433,8 @@ object Form1: TForm1
     TabOrder = 13
   end
   object cxButton1: TcxButton
-    Left = 1046
-    Top = 3
+    Left = 1038
+    Top = 19
     Width = 103
     Height = 25
     Caption = 'Need help?'
@@ -443,8 +443,8 @@ object Form1: TForm1
     TabOrder = 14
   end
   object cxButton2: TcxButton
-    Left = 8
-    Top = 203
+    Left = 0
+    Top = 219
     Width = 25
     Height = 25
     Caption = #10133
@@ -720,7 +720,8 @@ object Form1: TForm1
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 520
+    Left = 512
+    Top = 16
     object ClientDataSet1DOCKEY: TIntegerField
       FieldName = 'DOCKEY'
     end
@@ -980,8 +981,8 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = ClientDataSet1
-    Left = 424
-    Top = 1
+    Left = 416
+    Top = 17
   end
   object ClientDataSet2: TClientDataSet
     PersistDataPacket.Data = {
@@ -1068,7 +1069,8 @@ object Form1: TForm1
     Top = 361
   end
   object PopupMenu1: TPopupMenu
-    Left = 608
+    Left = 600
+    Top = 16
     object Guides1: TMenuItem
       Caption = 'Guide'
       OnClick = Guide1Click

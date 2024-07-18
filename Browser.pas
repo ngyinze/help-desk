@@ -3,28 +3,28 @@ unit Browser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes, VCL.Edge;
+  MediaConst, Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes, VCL.Edge;
 
 type
   TBrowser = class
-    procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
-    procedure LoadVideoId(vidID: string; timeframe: string);
   private
     { Private declarations }
     FHTML: string;
     FEdgeBrowser: TEdgeBrowser;
+    procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
+    function CalcSecs(timeFrame: string): Integer;
   public
     { Public declarations }
     constructor Create (ABrowser: TEdgeBrowser);
+    procedure LoadVideoId(vid: TVideoEntry);
+    procedure Navigate();
   end;
-
-  function CalcSecs(timeFrame: string): Integer;
 
 implementation
 
 { Browser }
 
-function CalcSecs(timeframe: string): Integer;
+function TBrowser.CalcSecs(timeframe: string): Integer;
   var min, sec: Integer;
 begin
   min := 0;
@@ -46,7 +46,7 @@ procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
   AResult: HRESULT);
 begin
   if Succeeded(AResult) then
-    FEdgeBrowser.NavigateToString(FHTML);
+    Self.Navigate;
 end;
 
 constructor TBrowser.Create(ABrowser: TEdgeBrowser);
@@ -56,8 +56,12 @@ begin
   FEdgeBrowser.OnCreateWebViewCompleted := ChkBrowserInitialized;
 end;
 
-procedure TBrowser.LoadVideoId(vidID: string; timeframe: string);
+procedure TBrowser.LoadVideoId(vid: TVideoEntry);
+var
+  vidID, timeFrame: string;
 begin
+  vidID := vid.ID;
+  timeFrame := vid.Timestamp;
   FHTML :=
   '''
   <style>
@@ -78,14 +82,19 @@ begin
   </style>
 
   <div class="yt">
-    <iframe id="ytplayer" type="text/html" width="560" height="315"
-    src="https://www.youtube.com/embed/$vidID$?autoplay=1&mute=1&fs=0&modestbranding=1&start=$time$"
+    <iframe id="ytplayer" type="text/html" width="1280" height="720"
+    src="https://www.youtube.com/embed/$vidID$?autoplay=0&fs=0&modestbranding=1&start=$time$"
     frameborder="0" allowfullscreen>
   </div>
   ''';
-
+  //560 315
   FHTML := StringReplace(FHTML, '$vidID$', vidID, [rfReplaceAll]);
-  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeframe).ToString, [rfReplaceAll]);
+  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
+end;
+
+procedure TBrowser.Navigate;
+begin
+  FEdgeBrowser.NavigateToString(FHTML);
 end;
 
 end.

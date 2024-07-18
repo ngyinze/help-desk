@@ -23,28 +23,39 @@ object Form2: TForm2
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 4
-    object cxCheckBox1: TcxCheckBox
+    DesignSize = (
+      904
+      128)
+    object chkBox: TcxCheckBox
       Left = 819
       Top = 7
+      Anchors = [akBottom]
       Caption = 'Full Step'
       Style.TransparentBorder = False
       TabOrder = 0
-      OnClick = cxCheckBox1Click
+      OnClick = ChkBoxClick
     end
-    object cxListView1: TcxListView
-      Left = 369
-      Top = 83
-      Width = 176
-      Height = 38
+    object lsView: TcxListView
+      Left = 328
+      Top = 75
+      Width = 281
+      Height = 50
       Margins.Left = 0
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
+      Anchors = [akBottom]
+      BiDiMode = bdLeftToRight
       ColumnClick = False
       Columns = <
         item
         end>
+      Constraints.MinHeight = 50
       HideSelection = False
+      IconOptions.Arrangement = iaLeft
+      IconOptions.AutoArrange = True
+      IconOptions.WrapText = False
+      ParentBiDiMode = False
       ParentFont = False
       ReadOnly = True
       ShowColumnHeaders = False
@@ -57,7 +68,7 @@ object Form2: TForm2
       Style.Font.Style = []
       Style.IsFontAssigned = True
       TabOrder = 1
-      OnSelectItem = cxListView1SelectItem
+      OnSelectItem = lsViewSelectItem
     end
   end
   object imgSlider: TdxImageSlider
@@ -693,7 +704,7 @@ object Form2: TForm2
     ParentFont = False
     OnClick = btnRetryClick
   end
-  object EdgeBrowser1: TEdgeBrowser
+  object EdgeBrowser: TEdgeBrowser
     Left = 0
     Top = 0
     Width = 904

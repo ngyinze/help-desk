@@ -13,7 +13,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   Vcl.StdCtrls, dxLayoutControl, Vcl.DBCtrls, Vcl.Mask, Vcl.ExtCtrls,
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, dxBar;
 
 type
   TForm1 = class(TForm)
@@ -208,8 +208,6 @@ procedure TForm1.dxUIAdornerManager1Badge4Click(AManager: TdxUIAdornerManager;
 begin
   createNewForm(3);
 end;
-
-
 
 procedure TForm1.Video1Click(Sender: TObject);
 begin

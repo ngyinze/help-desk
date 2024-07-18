@@ -7,7 +7,8 @@ uses
   SliderUpdater in 'SliderUpdater.pas',
   ImageRetriever in 'ImageRetriever.pas',
   YTembed in 'YTembed.pas' {Form3},
-  Browser in 'Browser.pas';
+  Browser in 'Browser.pas',
+  MediaConst in 'MediaConst.pas';
 
 {$R *.res}
 

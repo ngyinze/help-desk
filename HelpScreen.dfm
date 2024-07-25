@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 623
-  ClientWidth = 904
+  ClientHeight = 600
+  ClientWidth = 1005
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,120 +12,111 @@ object Form2: TForm2
   Font.Style = []
   Position = poDesigned
   DesignSize = (
-    904
-    623)
+    1005
+    600)
   TextHeight = 15
-  object Panel1: TPanel
-    Left = 0
-    Top = 495
-    Width = 904
-    Height = 128
-    Align = alBottom
-    BevelOuter = bvNone
-    TabOrder = 4
+  object dxPanel1: TdxPanel
+    Left = 231
+    Top = 474
+    Width = 766
+    Height = 126
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 2
     DesignSize = (
-      904
-      128)
-    object chkBox: TcxCheckBox
-      Left = 819
-      Top = 7
-      Anchors = [akBottom]
-      Caption = 'Full Step'
-      Style.TransparentBorder = False
-      TabOrder = 0
-      OnClick = ChkBoxClick
-    end
-    object lsView: TcxListView
-      Left = 328
-      Top = 75
-      Width = 281
-      Height = 50
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 0
-      Margins.Bottom = 0
-      Anchors = [akBottom]
-      BiDiMode = bdLeftToRight
-      ColumnClick = False
-      Columns = <
-        item
-        end>
-      Constraints.MinHeight = 50
-      HideSelection = False
-      IconOptions.Arrangement = iaLeft
-      IconOptions.AutoArrange = True
-      IconOptions.WrapText = False
-      ParentBiDiMode = False
+      764
+      124)
+    object txtSteps: TStaticText
+      Left = 0
+      Top = 0
+      Width = 764
+      Height = 124
+      Cursor = crDrag
+      Align = alClient
+      Alignment = taCenter
+      BevelOuter = bvNone
+      Caption = 'Enter Your Payment Target'
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
-      ReadOnly = True
-      ShowColumnHeaders = False
-      ShowWorkAreas = True
-      Style.BorderStyle = cbsNone
-      Style.Font.Charset = DEFAULT_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = 27
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.IsFontAssigned = True
+      TabOrder = 2
+      StyleName = 'Windows'
+    end
+    object btnRight: TcxButton
+      Left = 686
+      Top = 46
+      Width = 75
+      Height = 25
+      Anchors = [akRight]
+      Caption = '>'
+      TabOrder = 0
+      OnClick = btnRightClick
+    end
+    object btnLeft: TcxButton
+      Left = 3
+      Top = 47
+      Width = 75
+      Height = 25
+      Anchors = [akLeft]
+      Caption = '<'
       TabOrder = 1
-      OnSelectItem = lsViewSelectItem
+      OnClick = btnLeftClick
+    end
+    object txtDesc: TStaticText
+      Left = 101
+      Top = 44
+      Width = 551
+      Height = 24
+      Alignment = taCenter
+      Anchors = [akLeft, akRight]
+      Caption = 
+        'Insert your targeted person into the given column. For example: ' +
+        'supplier, customer.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object chkBox: TcxCheckBox
+      Left = 699
+      Top = 5
+      Anchors = [akRight]
+      Caption = 'Youtube'
+      Style.TransparentBorder = False
+      TabOrder = 4
+      OnClick = chkBoxClick
     end
   end
   object imgSlider: TdxImageSlider
-    Left = 0
-    Top = 0
-    Width = 904
-    Height = 495
-    Align = alClient
-    AnimationTime = 0
-    Enabled = False
+    Left = 231
+    Top = 8
+    Width = 766
+    Height = 463
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Images = imgCollection
     ItemIndex = 0
-    TransitionEffect = isteNone
-    Visible = False
   end
-  object btnLeft: TcxButton
-    Left = 8
-    Top = 527
-    Width = 57
-    Height = 25
-    Anchors = [akBottom]
-    Caption = '<'
+  object EdgeBrowser: TEdgeBrowser
+    Left = 231
+    Top = 10
+    Width = 766
+    Height = 464
     TabOrder = 0
-    OnClick = btnLeftClick
-  end
-  object btnRight: TcxButton
-    Left = 819
-    Top = 527
-    Width = 57
-    Height = 25
-    Anchors = [akBottom]
-    Caption = '>'
-    TabOrder = 1
-    OnClick = btnRightClick
-  end
-  object txtSteps: TStaticText
-    AlignWithMargins = True
-    Left = 202
-    Top = 527
-    Width = 518
-    Height = 29
-    Alignment = taCenter
-    Anchors = [akBottom]
-    AutoSize = False
-    Caption = 'Step 1: Enter your payment target'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Namenam'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
+    AllowSingleSignOnUsingOSPrimaryAccount = False
+    TargetCompatibleBrowserVersion = '117.0.2045.28'
+    UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
   end
   object imgNoInternet: TcxImage
-    Left = 353
-    Top = 150
-    Anchors = [akLeft, akRight]
+    Left = 536
+    Top = 160
+    Anchors = []
     Picture.Data = {
       0D546478536D617274496D61676589504E470D0A1A0A0000000D494844520000
       0200000002000806000000F478D4FA0000000473424954080808087C08648800
@@ -671,53 +662,52 @@ object Form2: TForm2
       3333333333333333333333333333333333333333333333333333333333333333
       33333333333333333333333333333333333333B372F87F2462239FED8C5D1700
       00000049454E44AE426082}
-    Properties.ReadOnly = True
-    Properties.ShowFocusRect = False
-    Style.BorderColor = clWhite
-    Style.BorderStyle = ebsNone
-    Style.Color = clWhite
-    Style.Edges = []
-    Style.HotTrack = False
-    Style.TransparentBorder = True
-    TabOrder = 5
-    Height = 89
-    Width = 227
+    TabOrder = 3
+    Height = 100
+    Width = 140
   end
   object btnRetry: TcxButton
-    Left = 447
-    Top = 275
+    Left = 592
+    Top = 266
     Width = 33
     Height = 34
-    Margins.Left = 0
-    Margins.Top = 0
-    Margins.Right = 0
-    Margins.Bottom = 0
     Anchors = []
     Caption = #55357#56579
-    LookAndFeel.Kind = lfFlat
-    TabOrder = 6
+    TabOrder = 4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    OnClick = btnRetryClick
   end
-  object EdgeBrowser: TEdgeBrowser
+  object dxTreeViewControl1: TdxTreeViewControl
     Left = 0
-    Top = 0
-    Width = 904
-    Height = 495
-    Align = alClient
-    TabOrder = 7
-    AllowSingleSignOnUsingOSPrimaryAccount = False
-    TargetCompatibleBrowserVersion = '117.0.2045.28'
-    UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
+    Top = 8
+    Width = 229
+    Height = 592
+    Anchors = [akLeft, akTop, akBottom]
+    OptionsBehavior.CaptionEditing = False
+    OptionsBehavior.HotTrack = True
+    OptionsSelection.HideSelection = False
+    TabOrder = 5
+    OnDblClick = dxTreeViewControl1DblClick
+    Data = {
+      01000100540100000A0000000009020000002A000000000C040000000E000000
+      430072006500610074006500200049006E0076006F006900630065002E000000
+      00051200000031002E002000530065006C006500630074002000430075007300
+      74006F006D00650072002C00000000051100000032002E00200049006E007300
+      6500720074002000640065007400610069006C00730036000000000516000000
+      33002E00200041006400640020006E006500770020006900740065006D002000
+      7200650063006F00720064003000000000051300000034002E00200046006900
+      6C006C00200069006E0020005100750061006E0074006900740079002E000000
+      000C0300000010000000430072006500610074006500200045002D0049006E00
+      76006F006900630065000E00000000050200000031002E000E00000000050200
+      000032002E000E00000000050200000033002E00}
   end
   object imgCollection: TcxImageCollection
-    Left = 656
-    Top = 8
+    Left = 936
+    Top = 16
     object imgCollectionItem1: TcxImageCollectionItem
     end
     object imgCollectionItem2: TcxImageCollectionItem

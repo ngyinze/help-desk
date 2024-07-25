@@ -3,7 +3,7 @@ unit MainForm;
 interface
 
 uses
-  cxButtons, HelpScreen, YTEmbed, Vcl.ToolWin, Vcl.ComCtrls, dxCoreGraphics, cxButtonEdit,
+  FeatureScreen, cxButtons, SelectHelp, HelpScreen, YTEmbed, Vcl.ToolWin, Vcl.ComCtrls, dxCoreGraphics, cxButtonEdit,
   cxClasses, dxUIAdorners, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxDataStorage, cxEdit, cxNavigator, dxDateRanges, dxScrollbarAnnotations,
   cxGridTableView, cxGridDBTableView, cxGrid, dxLayoutContainer, Vcl.Buttons,
@@ -13,10 +13,12 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   Vcl.StdCtrls, dxLayoutControl, Vcl.DBCtrls, Vcl.Mask, Vcl.ExtCtrls,
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, dxBar;
+  Winapi.Windows, Winapi.Messages, System.SysUtils,System.Variants, dxBar,
+  cxCheckBox, cxBarEditItem, dxCore, dxRibbonSkins, dxRibbon, cxLabel,
+  System.ImageList, Vcl.ImgList;
 
 type
-  TForm1 = class(TForm)
+  TMainForm = class(TForm)
     Address: TDBLabeledEdit;
     ClientDataSet1: TClientDataSet;
     ClientDataSet1ADDRESS1: TWideStringField;
@@ -76,7 +78,6 @@ type
     ClientDataSet1VALIDITY: TWideStringField;
     ClientDataSet2: TClientDataSet;
     cxButton1: TcxButton;
-    cxButton2: TcxButton;
     cxDBComboBox1: TcxDBComboBox;
     cxGrid1: TcxGrid;
     cxGrid1DBTableView1: TcxGridDBTableView;
@@ -142,13 +143,29 @@ type
     PopupMenu1: TPopupMenu;
     Video1: TMenuItem;
     Guides1: TMenuItem;
-    procedure createNewForm(aBadge: Integer);
+    dxBarManager1: TdxBarManager;
+    dxBarGroup1: TdxBarGroup;
+    dxBarDockControl1: TdxBarDockControl;
+    dxBarDockControl2: TdxBarDockControl;
+    ImageList1: TImageList;
+    dxBarManager1Bar1: TdxBar;
+    dxBarButton1: TdxBarButton;
+    cxButton2: TcxButton;
+    dxUIAdornerManager2: TdxUIAdornerManager;
+    dxUIAdornerManager2Badge1: TdxBadge;
+    dxUIAdornerManager2Badge2: TdxBadge;
+    dxUIAdornerManager2Badge3: TdxBadge;
+    dxUIAdornerManager2Badge4: TdxBadge;
+    dxGuide1: TdxGuide;
     procedure Guide1Click(Sender: TObject);
-    procedure dxUIAdornerManager1Badge1Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
-    procedure dxUIAdornerManager1Badge2Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
-    procedure dxUIAdornerManager1Badge3Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
-    procedure dxUIAdornerManager1Badge4Click(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
+    procedure EnableAdornerManager1;
+    procedure EnableAdornerManager2;
+    procedure createNewForm(aBadge: Integer; aCaption: string; aFormIdx: Integer);
+    procedure dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager; AAdorner:
+        TdxCustomAdorner);
+    procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure Video1Click(Sender: TObject);
+    procedure dxBarButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -156,18 +173,20 @@ type
   end;
 
 var
-  Form1: TForm1;
+  Form1: TMainForm;
   Form2: TForm2;
   Form3: TForm3;
+  Form4: TForm4;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.createNewForm(aBadge: Integer);
+procedure TMainForm.createNewForm(aBadge: Integer; aCaption: string; aFormIdx: Integer);
 begin
-  Form2 := TForm2.Create(Application);
+  Form2 := TForm2.Create(Application, aFormIdx);
   try
+    Form2.NodeCaption := aCaption;
     Form2.BadgeValue := aBadge;
     Form2.ShowModal;
   finally
@@ -175,41 +194,71 @@ begin
   end;
 end;
 
-procedure TForm1.Guide1Click(Sender: TObject);
+procedure TMainForm.Guide1Click(Sender: TObject);
 var
-  aState: boolean;
-  aBadges: TdxBadges;
+  IState: boolean;
+  IBadges: TdxBadges;
 begin
-  aState := dxUIAdornerManager1.Badges.Active;
-  aBadges := dxUIAdornerManager1.Badges;
-  if aState = True then aBadges.Active := False else aBadges.Active := True;
+  IState := dxUIAdornerManager1.Badges.Active;
+  IBadges := dxUIAdornerManager1.Badges;
+//  badge := dxUIAdornerManager1.Badges.Add;
+//  (badge.TargetElement as TdxAdornerTargetElementControl).Control := labelededit3;
+  if IState = True then IBadges.Active := False else IBadges.Active := True;
 end;
 
-procedure TForm1.dxUIAdornerManager1Badge1Click(AManager: TdxUIAdornerManager;
+procedure TMainForm.dxBarButton1Click(Sender: TObject);
+begin
+  Form4 := TForm4.Create(Application);
+  try
+    Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
+    begin
+      case ManagerToEnable of
+        amManager1: EnableAdornerManager1;
+        amManager2: EnableAdornerManager2;
+      end;
+    end;
+    Form4.ShowModal;
+  finally
+    Form4.Free;
+  end;
+end;
+
+procedure TMainForm.dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  createNewForm(0);
+  //Determine which badge is clicked
+  case AAdorner.ID of
+    0: createNewForm(0, 'Create Invoice', 0);
+    1: createNewForm(1, 'Create Invoice', 0);
+    2: createNewForm(2, 'Create Invoice', 0);
+    3: createNewForm(3, 'Create Invoice', 0);
+  end;
 end;
 
-procedure TForm1.dxUIAdornerManager1Badge2Click(AManager: TdxUIAdornerManager;
+procedure TMainForm.dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
-  createNewForm(1);
+  case AAdorner.ID of
+    0: createNewForm(0, 'Create E-Invoice', 1);
+    1: createNewForm(1, 'Create E-Invoice', 1);
+    2: createNewForm(2, 'Create E-Invoice', 1);
+    3: createNewForm(3, 'Create E-Invoice', 1);
+  end;
 end;
 
-procedure TForm1.dxUIAdornerManager1Badge3Click(AManager: TdxUIAdornerManager;
-    AAdorner: TdxCustomAdorner);
+procedure TMainForm.EnableAdornerManager1;
 begin
-  createNewForm(2);
+    dxUIAdornerManager1.Badges.Active := True;
+    dxUIAdornerManager2.Badges.Active := False;
 end;
 
-procedure TForm1.dxUIAdornerManager1Badge4Click(AManager: TdxUIAdornerManager;
-    AAdorner: TdxCustomAdorner);
+procedure TMainForm.EnableAdornerManager2;
 begin
-  createNewForm(3);
+    dxUIAdornerManager1.Badges.Active := False;
+    dxUIAdornerManager2.Badges.Active := True;
 end;
 
-procedure TForm1.Video1Click(Sender: TObject);
+procedure TMainForm.Video1Click(Sender: TObject);
 begin
   Form3 := TForm3.Create(Application);
   try

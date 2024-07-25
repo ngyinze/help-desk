@@ -1,7 +1,7 @@
 object Form3: TForm3
   Left = 0
   Top = 0
-  Caption = 'Form3'
+  Caption = 'Edge Browser'
   ClientHeight = 527
   ClientWidth = 994
   Color = clBtnFace
@@ -15,7 +15,7 @@ object Form3: TForm3
     Left = 5
     Top = 5
     Width = 984
-    Height = 512
+    Height = 524
     Margins.Left = 0
     Margins.Top = 0
     Margins.Right = 0

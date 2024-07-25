@@ -73,7 +73,7 @@
         <SanitizedProjectName>helpdesk</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>vclwinx;DataSnapServer;fmx;emshosting;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;FireDACCommonDriver;dxComnRS29;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;IndyIPClient;dbxcds;vcledge;bindcompvclwinx;FmxTeeUI;emsedge;bindcompfmx;DBXFirebirdDriver;inetdb;ibmonitor;FireDACSqliteDriver;DbxClientDriver;FireDACASADriver;Tee;soapmidas;vclactnband;TeeUI;fmxFireDAC;dbexpress;FireDACInfxDriver;DBXMySQLDriver;VclSmp;inet;DataSnapCommon;vcltouch;fmxase;DBXOdbcDriver;dbrtl;FireDACDBXDriver;Skia.Package.FMX;FireDACOracleDriver;fmxdae;TeeDB;FireDACMSAccDriver;CustomIPTransport;FireDACMSSQLDriver;cxGridRS29;DataSnapIndy10ServerTransport;PKIECtrl29;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;IndySystem;FireDACTDataDriver;cxLibraryRS29;Skia.Package.VCL;vcldb;dxGDIPlusRS29;ibxbindings;vclFireDAC;bindcomp;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;cxExportRS29;IndyCore;RESTBackendComponents;bindcompdbx;rtl;FireDACMySQLDriver;FireDACADSDriver;dxServerModeRS29;RESTComponents;DBXSqliteDriver;vcl;IndyIPServer;dsnapxml;dsnapcon;DataSnapClient;DataSnapProviderClient;adortl;dxCoreRS29;DBXSybaseASEDriver;DBXDb2Driver;vclimg;DataSnapFireDAC;emsclientfiredac;FireDACPgDriver;FireDAC;FireDACDSDriver;inetdbxpress;xmlrtl;tethering;ibxpress;bindcompvcl;dsnap;CloudService;DBXSybaseASADriver;DBXOracleDriver;FireDACDb2Driver;DBXInformixDriver;vclib;fmxobj;bindcompvclsmp;DataSnapNativeClient;FMXTee;DatasnapConnectorsFreePascal;soaprtl;soapserver;FireDACIBDriver;dxBarRS29;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>vclwinx;DataSnapServer;fmx;emshosting;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;FireDACCommonDriver;dxComnRS29;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;IndyIPClient;dbxcds;vcledge;bindcompvclwinx;FmxTeeUI;emsedge;bindcompfmx;DBXFirebirdDriver;inetdb;ibmonitor;FireDACSqliteDriver;DbxClientDriver;FireDACASADriver;Tee;soapmidas;vclactnband;TeeUI;fmxFireDAC;dbexpress;FireDACInfxDriver;DBXMySQLDriver;VclSmp;inet;DataSnapCommon;vcltouch;fmxase;DBXOdbcDriver;dbrtl;FireDACDBXDriver;Skia.Package.FMX;FireDACOracleDriver;fmxdae;TeeDB;FireDACMSAccDriver;CustomIPTransport;FireDACMSSQLDriver;cxGridRS29;DataSnapIndy10ServerTransport;PKIECtrl29;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;IndySystem;FireDACTDataDriver;cxLibraryRS29;Skia.Package.VCL;vcldb;dxGDIPlusRS29;ibxbindings;vclFireDAC;bindcomp;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;cxExportRS29;IndyCore;RESTBackendComponents;bindcompdbx;rtl;FireDACMySQLDriver;FireDACADSDriver;dxServerModeRS29;RESTComponents;DBXSqliteDriver;vcl;IndyIPServer;dsnapxml;dsnapcon;DataSnapClient;DataSnapProviderClient;adortl;dxCoreRS29;DBXSybaseASEDriver;DBXDb2Driver;vclimg;DataSnapFireDAC;emsclientfiredac;FireDACPgDriver;FireDAC;FireDACDSDriver;inetdbxpress;xmlrtl;tethering;ibxpress;bindcompvcl;dsnap;CloudService;DBXSybaseASADriver;DBXOracleDriver;FireDACDb2Driver;DBXInformixDriver;vclib;fmxobj;bindcompvclsmp;DataSnapNativeClient;FMXTee;DatasnapConnectorsFreePascal;soaprtl;soapserver;FireDACIBDriver;dxBarRS29;dxRibbonRS29;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -82,7 +82,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>vclwinx;DataSnapServer;fmx;emshosting;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;FireDACCommonDriver;dxComnRS29;appanalytics;IndyProtocols;vclx;IndyIPClient;dbxcds;vcledge;bindcompvclwinx;FmxTeeUI;emsedge;bindcompfmx;DBXFirebirdDriver;inetdb;ibmonitor;FireDACSqliteDriver;DbxClientDriver;FireDACASADriver;Tee;soapmidas;vclactnband;TeeUI;fmxFireDAC;dbexpress;FireDACInfxDriver;DBXMySQLDriver;VclSmp;inet;DataSnapCommon;vcltouch;fmxase;DBXOdbcDriver;dbrtl;FireDACDBXDriver;FireDACOracleDriver;fmxdae;TeeDB;FireDACMSAccDriver;CustomIPTransport;FireDACMSSQLDriver;cxGridRS29;DataSnapIndy10ServerTransport;PKIECtrl29;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;IndySystem;FireDACTDataDriver;cxLibraryRS29;Skia.Package.VCL;vcldb;dxGDIPlusRS29;ibxbindings;vclFireDAC;bindcomp;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;cxExportRS29;IndyCore;RESTBackendComponents;bindcompdbx;rtl;FireDACMySQLDriver;FireDACADSDriver;dxServerModeRS29;RESTComponents;DBXSqliteDriver;vcl;IndyIPServer;dsnapxml;dsnapcon;DataSnapClient;DataSnapProviderClient;adortl;dxCoreRS29;DBXSybaseASEDriver;DBXDb2Driver;vclimg;DataSnapFireDAC;emsclientfiredac;FireDACPgDriver;FireDAC;FireDACDSDriver;inetdbxpress;xmlrtl;tethering;ibxpress;bindcompvcl;dsnap;CloudService;DBXSybaseASADriver;DBXOracleDriver;FireDACDb2Driver;DBXInformixDriver;vclib;fmxobj;bindcompvclsmp;DataSnapNativeClient;FMXTee;DatasnapConnectorsFreePascal;soaprtl;soapserver;FireDACIBDriver;dxBarRS29;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>vclwinx;DataSnapServer;fmx;emshosting;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;FireDACCommonDriver;dxComnRS29;appanalytics;IndyProtocols;vclx;IndyIPClient;dbxcds;vcledge;bindcompvclwinx;FmxTeeUI;emsedge;bindcompfmx;DBXFirebirdDriver;inetdb;ibmonitor;FireDACSqliteDriver;DbxClientDriver;FireDACASADriver;Tee;soapmidas;vclactnband;TeeUI;fmxFireDAC;dbexpress;FireDACInfxDriver;DBXMySQLDriver;VclSmp;inet;DataSnapCommon;vcltouch;fmxase;DBXOdbcDriver;dbrtl;FireDACDBXDriver;FireDACOracleDriver;fmxdae;TeeDB;FireDACMSAccDriver;CustomIPTransport;FireDACMSSQLDriver;cxGridRS29;DataSnapIndy10ServerTransport;PKIECtrl29;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;IndySystem;FireDACTDataDriver;cxLibraryRS29;Skia.Package.VCL;vcldb;dxGDIPlusRS29;ibxbindings;vclFireDAC;bindcomp;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;cxExportRS29;IndyCore;RESTBackendComponents;bindcompdbx;rtl;FireDACMySQLDriver;FireDACADSDriver;dxServerModeRS29;RESTComponents;DBXSqliteDriver;vcl;IndyIPServer;dsnapxml;dsnapcon;DataSnapClient;DataSnapProviderClient;adortl;dxCoreRS29;DBXSybaseASEDriver;DBXDb2Driver;vclimg;DataSnapFireDAC;emsclientfiredac;FireDACPgDriver;FireDAC;FireDACDSDriver;inetdbxpress;xmlrtl;tethering;ibxpress;bindcompvcl;dsnap;CloudService;DBXSybaseASADriver;DBXOracleDriver;FireDACDb2Driver;DBXInformixDriver;vclib;fmxobj;bindcompvclsmp;DataSnapNativeClient;FMXTee;DatasnapConnectorsFreePascal;soaprtl;soapserver;FireDACIBDriver;dxBarRS29;dxRibbonRS29;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -103,6 +103,9 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <BRCC_IncludePath>F:\help-desk\dll;$(BRCC_IncludePath)</BRCC_IncludePath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -125,7 +128,6 @@
         </DelphiCompile>
         <DCCReference Include="MainForm.pas">
             <Form>Form1</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="HelpScreen.pas">
             <Form>Form2</Form>
@@ -134,10 +136,15 @@
         <DCCReference Include="ImageRetriever.pas"/>
         <DCCReference Include="YTembed.pas">
             <Form>Form3</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Browser.pas"/>
         <DCCReference Include="MediaConst.pas"/>
+        <DCCReference Include="SelectHelp.pas">
+            <Form>Form4</Form>
+        </DCCReference>
+        <DCCReference Include="FeatureScreen.pas">
+            <Form>Form5</Form>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -167,7 +174,25 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
+                <DeployFile LocalName="Win32\Debug\WebView2Loader.dll" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteName>WebView2Loader.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\WebView2Loader.dll" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteName>WebView2Loader.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\helpdesk.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>helpdesk.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Release\helpdesk.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>helpdesk.exe</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -23,6 +23,23 @@ const
    'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/4.gif'
    ];
 
+   c_ImageURL2: TArray<string> = [
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/click%20button.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/select%20cancellation.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/wait%20for%20confirmation.gif'
+   ];
+
+  c_ImageURL3: TArray<string> = [
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/project.png',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/attachment.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/notes.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/report.gif'
+   ];
+
+   
+
+   c_AttachmentGif: TArray<string> = ['https://pub-acbba587389e48438cf45bd374515a86.r2.dev/attachment.gif'];
+
 var
     c_Vid1: TArray<TVideoEntry>;
     c_Vid1_0: TVideoEntry = (ID: 'yfov50mD4-s'; Timestamp: '0.00');

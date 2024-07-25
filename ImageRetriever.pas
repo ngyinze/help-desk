@@ -73,31 +73,31 @@ end;
 procedure TImageRetriever.RetrieveImage(const URL: string; AImageCollection:
     TcxImageCollection; const AImageIndex: Integer);
 var
-  LResponse: IHTTPResponse;
-  LGraphic: TdxSmartImage;
-  LStream: TMemoryStream;
+  IResponse: IHTTPResponse;
+  IGraphic: TdxSmartImage;
+  IStream: TMemoryStream;
 begin
-    LStream := TMemoryStream.Create;
+    IStream := TMemoryStream.Create;
     try
       if IsImageCached(URL) then
-        LoadImageFromCache(URL, LStream)
+        LoadImageFromCache(URL, IStream)
       else if IsInternetAvailable then begin
-        LResponse := FHttpClient.Get(URL, LStream);
-        if LResponse.StatusCode = 200 then SaveImageToCache(URL, LStream)
-        else raise Exception.CreateFmt('Error retrieving image: %d - %s', [LResponse.StatusCode, LResponse.StatusText]);
+        IResponse := FHttpClient.Get(URL, IStream);
+        if IResponse.StatusCode = 200 then SaveImageToCache(URL, IStream)
+        else raise Exception.CreateFmt('Error retrieving image: %d - %s', [IResponse.StatusCode, IResponse.StatusText]);
       end
       else raise ENoInternetConnection.Create('No internet connection available');
 
-      LStream.Position := 0;
-      LGraphic := TdxSmartImage.Create;
+      IStream.Position := 0;
+      IGraphic := TdxSmartImage.Create;
       try
-        LGraphic.LoadFromStream(LStream);
-        AImageCollection.Items[AImageIndex].Picture.Assign(LGraphic);
+        IGraphic.LoadFromStream(IStream);
+        AImageCollection.Items[AImageIndex].Picture.Assign(IGraphic);
       finally
-        LGraphic.Free;
+        IGraphic.Free;
       end;
   finally
-    LStream.Free;
+    IStream.Free;
   end;
 end;
 

@@ -9,7 +9,7 @@ uses
 
 type
   TForm3 = class(TForm)
-    EdgeBrowser: TEdgeBrowser;
+  EdgeBrowser: TEdgeBrowser;
   private
     { Private declarations }
     FBrowser: TBrowser;    //object of TBrowser
@@ -29,7 +29,7 @@ begin
   FBrowser := TBrowser.Create(EdgeBrowser);
   FBrowser.LoadVideoId(c_Vid1_0);
   FBrowser.Navigate;
-end;
+  end;
 
 destructor TForm3.Destroy;
 begin

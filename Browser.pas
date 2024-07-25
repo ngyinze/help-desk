@@ -25,21 +25,21 @@ implementation
 { Browser }
 
 function TBrowser.CalcSecs(timeframe: string): Integer;
-  var min, sec: Integer;
+  var M, S: Integer;
 begin
-  min := 0;
-  sec := 0;
+  M := 0;
+  S := 0;
 
   if timeframe.Contains(':') then begin
-    min := SplitString(timeframe, ':')[0].ToInteger;
-    sec := SplitString(timeframe, ':')[1].ToInteger;
+    M := SplitString(timeframe, ':')[0].ToInteger;
+    S := SplitString(timeframe, ':')[1].ToInteger;
   end
   else if timeframe.Contains('.') then begin
-    min := SplitString(timeframe, '.')[0].ToInteger;
-    sec := SplitString(timeframe, '.')[1].ToInteger;
+    M := SplitString(timeframe, '.')[0].ToInteger;
+    S := SplitString(timeframe, '.')[1].ToInteger;
   end;
 
-  Result := (min * 60) + sec;
+  Result := (M * 60) + S;
 end;
 
 procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
@@ -87,7 +87,6 @@ begin
     frameborder="0" allowfullscreen>
   </div>
   ''';
-  //560 315
   FHTML := StringReplace(FHTML, '$vidID$', vidID, [rfReplaceAll]);
   FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;

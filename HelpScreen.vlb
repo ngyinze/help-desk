@@ -1,5 +1,6 @@
 ﻿[]
-Coordinates=357,108,82,33
+Coordinates=20,170,69,33
+Visible=True
 
 [Panel1]
 Coordinates=0,90,47,51
@@ -11,23 +12,12 @@ Coordinates=83,78,84,33
 [btnRetry]
 Coordinates=0,0,56,51
 
-[btnLeft]
-Coordinates=130,0,64,51
-
-[btnRight]
-Coordinates=0,0,64,51
-Visible=True
-
 [imgSlider]
 Coordinates=40,10,90,33
 Visible=True
 
 [imgCollection]
 Coordinates=379,56,111,33
-
-[txtSteps]
-Coordinates=20,170,69,33
-Visible=True
 
 [imgCollectionItem1]
 Coordinates=182,56,137,33

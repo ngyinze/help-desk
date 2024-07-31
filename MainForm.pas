@@ -155,12 +155,11 @@ type
     dxUIAdornerManager2Badge1: TdxBadge;
     dxUIAdornerManager2Badge2: TdxBadge;
     dxUIAdornerManager2Badge3: TdxBadge;
-    dxUIAdornerManager2Badge4: TdxBadge;
     dxGuide1: TdxGuide;
     procedure Guide1Click(Sender: TObject);
     procedure EnableAdornerManager1;
     procedure EnableAdornerManager2;
-    procedure createNewForm(aBadge: Integer; aCaption: string; aFormIdx: Integer);
+    procedure createNewForm(aBadge: Integer; aFormIdx: Integer);
     procedure dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager; AAdorner:
         TdxCustomAdorner);
     procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
@@ -182,16 +181,11 @@ implementation
 
 {$R *.dfm}
 
-procedure TMainForm.createNewForm(aBadge: Integer; aCaption: string; aFormIdx: Integer);
+procedure TMainForm.createNewForm(aBadge: Integer; aFormIdx: Integer);
 begin
-  Form2 := TForm2.Create(Application, aFormIdx);
-  try
-    Form2.NodeCaption := aCaption;
-    Form2.BadgeValue := aBadge;
-    Form2.ShowModal;
-  finally
-    Form2.Free;
-  end;
+  Form2 := TForm2.Create(nil, aFormIdx);
+  Form2.BadgeValue := aBadge;
+  Form2.Show;   //The form will be freed at onClose Event of Form2
 end;
 
 procedure TMainForm.Guide1Click(Sender: TObject);
@@ -208,7 +202,7 @@ end;
 
 procedure TMainForm.dxBarButton1Click(Sender: TObject);
 begin
-  Form4 := TForm4.Create(Application);
+  Form4 := TForm4.Create(nil);
   try
     Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
     begin
@@ -228,10 +222,10 @@ procedure TMainForm.dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager;
 begin
   //Determine which badge is clicked
   case AAdorner.ID of
-    0: createNewForm(0, 'Create Invoice', 0);
-    1: createNewForm(1, 'Create Invoice', 0);
-    2: createNewForm(2, 'Create Invoice', 0);
-    3: createNewForm(3, 'Create Invoice', 0);
+    0: createNewForm(0, 0);
+    1: createNewForm(1, 0);
+    2: createNewForm(2, 0);
+    3: createNewForm(3, 0);
   end;
 end;
 
@@ -239,10 +233,9 @@ procedure TMainForm.dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 begin
   case AAdorner.ID of
-    0: createNewForm(0, 'Create E-Invoice', 1);
-    1: createNewForm(1, 'Create E-Invoice', 1);
-    2: createNewForm(2, 'Create E-Invoice', 1);
-    3: createNewForm(3, 'Create E-Invoice', 1);
+    0: createNewForm(0, 1);
+    1: createNewForm(1, 1);
+    2: createNewForm(2, 1);
   end;
 end;
 
@@ -260,7 +253,7 @@ end;
 
 procedure TMainForm.Video1Click(Sender: TObject);
 begin
-  Form3 := TForm3.Create(Application);
+  Form3 := TForm3.Create(nil);
   try
     Form3.ShowModal;
   finally

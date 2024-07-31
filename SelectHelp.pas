@@ -9,11 +9,11 @@ uses
   Vcl.Menus, Vcl.StdCtrls, cxButtons;
 
 type
-  TAdornerManagerToEnable = (amManager1, amManager2);
-  TDataEntrySelectedEvent = reference to procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable);
+  TAdornerManagerToEnable = (null, amManager1, amManager2);      //NOTE: Null reference to no adorner to enable, thus opening the help screen
+  TDataEntrySelectedEvent = reference to procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable);   //NOTE: Anonymous type used for called back at Main Form
   TForm4 = class(TForm)
-    lvSelect: TcxListView;
-    procedure lvSelectDblClick(Sender: TObject);
+    listView: TcxListView;
+    procedure listViewDblClick(Sender: TObject);
   private
     FOnDataEntrySelected: TDataEntrySelectedEvent;
   public
@@ -22,47 +22,40 @@ type
 
 var
   HelpScreen: TForm2;
-//  Form4: TForm4;
-//  FeatureScreen: TForm5;
 
 implementation
 
 {$R *.dfm}
 
 
-procedure TForm4.lvSelectDblClick(Sender: TObject);
+procedure TForm4.listViewDblClick(Sender: TObject);
 var
   Item: TListItem;
   P: TPoint;
   ManagerToEnable: TAdornerManagerToEnable;
 begin
+  ManagerToEnable := null;
   GetCursorPos(P);
-  P := lvSelect.ScreenToClient(P);
-  Item := lvSelect.GetItemAt(P.X, P.Y);
+  P := listView.ScreenToClient(P);
+  Item := listView.GetItemAt(P.X, P.Y);
 
   if Assigned(Item) then
   begin
-    if Item.Caption = 'Create Invoice' then
-      ManagerToEnable := amManager1
-    else if Item.Caption = 'Create E-Invoice' then
-      begin
-        ManagerToEnable := amManager2
-//        HelpScreen := TForm2.Create(Self);
-//        try
-//          HelpScreen.NodeCaption := 'Create E-Invoice';
-//          HelpScreen.BadgeValue := 1;
-//          HelpScreen.ShowModal;
-//        finally
-//          HelpScreen.Free;
-//        end;
-      end
+    if Item.Caption = 'Create Invoice' then ManagerToEnable := amManager1          //TODO: USE NUMERIC TO COMPARE
+    else if Item.Caption = 'E-Invoice Cancellation' then ManagerToEnable := amManager2
+    else if Item.Caption = 'Common Usage' then      //CASE: No badge to be displayed
+    begin
+      HelpScreen := TForm2.Create(nil, 2);
+      HelpScreen.BadgeValue := 0;
+      HelpScreen.Show;
+    end
     else
       Exit;
     if Assigned(FOnDataEntrySelected) then begin
-      FOnDataEntrySelected(Self, ManagerToEnable);// execute the procedure
-      Close;
+      FOnDataEntrySelected(Self, ManagerToEnable);  //Execute the procedure
+      Close;                                        //Close the form after making selection
     end;
-//    Close;
+
   end;
 end;
 

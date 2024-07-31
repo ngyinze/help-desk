@@ -12,7 +12,7 @@ type
   EdgeBrowser: TEdgeBrowser;
   private
     { Private declarations }
-    FBrowser: TBrowser;    //object of TBrowser
+    FBrowser: TBrowser;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -27,7 +27,7 @@ constructor TForm3.Create(AOwner: TComponent);
 begin
   inherited;
   FBrowser := TBrowser.Create(EdgeBrowser);
-  FBrowser.LoadVideoId(c_Vid1_0);
+  FBrowser.LoadVideoId(c_Vid1[0]);
   FBrowser.Navigate;
   end;
 

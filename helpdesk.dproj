@@ -142,9 +142,6 @@
         <DCCReference Include="SelectHelp.pas">
             <Form>Form4</Form>
         </DCCReference>
-        <DCCReference Include="FeatureScreen.pas">
-            <Form>Form5</Form>
-        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

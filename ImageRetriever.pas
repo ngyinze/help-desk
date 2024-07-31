@@ -77,25 +77,26 @@ var
   IGraphic: TdxSmartImage;
   IStream: TMemoryStream;
 begin
-    IStream := TMemoryStream.Create;
-    try
-      if IsImageCached(URL) then
-        LoadImageFromCache(URL, IStream)
-      else if IsInternetAvailable then begin
-        IResponse := FHttpClient.Get(URL, IStream);
-        if IResponse.StatusCode = 200 then SaveImageToCache(URL, IStream)
-        else raise Exception.CreateFmt('Error retrieving image: %d - %s', [IResponse.StatusCode, IResponse.StatusText]);
-      end
-      else raise ENoInternetConnection.Create('No internet connection available');
+  IStream := TMemoryStream.Create;
+  try
+    if IsImageCached(URL) then
+      LoadImageFromCache(URL, IStream)
+    else if IsInternetAvailable then
+    begin
+      IResponse := FHttpClient.Get(URL, IStream);
+      if IResponse.StatusCode = 200 then SaveImageToCache(URL, IStream)
+      else raise Exception.CreateFmt('Error retrieving image: %d - %s', [IResponse.StatusCode, IResponse.StatusText]);
+    end
+    else raise ENoInternetConnection.Create('No internet connection available');
 
-      IStream.Position := 0;
-      IGraphic := TdxSmartImage.Create;
-      try
-        IGraphic.LoadFromStream(IStream);
-        AImageCollection.Items[AImageIndex].Picture.Assign(IGraphic);
-      finally
-        IGraphic.Free;
-      end;
+    IStream.Position := 0;
+    IGraphic := TdxSmartImage.Create;
+    try
+      IGraphic.LoadFromStream(IStream);
+      AImageCollection.Items[AImageIndex].Picture.Assign(IGraphic);
+    finally
+      IGraphic.Free;
+    end;
   finally
     IStream.Free;
   end;

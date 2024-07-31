@@ -11,31 +11,28 @@ uses
   Vcl.ExtCtrls, SliderUpdater, ImageRetriever, System.IOUtils, cxImage,
   cxTextEdit, cxHyperLinkEdit, cxDBLabel, Winapi.WebView2, Winapi.ActiveX,
   Vcl.Edge, cxCheckBox, cxCustomListBox, cxListBox, Vcl.ComCtrls, cxListView, dxListView,
-  cxTreeView, cxGeometry, dxFramedControl, dxPanel, dxTreeView;
+  cxTreeView, cxGeometry, dxFramedControl, dxPanel, dxTreeView, dxCustomTree,
+  cxScrollBar;
 
 type
   TForm2 = class(TForm)
     imgCollection: TcxImageCollection;
-    imgCollectionItem1: TcxImageCollectionItem;
-    imgCollectionItem2: TcxImageCollectionItem;
-    imgCollectionItem3: TcxImageCollectionItem;
-    imgCollectionItem4: TcxImageCollectionItem;
     imgSlider: TdxImageSlider;
     EdgeBrowser: TEdgeBrowser;
     dxPanel1: TdxPanel;
     btnRight: TcxButton;
     btnLeft: TcxButton;
     txtSteps: TStaticText;
-    txtDesc: TStaticText;
     chkBox: TcxCheckBox;
     imgNoInternet: TcxImage;
     btnRetry: TcxButton;
-    dxTreeViewControl1: TdxTreeViewControl;
+    treeView: TdxTreeViewControl;
     procedure btnLeftClick(Sender: TObject);
     procedure btnRightClick(Sender: TObject);
     procedure btnRetryClick(Sender: TObject);
     procedure ChkBoxClick(Sender: TObject);
-    procedure dxTreeViewControl1DblClick(Sender: TObject);
+    procedure treeViewClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FImageRetriever: TImageRetriever;
     FSliderUpdater: TSliderUpdater;
@@ -44,11 +41,10 @@ type
     FBrowser: TBrowser;
     FDescription, FImageURL: TArray<string>;
     FVideo: TArray<TVideoEntry>;
-    FNodeCaption: String;
     procedure InitializeComponents;
+    procedure FindParentNode;
     procedure GetRelevantMedia(Form: Integer);
     procedure RetrieveImages;
-    procedure SetNodeCaption(ACaption: string);
     procedure SetBadgeValue(Value: Integer);
     procedure ShowVideo;
     procedure ShowNoInternetWarning;
@@ -58,12 +54,12 @@ type
     constructor Create(AOwner: TComponent; aFormIdx: Integer); overload;
     destructor Destroy; override;
     property BadgeValue: Integer read FBadgeValue write SetBadgeValue;
-    property NodeCaption: String read FNodeCaption write SetNodeCaption;
   end;
 
 var
-  I : Integer;
-  INode: TdxTreeViewNode;
+  FNode: TdxTreeViewNode;
+  FParentNode: TArray<TdxTreeViewNode>;
+  FIndex: Integer;
 
 implementation
 
@@ -72,9 +68,8 @@ constructor TForm2.Create(AOwner: TComponent; aFormIdx: Integer);
 begin
   inherited Create(AOwner);
   FImagesLoaded := False;
+  FindParentNode;
   GetRelevantMedia(aFormIdx);
-  InitializeComponents;
-  RetrieveImages;
 end;
 
 destructor TForm2.Destroy;
@@ -88,43 +83,69 @@ end;
 
 procedure TForm2.GetRelevantMedia(Form: Integer);
 begin
-  case Form of   //tbc
-    0: begin
+  FIndex := Form;
+  case FIndex of   //TODO
+    0:
+    begin
       FImageURL := c_ImageURL1;
       FDescription := c_Description1;
       FVideo := c_Vid1;
     end;
-    1: begin
+    1:
+    begin
+      FImageURL := c_ImageURL2;
+      FDescription := c_Description2;
+      FVideo := c_Vid2;
+    end;
+    2:
+    begin
       FImageURL := c_ImageURL3;
-      FDescription := c_Description1;
-      FVideo := c_Vid1;
+      FDescription := c_Description3;
+      FVideo := nil;
     end;
   end;
+  InitializeComponents;
+  RetrieveImages;
 end;
 
 
 procedure TForm2.ChkBoxClick(Sender: TObject);
 begin
-  if ChkBox.Checked then begin
+  if ChkBox.Checked then
+  begin
     EdgeBrowser.Visible := True;
     ShowVideo;
   end
-  else begin
+  else
+  begin
     EdgeBrowser.Visible := False;
     EdgeBrowser.Refresh;
-    FSliderUpdater.UpdateSlider(0); //Restart the animation
+    FSliderUpdater.UpdateSlider(0);         //RESTART THE ANIMATION
   end;
 end;
 
-procedure TForm2.InitializeComponents;
+procedure TForm2.InitializeComponents;       //TODO: OPTIMISE THIS PART
 var
-  ICachePath: string;
+  ICachePath: String;
 begin
+  if Assigned(FSliderUpdater) then          //Free up the object when changing node
+  begin
+    FSliderUpdater.Free;
+    imgCollection.Items.Clear;
+  end
+  else
+  begin
+    ICachePath := TPath.Combine(TPath.GetHomePath, 'SQL', 'ImageCache');
+    FImageRetriever := TImageRetriever.Create(ICachePath);
+    FBrowser := TBrowser.Create(EdgeBrowser);
+    EdgeBrowser.Visible := False;
+  end;
+
+  if not Assigned(FVideo) then chkBox.Visible := False else chkBox.Visible := True;
+
+  //loop to add items needed to the collection
+  for var I := Low(FImageURL) to High(FImageURL) do imgCollection.Items.Add;
   FSliderUpdater := TSliderUpdater.Create(imgSlider, imgCollection, txtSteps, FDescription);
-  ICachePath := TPath.Combine(TPath.GetHomePath, 'SQL', 'ImageCache');
-  FImageRetriever := TImageRetriever.Create(ICachePath);
-  FBrowser := TBrowser.Create(EdgeBrowser);
-  EdgeBrowser.Visible := False;
 end;
 
 procedure TForm2.RetrieveImages;
@@ -154,27 +175,15 @@ begin
 end;
 
 procedure TForm2.UpdateUIState;
-var
-  INodes: TdxTreeViewNodes;
-  INode: TdxTreeViewNode;
 begin
   if FImagesLoaded then
   begin
     HideNoInternetWarning;
-    FSliderUpdater.BadgeValue := 0;     //restart the animation from frame zero
-    dxTreeViewControl1.FullCollapse;
-
-    INodes := dxTreeViewControl1.Items;
-    dxTreeViewControl1.select(INodes[1], True);
-    for INode in dxTreeViewControl1.Items do begin
-      if FNodeCaption = INode.Caption then
-        INode.Expand(true);
-    end;
+    FSliderUpdater.BadgeValue := 0;     //Restart the animation from frame zero
+    treeView.FullCollapse;    //Optional
   end
   else
-  begin
     ShowNoInternetWarning;
-  end;
 end;
 
 procedure TForm2.ShowNoInternetWarning;
@@ -189,7 +198,8 @@ end;
 
 procedure TForm2.ShowVideo;
 begin
-  if ChkBox.Checked then begin
+  if ChkBox.Checked then
+  begin
     FBrowser.LoadVideoId(FVideo[FSliderUpdater.BadgeValue]);
     FBrowser.Navigate;
   end;
@@ -197,6 +207,7 @@ end;
 
 procedure TForm2.HideNoInternetWarning;
 begin
+//  if not Assigned(FVideo) then chkBox.Visible := False;
   imgNoInternet.Visible := False;
   btnRetry.Visible := False;
   imgSlider.Visible := True;
@@ -213,52 +224,82 @@ end;
 procedure TForm2.btnLeftClick(Sender: TObject);
 begin
   FSliderUpdater.Previous;
-  if Assigned(Inode.Prev) then
-    begin
-      INode := INode.Prev;
-      INode.Focused := true;
-    end;
+  if Assigned(Fnode.Prev) then
+  begin
+    FNode := FNode.Prev;
+    FNode.Focused := True;
+  end;
   ShowVideo;
 end;
 
 procedure TForm2.btnRightClick(Sender: TObject);
 begin
   FSliderUpdater.Next;
-  if Assigned(Inode.Next) then
-    begin
-      INode := INode.Next;
-      INode.Focused := true;
-    end;
+  if Assigned(Fnode.Next) then
+  begin
+    FNode := FNode.Next;
+    FNode.Focused := True;
+  end;
   ShowVideo;
 end;
 
-procedure TForm2.dxTreeViewControl1DblClick(Sender: TObject);
+procedure TForm2.treeViewClick(Sender: TObject);
 var
   P: TPoint;
   N: TdxTreeViewNode;
+  I: Integer;
 begin
+  I := 0;
   GetCursorPos(P);
-  P := dxTreeViewControl1.ScreenToClient(P);
-  dxTreeViewControl1.GetNodeAtPos(P, N);   //get the node
-  FSliderUpdater.BadgeValue := N.Index;
+  P := treeView.ScreenToClient(P);
+  if treeView.GetNodeAtPos(P, N) then   //Get node and checks if the point is a node
+  begin
+    for var node in FParentNode do
+    begin
+      if N.HasAsParent(Node) then       //Checks node clicked is child node
+      begin
+        GetRelevantMedia(I);
+        FIndex := I;
+        FSliderUpdater.BadgeValue := N.Index;
+        FNode := FParentNode[FIndex].Items[N.Index];
+        FNode.Focused := True;
+        Break;
+      end;
+      Inc(I);
+    end;
+  end;
+
 end;
 
-procedure TForm2.SetBadgeValue(Value: Integer);
+procedure TForm2.FindParentNode;
+var
+  Anode: TdxTreeViewNode;
+  I: Integer;
+begin
+  I := 0;
+  SetLength(FParentNode, 10);     //Temp set to 5, adjust accordingly
+  for ANode in treeView.Items do
+  begin
+    if Anode.Count > 0 then
+    begin
+      FParentNode[I] := Anode;
+      Inc(I);
+    end;
+  end;
+end;
+
+procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TForm2.SetBadgeValue(Value: Integer);      //TBO
 begin
   FBadgeValue := Value;
-  if FImagesLoaded then
-    FSliderUpdater.UpdateSlider(Value);
-
-  I := FBadgeValue;
-  showMessage(inttostr(I));
-  INode := dxTreeViewControl1.Items[5].Items[I]; //the first items indicate the parent node in absolute, 0 or 5
-  INode.Focused := true;
-end;
-
-procedure TForm2.SetNodeCaption(ACaption: string);
-begin
-  FNodeCaption := ACaption;
   updateUiState;
+  if FImagesLoaded then FSliderUpdater.UpdateSlider(FBadgeValue);
+  FNode := FParentNode[FIndex].Items[Value];
+  FNode.Focused := True;
 end;
 
 end.

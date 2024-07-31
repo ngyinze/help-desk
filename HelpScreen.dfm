@@ -11,13 +11,14 @@ object Form2: TForm2
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   DesignSize = (
     1005
     600)
   TextHeight = 15
   object dxPanel1: TdxPanel
     Left = 231
-    Top = 474
+    Top = 480
     Width = 766
     Height = 126
     Anchors = [akLeft, akRight, akBottom]
@@ -26,13 +27,13 @@ object Form2: TForm2
       764
       124)
     object txtSteps: TStaticText
-      Left = 0
-      Top = 0
-      Width = 764
-      Height = 124
-      Cursor = crDrag
-      Align = alClient
+      Left = 96
+      Top = 11
+      Width = 568
+      Height = 97
       Alignment = taCenter
+      Anchors = [akLeft, akRight]
+      AutoSize = False
       BevelOuter = bvNone
       Caption = 'Enter Your Payment Target'
       Color = clWhite
@@ -66,31 +67,13 @@ object Form2: TForm2
       TabOrder = 1
       OnClick = btnLeftClick
     end
-    object txtDesc: TStaticText
-      Left = 101
-      Top = 44
-      Width = 551
-      Height = 24
-      Alignment = taCenter
-      Anchors = [akLeft, akRight]
-      Caption = 
-        'Insert your targeted person into the given column. For example: ' +
-        'supplier, customer.'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-    end
     object chkBox: TcxCheckBox
       Left = 699
       Top = 5
       Anchors = [akRight]
       Caption = 'Youtube'
       Style.TransparentBorder = False
-      TabOrder = 4
+      TabOrder = 3
       OnClick = chkBoxClick
     end
   end
@@ -101,13 +84,13 @@ object Form2: TForm2
     Height = 463
     Anchors = [akLeft, akTop, akRight, akBottom]
     Images = imgCollection
-    ItemIndex = 0
   end
   object EdgeBrowser: TEdgeBrowser
     Left = 231
-    Top = 10
+    Top = 18
     Width = 766
-    Height = 464
+    Height = 456
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
     AllowSingleSignOnUsingOSPrimaryAccount = False
     TargetCompatibleBrowserVersion = '117.0.2045.28'
@@ -680,8 +663,9 @@ object Form2: TForm2
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    OnClick = btnRetryClick
   end
-  object dxTreeViewControl1: TdxTreeViewControl
+  object treeView: TdxTreeViewControl
     Left = 0
     Top = 8
     Width = 229
@@ -691,30 +675,34 @@ object Form2: TForm2
     OptionsBehavior.HotTrack = True
     OptionsSelection.HideSelection = False
     TabOrder = 5
-    OnDblClick = dxTreeViewControl1DblClick
+    OnClick = treeViewClick
     Data = {
-      01000100540100000A0000000009020000002A000000000C040000000E000000
+      01000100DE0200000A0000000009030000002A000000000C040000000E000000
       430072006500610074006500200049006E0076006F006900630065002E000000
       00051200000031002E002000530065006C006500630074002000430075007300
       74006F006D00650072002C00000000051100000032002E00200049006E007300
       6500720074002000640065007400610069006C00730036000000000516000000
       33002E00200041006400640020006E006500770020006900740065006D002000
       7200650063006F00720064003000000000051300000034002E00200046006900
-      6C006C00200069006E0020005100750061006E0074006900740079002E000000
-      000C0300000010000000430072006500610074006500200045002D0049006E00
-      76006F006900630065000E00000000050200000031002E000E00000000050200
-      000032002E000E00000000050200000033002E00}
+      6C006C00200069006E0020005100750061006E0074006900740079003A000000
+      000C030000001600000045002D0049006E0076006F0069006300650020004300
+      61006E00630065006C006C006100740069006F006E002E000000000512000000
+      31002E00200043006C00690063006B0020004D00790049006E0076006F006900
+      630065003600000000051600000032002E002000530065006C00650063007400
+      2000430061006E00630065006C006C006100740069006F006E00380000000005
+      1700000033002E0020005700610069007400200066006F007200200043006F00
+      6E00660069006D006100740069006F006E0026000000000C050000000C000000
+      43006F006D006D006F006E002000750073006100670065003600000000051600
+      000044006500630069006D0061006C00200050006C0061006300650020005300
+      65007400740069006E0067007300300000000005130000005200650073006500
+      7400200043006F006C0075006D006E0020004C00610079006F00750074003200
+      0000000514000000530065007400200044006F00630075006D0065006E007400
+      2000500072006F006A006500630074002800000000050F00000043006F006C00
+      75006D006E00200044006900730070006C006100790020002600000000050E00
+      0000500072006500760069006500770020005200650070006F0072007400}
   end
   object imgCollection: TcxImageCollection
     Left = 936
     Top = 16
-    object imgCollectionItem1: TcxImageCollectionItem
-    end
-    object imgCollectionItem2: TcxImageCollectionItem
-    end
-    object imgCollectionItem3: TcxImageCollectionItem
-    end
-    object imgCollectionItem4: TcxImageCollectionItem
-    end
   end
 end

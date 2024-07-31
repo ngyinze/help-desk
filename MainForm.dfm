@@ -1316,7 +1316,7 @@ object MainForm: TMainForm
     Badges.Font.Name = 'Segoe UI'
     Badges.Font.Style = []
     Badges.ParentFont = False
-    Left = 592
+    Left = 672
     Top = 360
     object dxUIAdornerManager2Badge1: TdxBadge
       TargetElement.Control = cxGrid1
@@ -1372,25 +1372,6 @@ object MainForm: TMainForm
       Size.Height = 30
       Size.Width = 30
       Text = '3'
-      TextMargins.All = 3
-    end
-    object dxUIAdornerManager2Badge4: TdxBadge
-      TargetElement.Control = cxButton2
-      OnClick = dxUIAdornerManager2BadgeClick
-      Alignment.Horz = taLeftJustify
-      Background.Color = clTomato
-      Background.FitMode = ifmFit
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = 22
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      Offset.X = 30
-      Offset.Y = -3
-      ParentFont = False
-      Size.Height = 30
-      Size.Width = 30
-      Text = '4'
       TextMargins.All = 3
     end
     object dxGuide1: TdxGuide

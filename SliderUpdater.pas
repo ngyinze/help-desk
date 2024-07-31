@@ -47,7 +47,6 @@ var
   IImage: TdxSmartImage;
 begin
   IImage := (FImageCollection.Items[FSlider.ItemIndex].Picture.Graphic) as TdxSmartImage;
-//  TdxSmartImage(FImageCollection.Items[FSlider.ItemIndex].Picture.Graphic).AnimationLoop := bFalse;          //this is also casting
   IImage.AnimationLoop := bFalse;
   IImage.ActiveFrame := 0;
   IImage.StartAnimation;
@@ -73,6 +72,7 @@ end;
 procedure TSliderUpdater.UpdateSlider(aIndex: Integer);
 begin
   FSlider.ItemIndex := FSlider.ItemIndex + aIndex;
-  AnimateImage;
+  if FSlider.ItemIndex < Length(FStepDescriptions) then AnimateImage;
 end;
+
 end.

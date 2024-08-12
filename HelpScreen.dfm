@@ -17,19 +17,20 @@ object Form2: TForm2
     600)
   TextHeight = 15
   object dxPanel1: TdxPanel
-    Left = 231
+    Left = 237
     Top = 480
-    Width = 766
+    Width = 760
     Height = 126
     Anchors = [akLeft, akRight, akBottom]
+    Color = clAliceblue
     TabOrder = 2
     DesignSize = (
-      764
+      758
       124)
     object txtSteps: TStaticText
       Left = 96
       Top = 11
-      Width = 568
+      Width = 562
       Height = 97
       Alignment = taCenter
       Anchors = [akLeft, akRight]
@@ -46,9 +47,10 @@ object Form2: TForm2
       ParentFont = False
       TabOrder = 2
       StyleName = 'Windows'
+      ExplicitWidth = 560
     end
     object btnRight: TcxButton
-      Left = 686
+      Left = 680
       Top = 46
       Width = 75
       Height = 25
@@ -56,6 +58,7 @@ object Form2: TForm2
       Caption = '>'
       TabOrder = 0
       OnClick = btnRightClick
+      ExplicitLeft = 678
     end
     object btnLeft: TcxButton
       Left = 3
@@ -68,27 +71,45 @@ object Form2: TForm2
       OnClick = btnLeftClick
     end
     object chkBox: TcxCheckBox
-      Left = 699
+      Left = 693
       Top = 5
       Anchors = [akRight]
       Caption = 'Youtube'
       Style.TransparentBorder = False
       TabOrder = 3
       OnClick = chkBoxClick
+      ExplicitLeft = 691
+    end
+    object hyperLink: TcxHyperLinkEdit
+      Left = 641
+      Top = 98
+      Properties.ImeMode = imKata
+      Properties.Prefix = 'https://'
+      Style.BorderColor = clNone
+      Style.BorderStyle = ebsNone
+      Style.Color = clAliceblue
+      Style.HotTrack = False
+      Style.TextStyle = [fsUnderline]
+      Style.TransparentBorder = True
+      StyleHot.BorderStyle = ebsSingle
+      TabOrder = 4
+      Text = 'Full Documentation'
+      OnClick = hyperLinkClick
+      Width = 116
     end
   end
   object imgSlider: TdxImageSlider
-    Left = 231
+    Left = 237
     Top = 8
-    Width = 766
+    Width = 760
     Height = 463
     Anchors = [akLeft, akTop, akRight, akBottom]
     Images = imgCollection
   end
   object EdgeBrowser: TEdgeBrowser
-    Left = 231
-    Top = 18
-    Width = 766
+    Left = 237
+    Top = 13
+    Width = 760
     Height = 456
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
@@ -97,7 +118,7 @@ object Form2: TForm2
     UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
   end
   object imgNoInternet: TcxImage
-    Left = 536
+    Left = 533
     Top = 160
     Anchors = []
     Picture.Data = {
@@ -646,11 +667,13 @@ object Form2: TForm2
       33333333333333333333333333333333333333B372F87F2462239FED8C5D1700
       00000049454E44AE426082}
     TabOrder = 3
+    ExplicitLeft = 532
+    ExplicitTop = 157
     Height = 100
     Width = 140
   end
   object btnRetry: TcxButton
-    Left = 592
+    Left = 589
     Top = 266
     Width = 33
     Height = 34
@@ -664,6 +687,8 @@ object Form2: TForm2
     Font.Style = []
     ParentFont = False
     OnClick = btnRetryClick
+    ExplicitLeft = 588
+    ExplicitTop = 262
   end
   object treeView: TdxTreeViewControl
     Left = 0
@@ -676,6 +701,7 @@ object Form2: TForm2
     OptionsSelection.HideSelection = False
     TabOrder = 5
     OnClick = treeViewClick
+    ExplicitHeight = 584
     Data = {
       01000100DE0200000A0000000009030000002A000000000C040000000E000000
       430072006500610074006500200049006E0076006F006900630065002E000000

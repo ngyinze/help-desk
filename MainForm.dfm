@@ -32,6 +32,8 @@ object MainForm: TMainForm
     BevelKind = bkFlat
     BevelWidth = 3
     TabOrder = 0
+    ExplicitWidth = 1180
+    ExplicitHeight = 426
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       ScrollbarAnnotations.CustomAnnotations = <>

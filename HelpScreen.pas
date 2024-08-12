@@ -3,7 +3,7 @@ unit HelpScreen;
 interface
 
 uses
-  cxLookAndFeelPainters, Browser, YTembed, MediaConst, dxImageSlider, Data.DB, dxGDIPlusClasses, cxClasses,
+  shellapi, cxLookAndFeelPainters, Browser, YTembed, MediaConst, dxImageSlider, Data.DB, dxGDIPlusClasses, cxClasses,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   Vcl.Menus, Vcl.StdCtrls, cxButtons,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
@@ -27,19 +27,22 @@ type
     imgNoInternet: TcxImage;
     btnRetry: TcxButton;
     treeView: TdxTreeViewControl;
+    hyperLink: TcxHyperLinkEdit;
     procedure btnLeftClick(Sender: TObject);
     procedure btnRightClick(Sender: TObject);
     procedure btnRetryClick(Sender: TObject);
     procedure ChkBoxClick(Sender: TObject);
+    procedure hyperLinkClick(Sender: TObject);
     procedure treeViewClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ShellOpen(const Url: string; const Params: string = '');
   private
     FImageRetriever: TImageRetriever;
     FSliderUpdater: TSliderUpdater;
     FBadgeValue: Integer;
     FImagesLoaded: Boolean;
     FBrowser: TBrowser;
-    FDescription, FImageURL: TArray<string>;
+    FDescription, FImageURL, FLink: TArray<string>;
     FVideo: TArray<TVideoEntry>;
     procedure InitializeComponents;
     procedure FindParentNode;
@@ -90,12 +93,14 @@ begin
       FImageURL := c_ImageURL1;
       FDescription := c_Description1;
       FVideo := c_Vid1;
+      FLink := c_Link1;
     end;
     1:
     begin
       FImageURL := c_ImageURL2;
       FDescription := c_Description2;
       FVideo := c_Vid2;
+      FLink := c_Link2;
     end;
     2:
     begin
@@ -145,7 +150,7 @@ begin
 
   //loop to add items needed to the collection
   for var I := Low(FImageURL) to High(FImageURL) do imgCollection.Items.Add;
-  FSliderUpdater := TSliderUpdater.Create(imgSlider, imgCollection, txtSteps, FDescription);
+  FSliderUpdater := TSliderUpdater.Create(imgSlider, imgCollection, txtSteps, FDescription, Flink);
 end;
 
 procedure TForm2.RetrieveImages;
@@ -186,6 +191,11 @@ begin
     ShowNoInternetWarning;
 end;
 
+procedure TForm2.ShellOpen(const Url, Params: string);
+begin
+  ShellAPI.ShellExecute(0, 'Open', PChar(Url), PChar(Params), nil, SW_SHOWNORMAL);
+end;
+
 procedure TForm2.ShowNoInternetWarning;
 begin
   imgNoInternet.Visible := True;
@@ -207,7 +217,6 @@ end;
 
 procedure TForm2.HideNoInternetWarning;
 begin
-//  if not Assigned(FVideo) then chkBox.Visible := False;
   imgNoInternet.Visible := False;
   btnRetry.Visible := False;
   imgSlider.Visible := True;
@@ -241,6 +250,11 @@ begin
     FNode.Focused := True;
   end;
   ShowVideo;
+end;
+
+procedure TForm2.hyperLinkClick(Sender: TObject);
+begin
+  ShellOpen(FSliderUpdater.GetLink);
 end;
 
 procedure TForm2.treeViewClick(Sender: TObject);

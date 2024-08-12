@@ -13,7 +13,7 @@ object Form4: TForm4
   TextHeight = 15
   object listView: TcxListView
     Left = 8
-    Top = 8
+    Top = 31
     Width = 369
     Height = 274
     Columns = <>
@@ -31,5 +31,14 @@ object Form4: TForm4
     TabOrder = 0
     ViewStyle = vsTile
     OnDblClick = listViewDblClick
+  end
+  object StaticText1: TStaticText
+    Left = 8
+    Top = 8
+    Width = 68
+    Height = 19
+    Caption = 'Hide Guides'
+    TabOrder = 1
+    OnDblClick = StaticText1DblClick
   end
 end

@@ -51,7 +51,18 @@ const
   'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/report.gif'
    ];
 
+   c_Link1: TArray<string> = [
+   'https://youtube.com',
+   'https://sql.com.my',
+   'https://sql.com.my/e-invoice/',
+   'https://github.com'
+   ];
 
+   c_Link2: TArray<string> = [
+   'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/click%20button.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/select%20cancellation.gif',
+  'https://pub-acbba587389e48438cf45bd374515a86.r2.dev/wait%20for%20confirmation.gif'
+   ];
 
 var
     c_Vid1, c_Vid2: TArray<TVideoEntry>;
@@ -65,7 +76,6 @@ begin
 end;
 
 begin
-
   SetLength(c_Vid1, 4);
   c_Vid1[0] := CreateVideoEntry('yfov50mD4-s', '0.00');
   c_Vid1[1] := CreateVideoEntry('yfov50mD4-s', '0.04');

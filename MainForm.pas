@@ -157,18 +157,14 @@ type
     dxUIAdornerManager2Badge3: TdxBadge;
     dxGuide1: TdxGuide;
     procedure Guide1Click(Sender: TObject);
-    procedure EnableAdornerManager1;
-    procedure EnableAdornerManager2;
+    procedure EnableAdornerManager(aIdx: Integer);
     procedure createNewForm(aBadge: Integer; aFormIdx: Integer);
     procedure dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager; AAdorner:
         TdxCustomAdorner);
     procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
-    procedure Video1Click(Sender: TObject);
     procedure dxBarButton1Click(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    procedure Video1Click(Sender: TObject);
+    procedure HideBadges;
   end;
 
 var
@@ -176,10 +172,15 @@ var
   Form2: TForm2;
   Form3: TForm3;
   Form4: TForm4;
+//  IAdorner: TArray<TdxUIAdornerManager>;
 
 implementation
 
 {$R *.dfm}
+
+var
+
+  IAdorner: TArray<TdxUIAdornerManager>;
 
 procedure TMainForm.createNewForm(aBadge: Integer; aFormIdx: Integer);
 begin
@@ -207,10 +208,11 @@ begin
     Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
     begin
       case ManagerToEnable of
-        amManager1: EnableAdornerManager1;
-        amManager2: EnableAdornerManager2;
+        amManager1: EnableAdornerManager(0);
+        amManager2: EnableAdornerManager(1);
       end;
     end;
+    Form4.OnCloseBadgeEvent := HideBadges;
     Form4.ShowModal;
   finally
     Form4.Free;
@@ -239,16 +241,25 @@ begin
   end;
 end;
 
-procedure TMainForm.EnableAdornerManager1;
+procedure TMainForm.EnableAdornerManager(aIdx: Integer);
+var
+  Adorner: TdxUIAdornerManager;
 begin
-    dxUIAdornerManager1.Badges.Active := True;
-    dxUIAdornerManager2.Badges.Active := False;
+  Setlength(IAdorner, 3);
+
+  IAdorner := [
+    dxUIAdornerManager1,
+    dxUIAdornerManager2
+  ];
+
+  for Adorner in IAdorner do Adorner.Badges.Active := False;
+
+  IAdorner[aIdx].Badges.Active := True;
 end;
 
-procedure TMainForm.EnableAdornerManager2;
+procedure TMainForm.HideBadges;
 begin
-    dxUIAdornerManager1.Badges.Active := False;
-    dxUIAdornerManager2.Badges.Active := True;
+  for var Adorner in IAdorner do Adorner.Badges.Active := False;
 end;
 
 procedure TMainForm.Video1Click(Sender: TObject);

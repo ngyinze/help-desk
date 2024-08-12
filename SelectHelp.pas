@@ -11,13 +11,18 @@ uses
 type
   TAdornerManagerToEnable = (null, amManager1, amManager2);      //NOTE: Null reference to no adorner to enable, thus opening the help screen
   TDataEntrySelectedEvent = reference to procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable);   //NOTE: Anonymous type used for called back at Main Form
+  TCloseBadgeEvent = procedure of object;
   TForm4 = class(TForm)
     listView: TcxListView;
+    StaticText1: TStaticText;
     procedure listViewDblClick(Sender: TObject);
+    procedure StaticText1DblClick(Sender: TObject);
   private
     FOnDataEntrySelected: TDataEntrySelectedEvent;
+    FOnCloseBadgeEvent: TCloseBadgeEvent;
   public
     property OnDataEntrySelected: TDataEntrySelectedEvent read FOnDataEntrySelected write FOnDataEntrySelected;
+    property OnCloseBadgeEvent: TCloseBadgeEvent read FOnCloseBadgeEvent write FOnCloseBadgeEvent;
   end;
 
 var
@@ -26,7 +31,6 @@ var
 implementation
 
 {$R *.dfm}
-
 
 procedure TForm4.listViewDblClick(Sender: TObject);
 var
@@ -59,5 +63,12 @@ begin
   end;
 end;
 
+procedure TForm4.StaticText1DblClick(Sender: TObject);
+begin
+  if Assigned(FOnCloseBadgeEvent) then begin
+    FOnCloseBadgeEvent;
+    Close;
+  end;
+end;
 
 end.

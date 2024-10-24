@@ -5,7 +5,7 @@
             {
                 "title": "Step1: Select Customer",
                 "id": "", 
-                "targetElement": "Address",
+                "targetElement": "cxDBCombobox1",
                 "text": "1",
                 "url": "https://a.gif"
             },

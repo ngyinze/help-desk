@@ -130,7 +130,6 @@ type
     DBEdit3: TDBEdit;
     DBLabeledEdit1: TDBLabeledEdit;
     dxUIAdornerManager1: TdxUIAdornerManager;
-    dxUIAdornerManager1Badge1: TdxBadge;
     dxUIAdornerManager1Guide1: TdxGuide;
     Edit1: TDBEdit;
     Label1: TLabel;
@@ -156,18 +155,22 @@ type
     dxUIAdornerManager2Badge2: TdxBadge;
     dxUIAdornerManager2Badge3: TdxBadge;
     dxGuide1: TdxGuide;
-    dxUIAdornerManager1Badge5: TdxBadge;
-    procedure FormCreate(Sender: TObject);
+    dxUIAdornerManager3: TdxUIAdornerManager;
+    dxBadge1: TdxBadge;
+    dxBadge2: TdxBadge;
+    dxBadge3: TdxBadge;
+    dxBadge4: TdxBadge;
+    dxBadge5: TdxBadge;
+    dxGuide2: TdxGuide;
     procedure Guide1Click(Sender: TObject);
     procedure EnableAdornerManager(aIdx: Integer);
-    procedure createNewForm(aBadge: Integer; aFormIdx: Integer);
+    procedure createNewForm(aid, aBadge: Integer);
     procedure dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager; AAdorner:
         TdxCustomAdorner);
     procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxBarButton1Click(Sender: TObject);
     procedure Video1Click(Sender: TObject);
     procedure HideBadges;
-    private
     procedure ApplyAdornerConfig(ConfigArray: TJSONArray);
   end;
 
@@ -182,28 +185,17 @@ implementation
 {$R *.dfm}
 
 uses
-  Adorner;
+  Adorner, System.Net.HttpClient;
 
 var
   IAdorner: TArray<TdxUIAdornerManager>;
 
-procedure TMainForm.FormCreate(Sender: TObject);
-var
-  ConfigArray: TJSONArray;
+procedure TMainForm.createNewForm(aid, aBadge: Integer);
 begin
-//  ConfigArray := TAdorner.FetchAdornerConfig('https://yourserver.com/adornerConfig.json');
-//  if Assigned(ConfigArray) then
-//    ApplyAdornerConfig(ConfigArray)
-//  else
-//    ShowMessage('Failed to load UI configurations.');
-end;
-
-procedure TMainForm.createNewForm(aBadge: Integer; aFormIdx: Integer);
-begin
-  Form2 := TForm2.Create(nil, aFormIdx);
+  Form2 := TForm2.Create(nil, aBadge);
   try
     Form2.BadgeValue := aBadge;
-    Form2.ShowModal;   //The form will be freed at onClose Event of Form2
+    Form2.ShowModal;
   finally
     Form2.Free;
   end;
@@ -211,31 +203,37 @@ end;
 
 procedure TMainForm.ApplyAdornerConfig(ConfigArray: TJSONArray);
 var
+  TopicObj, AdornerObj: TJSONObject;
+  SubtopicsArray: TJSONArray;
   Adorner: TdxBadge;
-  Config: TJSONObject;
   Component: TComponent;
-  I: Integer;
+  I, J: Integer;
+  TargetElementName, Text, Title: string;
 begin
   for I := 0 to ConfigArray.Count - 1 do
   begin
-    Config := ConfigArray.Items[I] as TJSONObject;
-    Component := FindComponent(Config.GetValue('componentName').Value);
-    if Assigned(Component) and (Component is TWinControl) then
+    TopicObj := ConfigArray.Items[I] as TJSONObject;
+    if TopicObj.TryGetValue<TJSONArray>('subtopic', SubtopicsArray) then
     begin
-      dxUIAdornerManager1.Badges.Add;
+      for J := 0 to SubtopicsArray.Count - 1 do
+      begin
+        AdornerObj := SubtopicsArray.Items[J] as TJSONObject;
 
-      Adorner := TdxBadge.Create(Self);
-//      Adorner.TargetElement.Control := TWinControl(Component);
-      Adorner.Text := Config.GetValue('badgeText').Value;
-      Adorner.Offset.X := StrToInt(Config.GetValue('x_position').value);
-      Adorner.Offset.Y := StrToInt(Config.GetValue('y_position').value);
-      Adorner.Visible := StrToBool(Config.GetValue('visible').Value);
-
-      dxUIAdornerManager1.Badges.Items[i] := Adorner;
-
-
+        // Extract the 'targetElement' field
+        TargetElementName := AdornerObj.GetValue<string>('targetElement');
+          Component := FindComponent(TargetElementName);
+          if Assigned(Component) and (Component is TWinControl) then
+          begin
+            // Create a new Adorner
+            Adorner := TdxBadge.Create(Self);
+            Adorner := dxUIAdornerManager1.Badges.Add;
+            (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
+            Adorner.Text := AdornerObj.GetValue<string>('text', Text)
+          end
+        end
+      end;
     end;
-  end;
+    ConfigArray.Free;
 end;
 
 procedure TMainForm.Guide1Click(Sender: TObject);
@@ -251,9 +249,17 @@ begin
 end;
 
 procedure TMainForm.dxBarButton1Click(Sender: TObject);
+var
+  ConfigArray: TJSONArray;
 begin
   Form4 := TForm4.Create(nil);
   try
+    ConfigArray := TAdorner.FetchAdornerConfig('https://raw.githubusercontent.com/ngyinze/help-desk/refs/heads/main/json/invoice.json');
+    if Assigned(ConfigArray) then
+      ApplyAdornerConfig(ConfigArray)
+    else
+    ShowMessage('Failed to load UI configurations.');
+
     Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
     begin
       case ManagerToEnable of

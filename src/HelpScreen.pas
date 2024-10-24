@@ -55,7 +55,7 @@ type
     procedure HideNoInternetWarning;
     procedure UpdateUIState;
   public
-    constructor Create(AOwner: TComponent; aFormIdx: Integer); overload;
+    constructor Create(AOwner: TObject; aFormIdx: Integer); overload;
     destructor Destroy; override;
     property BadgeValue: Integer read FBadgeValue write SetBadgeValue;
   end;
@@ -68,9 +68,8 @@ var
 implementation
 
 {$R *.dfm}
-constructor TForm2.Create(AOwner: TComponent; aFormIdx: Integer);
+constructor TForm2.Create(AOwner: TObject; aFormIdx: Integer);
 begin
-  inherited Create(AOwner);
   FImagesLoaded := False;
   FindParentNode;
   GetRelevantMedia(aFormIdx);

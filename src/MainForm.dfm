@@ -10,7 +10,6 @@ object MainForm: TMainForm
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OnCreate = FormCreate
   DesignSize = (
     1182
     658)
@@ -33,8 +32,6 @@ object MainForm: TMainForm
     BevelKind = bkFlat
     BevelWidth = 3
     TabOrder = 17
-    ExplicitWidth = 1180
-    ExplicitHeight = 409
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       ScrollbarAnnotations.CustomAnnotations = <>
@@ -470,6 +467,7 @@ object MainForm: TMainForm
     TabOrder = 14
   end
   object dxUIAdornerManager1: TdxUIAdornerManager
+    Badges.Active = True
     Badges.Font.Charset = DEFAULT_CHARSET
     Badges.Font.Color = clWindowText
     Badges.Font.Height = -12
@@ -478,79 +476,6 @@ object MainForm: TMainForm
     Badges.ParentFont = False
     Left = 536
     Top = 360
-    object dxUIAdornerManager1Badge1: TdxBadge
-      TargetElement.Control = cxDBComboBox1
-      OnClick = dxUIAdornerManager1BadgeClick
-      Background.Color = clTomato
-      Background.FitMode = ifmFit
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = 23
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Size.Height = 30
-      Size.Width = 30
-      Text = '1'
-      TextMargins.All = 3
-    end
-    object dxUIAdornerManager1Badge2: TdxBadge
-      TargetElement.Control = LabeledEdit1
-      OnClick = dxUIAdornerManager1BadgeClick
-      Alignment.Horz = taLeftJustify
-      Background.Color = clTomato
-      Background.FitMode = ifmFit
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = 22
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Size.Height = 30
-      Size.Width = 30
-      Text = '2'
-      TextMargins.All = 3
-    end
-    object dxUIAdornerManager1Badge3: TdxBadge
-      TargetElement.Control = DBLabeledEdit1
-      OnClick = dxUIAdornerManager1BadgeClick
-      Alignment.Horz = taLeftJustify
-      Background.Color = clTomato
-      Background.FitMode = ifmFit
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = 22
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Size.Height = 30
-      Size.Width = 30
-      Text = '3'
-      TextMargins.All = 3
-    end
-    object dxUIAdornerManager1Badge4: TdxBadge
-      TargetElement.Control = Address
-      OnClick = dxUIAdornerManager1BadgeClick
-      Alignment.Horz = taLeftJustify
-      Background.Color = clTomato
-      Background.FitMode = ifmFit
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = 22
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      Offset.X = 30
-      Offset.Y = -3
-      ParentFont = False
-      Size.Height = 30
-      Size.Width = 30
-      Text = '4'
-      TextMargins.All = 3
-    end
-    object dxUIAdornerManager1Badge5: TdxBadge
-      TargetElement.Control = cxButton2
-      Text = '8'
-    end
     object dxUIAdornerManager1Guide1: TdxGuide
       TargetElement.Control = cxDBComboBox1
       BorderColor = clRed
@@ -1376,6 +1301,93 @@ object MainForm: TMainForm
       TextMargins.All = 3
     end
     object dxGuide1: TdxGuide
+      TargetElement.Control = cxDBComboBox1
+      BorderColor = clRed
+    end
+  end
+  object dxUIAdornerManager3: TdxUIAdornerManager
+    Badges.Font.Charset = DEFAULT_CHARSET
+    Badges.Font.Color = clWindowText
+    Badges.Font.Height = -12
+    Badges.Font.Name = 'Segoe UI'
+    Badges.Font.Style = []
+    Badges.ParentFont = False
+    Left = 776
+    Top = 360
+    object dxBadge1: TdxBadge
+      TargetElement.Control = cxDBComboBox1
+      OnClick = dxUIAdornerManager1BadgeClick
+      Background.Color = clTomato
+      Background.FitMode = ifmFit
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = 23
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Size.Height = 30
+      Size.Width = 30
+      Text = '1'
+      TextMargins.All = 3
+    end
+    object dxBadge2: TdxBadge
+      TargetElement.Control = LabeledEdit1
+      OnClick = dxUIAdornerManager1BadgeClick
+      Alignment.Horz = taLeftJustify
+      Background.Color = clTomato
+      Background.FitMode = ifmFit
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = 22
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Size.Height = 30
+      Size.Width = 30
+      Text = '2'
+      TextMargins.All = 3
+    end
+    object dxBadge3: TdxBadge
+      TargetElement.Control = DBLabeledEdit1
+      OnClick = dxUIAdornerManager1BadgeClick
+      Alignment.Horz = taLeftJustify
+      Background.Color = clTomato
+      Background.FitMode = ifmFit
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = 22
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Size.Height = 30
+      Size.Width = 30
+      Text = '3'
+      TextMargins.All = 3
+    end
+    object dxBadge4: TdxBadge
+      TargetElement.Control = Address
+      OnClick = dxUIAdornerManager1BadgeClick
+      Alignment.Horz = taLeftJustify
+      Background.Color = clTomato
+      Background.FitMode = ifmFit
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = 22
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      Offset.X = 30
+      Offset.Y = -3
+      ParentFont = False
+      Size.Height = 30
+      Size.Width = 30
+      Text = '4'
+      TextMargins.All = 3
+    end
+    object dxBadge5: TdxBadge
+      TargetElement.Control = cxButton2
+      Text = '8'
+    end
+    object dxGuide2: TdxGuide
       TargetElement.Control = cxDBComboBox1
       BorderColor = clRed
     end

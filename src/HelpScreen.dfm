@@ -24,8 +24,6 @@ object Form2: TForm2
     Anchors = [akLeft, akRight, akBottom]
     Color = clAliceblue
     TabOrder = 5
-    ExplicitTop = 472
-    ExplicitWidth = 750
     DesignSize = (
       750
       124)
@@ -49,7 +47,6 @@ object Form2: TForm2
       ParentFont = False
       TabOrder = 1
       StyleName = 'Windows'
-      ExplicitWidth = 552
     end
     object btnRight: TcxButton
       Left = 672
@@ -60,7 +57,6 @@ object Form2: TForm2
       Caption = '>'
       TabOrder = 2
       OnClick = btnRightClick
-      ExplicitLeft = 670
     end
     object btnLeft: TcxButton
       Left = 3
@@ -80,7 +76,6 @@ object Form2: TForm2
       Style.TransparentBorder = False
       TabOrder = 0
       OnClick = chkBoxClick
-      ExplicitLeft = 683
     end
     object hyperLink: TcxHyperLinkEdit
       Left = 634
@@ -99,7 +94,6 @@ object Form2: TForm2
       TabOrder = 4
       Text = 'Full Documentation'
       OnClick = hyperLinkClick
-      ExplicitLeft = 632
       Height = 23
       Width = 116
     end
@@ -111,8 +105,6 @@ object Form2: TForm2
     Height = 463
     Anchors = [akLeft, akTop, akRight, akBottom]
     Images = imgCollection
-    ExplicitWidth = 750
-    ExplicitHeight = 455
   end
   object EdgeBrowser: TEdgeBrowser
     Left = 235
@@ -124,8 +116,6 @@ object Form2: TForm2
     AllowSingleSignOnUsingOSPrimaryAccount = False
     TargetCompatibleBrowserVersion = '117.0.2045.28'
     UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
-    ExplicitWidth = 750
-    ExplicitHeight = 448
   end
   object imgNoInternet: TcxImage
     Left = 529
@@ -677,8 +667,6 @@ object Form2: TForm2
       33333333333333333333333333333333333333B372F87F2462239FED8C5D1700
       00000049454E44AE426082}
     TabOrder = 2
-    ExplicitLeft = 528
-    ExplicitTop = 157
     Height = 100
     Width = 140
   end
@@ -697,8 +685,6 @@ object Form2: TForm2
     Font.Style = []
     ParentFont = False
     OnClick = btnRetryClick
-    ExplicitLeft = 584
-    ExplicitTop = 262
   end
   object treeView: TdxTreeViewControl
     Left = 0
@@ -711,7 +697,6 @@ object Form2: TForm2
     OptionsSelection.HideSelection = False
     TabOrder = 0
     OnClick = treeViewClick
-    ExplicitHeight = 584
     Data = {
       01000100E00200000A0000000009030000002A000000000C040000000E000000
       430072006500610074006500200049006E0076006F006900630065002E000000

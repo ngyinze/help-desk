@@ -5,24 +5,32 @@ interface
 uses
   HelpScreen, Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, cxGraphics, cxControls,
-  cxContainer, cxEdit, cxListView,
-  Vcl.Menus, Vcl.StdCtrls, cxLookAndFeels, cxLookAndFeelPainters;
+  cxContainer, cxEdit, cxListView, System.JSON,
+  Vcl.Menus, Vcl.StdCtrls, cxLookAndFeels, cxLookAndFeelPainters, dxListView,
+  cxCustomListBox, cxListBox, dxImageSlider, dxUIAdorners;
 
 type
   TAdornerManagerToEnable = (null, amManager1, amManager2);      //NOTE: Null reference to no adorner to enable, thus opening the help screen
   TDataEntrySelectedEvent = reference to procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable);   //NOTE: Anonymous type used for called back at Main Form
   TCloseBadgeEvent = procedure of object;
   TForm4 = class(TForm)
-    listView: TcxListView;
     StaticText1: TStaticText;
+    listView: TdxListViewControl;
+    procedure FormShow(Sender: TObject);
     procedure listViewDblClick(Sender: TObject);
     procedure StaticText1DblClick(Sender: TObject);
+    procedure initListView(ConfigArray: TJSONArray);
   private
     FOnDataEntrySelected: TDataEntrySelectedEvent;
     FOnCloseBadgeEvent: TCloseBadgeEvent;
+    FConfig: TJSONArray;
+    FAdornerManager: TdxUIAdornerManager;
   public
+    constructor Create(AOwner: TComponent); override;
     property OnDataEntrySelected: TDataEntrySelectedEvent read FOnDataEntrySelected write FOnDataEntrySelected;
     property OnCloseBadgeEvent: TCloseBadgeEvent read FOnCloseBadgeEvent write FOnCloseBadgeEvent;
+    property ConfigArray: TJsonArray read FConfig write FConfig;
+    property AdornerManager: TdxUIAdornerManager read FAdornerManager write FAdornerManager;
   end;
 
 var
@@ -30,11 +38,46 @@ var
 
 implementation
 
+uses SL_IV;
+
+var FMainForm: TSL_IV;
+
 {$R *.dfm}
+
+constructor TForm4.Create(AOwner: TComponent);
+begin
+  inherited;
+  if AOwner is TSL_IV then
+    FMainForm := TSL_IV(AOwner)
+  else
+    FMainForm := TSL_IV(Application.MainForm);
+end;
+
+procedure TForm4.FormShow(Sender: TObject);
+begin
+  initListView(FConfig);
+end;
+
+procedure TForm4.initListView(ConfigArray: TJSONArray);
+var
+  TopicObj, AdornerObj: TJSONObject;
+  TopicsArray: TJSONArray;
+  Component: TComponent;
+  I, J: Integer;
+  Myobj: TObject;
+begin
+  Myobj := TObject.Create;
+  for I := 0 to ConfigArray.Count - 1 do
+  begin
+    TopicObj := ConfigArray.Items[I] as TJSONObject;
+    listView.AddItem(TopicObj.GetValue<string>('topic'),Myobj);
+  end;
+  MyObj.Free;
+end;
 
 procedure TForm4.listViewDblClick(Sender: TObject);
 var
-  Item: TListItem;
+  Item: TdxListItem;
   P: TPoint;
   ManagerToEnable: TAdornerManagerToEnable;
 begin
@@ -43,25 +86,31 @@ begin
   P := listView.ScreenToClient(P);
   Item := listView.GetItemAt(P.X, P.Y);
 
-  if Assigned(Item) then
+  if Assigned(Item) and Assigned(FMainForm) then
   begin
-    if Item.Caption = 'Create Invoice' then ManagerToEnable := amManager1          //TODO: USE NUMERIC TO COMPARE
-    else if Item.Caption = 'E-Invoice Cancellation' then ManagerToEnable := amManager2
-    else if Item.Caption = 'Common Usage' then      //CASE: No badge to be displayed
-    begin
-      HelpScreen := TForm2.Create(nil, 2);
-      HelpScreen.BadgeValue := 0;
-      HelpScreen.Show;
-    end
-    else
-      Exit;
-    if Assigned(FOnDataEntrySelected) then begin
-      FOnDataEntrySelected(Self, ManagerToEnable);  //Execute the procedure
-      Close;                                        //Close the form after making selection
-    end;
+    //Load the desire json item based on the item index
+    FMainForm.ApplyAdornerConfig(Item.Index, FConfig);
+    if Assigned(FAdornerManager) then FAdornerManager.Badges.Active := True;
+
+//    if Item.Caption = 'Create Invoice' then ManagerToEnable := amManager1          //TODO: USE NUMERIC TO COMPARE
+//    else if Item.Caption = 'E-Invoice Cancellation' then ManagerToEnable := amManager2
+//    else if Item.Caption = 'Common Usage' then      //CASE: No badge to be displayed
+//    begin
+//      HelpScreen := TForm2.Create(nil, 2);
+//      HelpScreen.BadgeValue := 0;
+//      HelpScreen.Show;
+//    end
+//    else
+//      Exit;
+//    if Assigned(FOnDataEntrySelected) then begin
+//      FOnDataEntrySelected(Self, ManagerToEnable);  //Execute the procedure
+      FConfig.Free;
+      Close;
 
   end;
 end;
+
+
 
 procedure TForm4.StaticText1DblClick(Sender: TObject);
 begin

@@ -15,7 +15,7 @@ type
     FBrowser: TBrowser;
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent; AUrl: string); reintroduce;
     destructor Destroy; override;
   end;
 
@@ -23,9 +23,9 @@ implementation
 
 {$R *.dfm}
 
-constructor TForm3.Create(AOwner: TComponent);
+constructor TForm3.Create(AOwner: TComponent; AUrl: string);
 begin
-  inherited;
+  inherited Create(AOwner);
   FBrowser := TBrowser.Create(EdgeBrowser);
   FBrowser.LoadVideoId(c_Vid1[0]);
   FBrowser.Navigate;

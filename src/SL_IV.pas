@@ -1,4 +1,4 @@
-unit MainForm;
+unit SL_IV;
 
 interface
 
@@ -18,7 +18,7 @@ uses
   dxDateRanges, dxScrollbarAnnotations, cxDBData, System.JSON;
 
 type
-  TMainForm = class(TForm)
+  TSL_IV = class(TForm)
     Address: TDBLabeledEdit;
     ClientDataSet1: TClientDataSet;
     ClientDataSet1ADDRESS1: TWideStringField;
@@ -164,21 +164,21 @@ type
     dxGuide2: TdxGuide;
     procedure Guide1Click(Sender: TObject);
     procedure EnableAdornerManager(aIdx: Integer);
-    procedure createNewForm(aid, aBadge: Integer);
-    procedure dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager; AAdorner:
-        TdxCustomAdorner);
+    procedure createNewForm(AUrl: string);
     procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxBarButton1Click(Sender: TObject);
     procedure Video1Click(Sender: TObject);
     procedure HideBadges;
-    procedure ApplyAdornerConfig(ConfigArray: TJSONArray);
+  public
+    procedure ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
   end;
 
 var
-  Form1: TMainForm;
+  Form1: TSL_IV;
   Form2: TForm2;
   Form3: TForm3;
   Form4: TForm4;
+  SubtopicsArray: TJSONArray; //not sure want to put it in class or not
 
 implementation
 
@@ -190,113 +190,93 @@ uses
 var
   IAdorner: TArray<TdxUIAdornerManager>;
 
-procedure TMainForm.createNewForm(aid, aBadge: Integer);
+procedure TSL_IV.createNewForm(AUrl: string);
 begin
-  Form2 := TForm2.Create(nil, aBadge);
+  Form3 := TForm3.Create(nil, AUrl);
   try
-    Form2.BadgeValue := aBadge;
-    Form2.ShowModal;
+    Form3.ShowModal;
   finally
-    Form2.Free;
+    Form3.Free;
   end;
 end;
 
-procedure TMainForm.ApplyAdornerConfig(ConfigArray: TJSONArray);
-var
-  TopicObj, AdornerObj: TJSONObject;
-  SubtopicsArray: TJSONArray;
-  Adorner: TdxBadge;
-  Component: TComponent;
-  I, J: Integer;
-  TargetElementName, Text, Title: string;
-begin
-  for I := 0 to ConfigArray.Count - 1 do
-  begin
-    TopicObj := ConfigArray.Items[I] as TJSONObject;
-    if TopicObj.TryGetValue<TJSONArray>('subtopic', SubtopicsArray) then
-    begin
-      for J := 0 to SubtopicsArray.Count - 1 do
-      begin
-        AdornerObj := SubtopicsArray.Items[J] as TJSONObject;
 
-        // Extract the 'targetElement' field
-        TargetElementName := AdornerObj.GetValue<string>('targetElement');
-          Component := FindComponent(TargetElementName);
-          if Assigned(Component) and (Component is TWinControl) then
-          begin
-            // Create a new Adorner
-            Adorner := TdxBadge.Create(Self);
-            Adorner := dxUIAdornerManager1.Badges.Add;
-            (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
-            Adorner.Text := AdornerObj.GetValue<string>('text', Text)
-          end
-        end
-      end;
-    end;
-    ConfigArray.Free;
-end;
-
-procedure TMainForm.Guide1Click(Sender: TObject);
+procedure TSL_IV.Guide1Click(Sender: TObject);
 var
   IState: boolean;
   IBadges: TdxBadges;
 begin
   IState := dxUIAdornerManager1.Badges.Active;
   IBadges := dxUIAdornerManager1.Badges;
-//  badge := dxUIAdornerManager1.Badges.Add;
-//  (badge.TargetElement as TdxAdornerTargetElementControl).Control := labelededit3;
   if IState = True then IBadges.Active := False else IBadges.Active := True;
 end;
 
-procedure TMainForm.dxBarButton1Click(Sender: TObject);
+procedure TSL_IV.dxBarButton1Click(Sender: TObject);
 var
   ConfigArray: TJSONArray;
 begin
-  Form4 := TForm4.Create(nil);
+  Form4 := TForm4.Create(Self);
   try
-    ConfigArray := TAdorner.FetchAdornerConfig('https://raw.githubusercontent.com/ngyinze/help-desk/refs/heads/main/json/invoice.json');
-    if Assigned(ConfigArray) then
-      ApplyAdornerConfig(ConfigArray)
-    else
-    ShowMessage('Failed to load UI configurations.');
-
-    Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
-    begin
-      case ManagerToEnable of
-        amManager1: EnableAdornerManager(0);
-        amManager2: EnableAdornerManager(1);
-      end;
-    end;
-    Form4.OnCloseBadgeEvent := HideBadges;
+    ConfigArray := TAdorner.FetchAdornerConfig('https://raw.githubusercontent.com/ngyinze/help-desk/refs/heads/yinze/badges/json/invoice.json');
+//    Form4.OnDataEntrySelected := procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable) //pass the anonymous method to form 4
+//    begin
+//      case ManagerToEnable of
+//        amManager1: EnableAdornerManager(0);
+//        amManager2: EnableAdornerManager(1);
+//      end;
+//    end;
+//    Form4.OnCloseBadgeEvent := HideBadges;
+    Form4.AdornerManager := dxUIAdornerManager1;
+    Form4.ConfigArray := ConfigArray;
     Form4.ShowModal;
   finally
     Form4.Free;
   end;
 end;
 
-procedure TMainForm.dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager;
-    AAdorner: TdxCustomAdorner);
+procedure TSL_IV.ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
+var
+  TopicObj, AdornerObj: TJSONObject;
+  Adorner: TdxBadge;
+  Component: TComponent;
+  I, J: Integer;
+  TargetElementName, Text, Title: string;
 begin
-  //Determine which badge is clicked
-  case AAdorner.ID of
-    0: createNewForm(0, 0);
-    1: createNewForm(1, 0);
-    2: createNewForm(2, 0);
-    3: createNewForm(3, 0);
+  begin
+    dxUIAdornerManager1.Badges.Clear;
+    TopicObj := ConfigArray.Items[AItem] as TJSONObject;
+    if TopicObj.TryGetValue<TJSONArray>('subtopic', SubtopicsArray) then
+    begin
+      for J := 0 to SubtopicsArray.Count - 1 do
+      begin
+        AdornerObj := SubtopicsArray.Items[J] as TJSONObject;
+        TargetElementName := AdornerObj.GetValue<string>('targetElement');
+        Component := FindComponent(TargetElementName);
+        if Assigned(Component) and (Component is TWinControl) then
+        begin
+          Adorner := TdxBadge.Create(Self);
+          Adorner := dxUIAdornerManager1.Badges.Add;
+          (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
+          Adorner.Text := AdornerObj.GetValue<string>('text', Text);
+          Adorner.OnClick := dxUIAdornerManager1BadgeClick;
+        end
+      end
+    end;
   end;
 end;
 
-procedure TMainForm.dxUIAdornerManager2BadgeClick(AManager: TdxUIAdornerManager;
+procedure TSL_IV.dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
+var
+  A: TJsonObject;
+  IUrl: string;
 begin
-  case AAdorner.ID of
-    0: createNewForm(0, 1);
-    1: createNewForm(1, 1);
-    2: createNewForm(2, 1);
-  end;
+  A := SubtopicsArray.Items[AAdorner.ID] as TJSONObject;
+  IUrl := A.GetValue<string>('url');
+  createNewForm(IURL);
 end;
 
-procedure TMainForm.EnableAdornerManager(aIdx: Integer);
+procedure TSL_IV.EnableAdornerManager(aIdx: Integer);
 var
   Adorner: TdxUIAdornerManager;
 begin
@@ -312,19 +292,19 @@ begin
   IAdorner[aIdx].Badges.Active := True;
 end;
 
-procedure TMainForm.HideBadges;
+procedure TSL_IV.HideBadges;
 begin
   for var Adorner in IAdorner do Adorner.Badges.Active := False;
 end;
 
-procedure TMainForm.Video1Click(Sender: TObject);
+procedure TSL_IV.Video1Click(Sender: TObject);
 begin
-  Form3 := TForm3.Create(nil);
-  try
-    Form3.ShowModal;
-  finally
-    Form3.Free;
-  end;
+//  Form3 := TForm3.Create(nil);
+//  try
+//    Form3.ShowModal;
+//  finally
+//    Form3.Free;
+//  end;
 end;
 
 

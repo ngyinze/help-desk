@@ -16,110 +16,20 @@ object Form2: TForm2
     1005
     600)
   TextHeight = 15
-  object dxPanel1: TdxPanel
-    Left = 237
-    Top = 480
-    Width = 752
-    Height = 126
-    Anchors = [akLeft, akRight, akBottom]
-    Color = clAliceblue
-    TabOrder = 5
-    DesignSize = (
-      750
-      124)
-    object txtSteps: TStaticText
-      Left = 96
-      Top = 11
-      Width = 554
-      Height = 97
-      Alignment = taCenter
-      Anchors = [akLeft, akRight]
-      AutoSize = False
-      BevelOuter = bvNone
-      Caption = 'Enter Your Payment Target'
-      Color = clWhite
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -20
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 1
-      StyleName = 'Windows'
-    end
-    object btnRight: TcxButton
-      Left = 672
-      Top = 46
-      Width = 75
-      Height = 25
-      Anchors = [akRight]
-      Caption = '>'
-      TabOrder = 2
-      OnClick = btnRightClick
-    end
-    object btnLeft: TcxButton
-      Left = 3
-      Top = 47
-      Width = 75
-      Height = 25
-      Anchors = [akLeft]
-      Caption = '<'
-      TabOrder = 3
-      OnClick = btnLeftClick
-    end
-    object chkBox: TcxCheckBox
-      Left = 685
-      Top = 5
-      Anchors = [akRight]
-      Caption = 'YouTube'
-      Style.TransparentBorder = False
-      TabOrder = 0
-      OnClick = chkBoxClick
-    end
-    object hyperLink: TcxHyperLinkEdit
-      Left = 634
-      Top = 98
-      Anchors = [akRight]
-      AutoSize = False
-      Properties.ImeMode = imKata
-      Properties.Prefix = 'https://'
-      Style.BorderColor = clNone
-      Style.BorderStyle = ebsNone
-      Style.Color = clAliceblue
-      Style.HotTrack = False
-      Style.TextStyle = [fsUnderline]
-      Style.TransparentBorder = True
-      StyleHot.BorderStyle = ebsSingle
-      TabOrder = 4
-      Text = 'Full Documentation'
-      OnClick = hyperLinkClick
-      Height = 23
-      Width = 116
-    end
-  end
-  object imgSlider: TdxImageSlider
-    Left = 237
-    Top = 8
-    Width = 752
-    Height = 463
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    Images = imgCollection
-  end
   object EdgeBrowser: TEdgeBrowser
-    Left = 235
-    Top = 8
-    Width = 752
+    Left = 87
+    Top = 56
+    Width = 750
     Height = 456
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
+    TabOrder = 0
     AllowSingleSignOnUsingOSPrimaryAccount = False
     TargetCompatibleBrowserVersion = '117.0.2045.28'
     UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
   end
   object imgNoInternet: TcxImage
-    Left = 529
-    Top = 160
+    Left = 398
+    Top = 216
     Anchors = []
     Picture.Data = {
       0D546478536D617274496D61676589504E470D0A1A0A0000000D494844520000
@@ -666,18 +576,18 @@ object Form2: TForm2
       3333333333333333333333333333333333333333333333333333333333333333
       33333333333333333333333333333333333333B372F87F2462239FED8C5D1700
       00000049454E44AE426082}
-    TabOrder = 2
+    TabOrder = 1
     Height = 100
     Width = 140
   end
   object btnRetry: TcxButton
-    Left = 585
-    Top = 266
+    Left = 457
+    Top = 322
     Width = 33
     Height = 34
     Anchors = []
     Caption = #55357#56579
-    TabOrder = 3
+    TabOrder = 2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
@@ -685,45 +595,5 @@ object Form2: TForm2
     Font.Style = []
     ParentFont = False
     OnClick = btnRetryClick
-  end
-  object treeView: TdxTreeViewControl
-    Left = 0
-    Top = 8
-    Width = 229
-    Height = 592
-    Anchors = [akLeft, akTop, akBottom]
-    OptionsBehavior.CaptionEditing = False
-    OptionsBehavior.HotTrack = True
-    OptionsSelection.HideSelection = False
-    TabOrder = 0
-    OnClick = treeViewClick
-    Data = {
-      01000100E00200000A0000000009030000002A000000000C040000000E000000
-      430072006500610074006500200049006E0076006F006900630065002E000000
-      00051200000031002E002000530065006C006500630074002000430075007300
-      74006F006D00650072002C00000000051100000032002E00200049006E007300
-      6500720074002000640065007400610069006C00730032000000000514000000
-      33002E0020005700720069007400650020004400650073006300720069007000
-      740069006F006E003600000000051600000034002E0020004100640064002000
-      6E006500770020006900740065006D0020007200650063006F00720064003A00
-      0000000C030000001600000045002D0049006E0076006F006900630065002000
-      430061006E00630065006C006C006100740069006F006E002E00000000051200
-      000031002E00200043006C00690063006B0020004D00790049006E0076006F00
-      6900630065003600000000051600000032002E002000530065006C0065006300
-      74002000430061006E00630065006C006C006100740069006F006E0038000000
-      00051700000033002E0020005700610069007400200066006F00720020004300
-      6F006E00660069006D006100740069006F006E0026000000000C050000000C00
-      000043006F006D006D006F006E00200075007300610067006500360000000005
-      1600000044006500630069006D0061006C00200050006C006100630065002000
-      530065007400740069006E006700730030000000000513000000520065007300
-      65007400200043006F006C0075006D006E0020004C00610079006F0075007400
-      32000000000514000000530065007400200044006F00630075006D0065006E00
-      74002000500072006F006A006500630074002800000000050F00000043006F00
-      6C0075006D006E00200044006900730070006C00610079002000260000000005
-      0E000000500072006500760069006500770020005200650070006F0072007400}
-  end
-  object imgCollection: TcxImageCollection
-    Left = 936
-    Top = 16
   end
 end

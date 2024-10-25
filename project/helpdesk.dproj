@@ -126,8 +126,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\MainForm.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="..\src\SL_IV.pas">
+            <Form>SL_IV</Form>
         </DCCReference>
         <DCCReference Include="..\src\HelpScreen.pas">
             <Form>Form2</Form>

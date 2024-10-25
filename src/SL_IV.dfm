@@ -1,4 +1,4 @@
-object MainForm: TMainForm
+object SL_IV: TSL_IV
   Left = 0
   Top = 0
   Caption = 'Form1'
@@ -467,7 +467,6 @@ object MainForm: TMainForm
     TabOrder = 14
   end
   object dxUIAdornerManager1: TdxUIAdornerManager
-    Badges.Active = True
     Badges.Font.Charset = DEFAULT_CHARSET
     Badges.Font.Color = clWindowText
     Badges.Font.Height = -12
@@ -1246,7 +1245,6 @@ object MainForm: TMainForm
     Top = 360
     object dxUIAdornerManager2Badge1: TdxBadge
       TargetElement.Control = cxGrid1
-      OnClick = dxUIAdornerManager2BadgeClick
       Background.Color = clTomato
       Background.FitMode = ifmFit
       Font.Charset = DEFAULT_CHARSET
@@ -1264,7 +1262,6 @@ object MainForm: TMainForm
     end
     object dxUIAdornerManager2Badge2: TdxBadge
       TargetElement.Control = LabeledEdit2
-      OnClick = dxUIAdornerManager2BadgeClick
       Alignment.Horz = taLeftJustify
       Background.Color = clTomato
       Background.FitMode = ifmFit
@@ -1283,7 +1280,6 @@ object MainForm: TMainForm
     end
     object dxUIAdornerManager2Badge3: TdxBadge
       TargetElement.Control = Edit1
-      OnClick = dxUIAdornerManager2BadgeClick
       Alignment.Horz = taLeftJustify
       Background.Color = clTomato
       Background.FitMode = ifmFit
@@ -1312,7 +1308,7 @@ object MainForm: TMainForm
     Badges.Font.Name = 'Segoe UI'
     Badges.Font.Style = []
     Badges.ParentFont = False
-    Left = 776
+    Left = 824
     Top = 360
     object dxBadge1: TdxBadge
       TargetElement.Control = cxDBComboBox1

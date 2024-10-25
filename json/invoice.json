@@ -35,5 +35,30 @@
                 "url": "https://a.gif"
             }
         ]
+    },
+    {
+        "topic": "E-invoice cancellation",
+        "subtopic": [
+            {
+                "title": "Step1: Select button",
+                "id": "", 
+                "targetElement": "cxGrid1",
+                "text": "1",
+                "url": "https://a.gif"
+            },
+            {
+                "title": "Step2: Insert Details",
+                "targetElement": "LabeledEdit2",
+                "text": "2",
+                "url": "https://a.gif"
+            },
+            {
+                "title": "Step3: Write Description",
+                "targetElement": "Edit1",
+                "text": "3",
+                "url": "https://a.gif"
+
+            }
+        ]
     }
 ]

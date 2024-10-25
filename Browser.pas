@@ -3,7 +3,7 @@ unit Browser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes, VCL.Edge;
+  MediaConst, Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes, VCL.Edge;
 
 type
   TBrowser = class
@@ -13,9 +13,15 @@ type
     { Private declarations }
     FHTML: string;
     FEdgeBrowser: TEdgeBrowser;
+    procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
+    function CalcSecs(timeFrame: string): Integer;
   public
     { Public declarations }
     constructor Create (ABrowser: TEdgeBrowser);
+    procedure LoadVideoId(vid: TVideoEntry);
+    procedure LoadImage(url: String);
+    procedure LoadPDF(url: String);
+    procedure Navigate();
   end;
 
   function CalcSecs(timeFrame: string): Integer;
@@ -24,29 +30,29 @@ implementation
 
 { Browser }
 
-function CalcSecs(timeframe: string): Integer;
-  var min, sec: Integer;
+function TBrowser.CalcSecs(timeframe: string): Integer;
+  var M, S: Integer;
 begin
-  min := 0;
-  sec := 0;
+  M := 0;
+  S := 0;
 
   if timeframe.Contains(':') then begin
-    min := SplitString(timeframe, ':')[0].ToInteger;
-    sec := SplitString(timeframe, ':')[1].ToInteger;
+    M := SplitString(timeframe, ':')[0].ToInteger;
+    S := SplitString(timeframe, ':')[1].ToInteger;
   end
   else if timeframe.Contains('.') then begin
-    min := SplitString(timeframe, '.')[0].ToInteger;
-    sec := SplitString(timeframe, '.')[1].ToInteger;
+    M := SplitString(timeframe, '.')[0].ToInteger;
+    S := SplitString(timeframe, '.')[1].ToInteger;
   end;
 
-  Result := (min * 60) + sec;
+  Result := (M * 60) + S;
 end;
 
 procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
   AResult: HRESULT);
 begin
   if Succeeded(AResult) then
-    FEdgeBrowser.NavigateToString(FHTML);
+    Self.Navigate;
 end;
 
 constructor TBrowser.Create(ABrowser: TEdgeBrowser);
@@ -56,8 +62,12 @@ begin
   FEdgeBrowser.OnCreateWebViewCompleted := ChkBrowserInitialized;
 end;
 
-procedure TBrowser.LoadVideoId(vidID: string; timeframe: string);
+procedure TBrowser.LoadVideoId(vid: TVideoEntry);
+var
+  vidID, timeFrame: string;
 begin
+  vidID := vid.ID;
+  timeFrame := vid.Timestamp;
   FHTML :=
   '''
   <style>
@@ -78,14 +88,48 @@ begin
   </style>
 
   <div class="yt">
-    <iframe id="ytplayer" type="text/html" width="560" height="315"
-    src="https://www.youtube.com/embed/$vidID$?autoplay=1&mute=1&fs=0&modestbranding=1&start=$time$"
+    <iframe id="ytplayer" type="text/html" width="1280" height="720"
+    src="https://www.youtube.com/embed/$vidID$?autoplay=0&fs=0&modestbranding=1&start=$time$"
     frameborder="0" allowfullscreen>
   </div>
   ''';
 
   FHTML := StringReplace(FHTML, '$vidID$', vidID, [rfReplaceAll]);
-  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeframe).ToString, [rfReplaceAll]);
+  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
+end;
+
+procedure TBrowser.Navigate;
+begin
+  FEdgeBrowser.NavigateToString(FHTML);
+end;
+
+procedure TBrowser.LoadImage(url: String);
+begin
+  FHTML :=
+  '''
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img style="height: 95vh; width: 100vw;" src="$url$" alt="Add Record">
+    </div>
+  ''';
+  FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
+//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
+end;
+
+procedure TBrowser.LoadPDF(url: String);
+begin
+  FHTML :=
+  '''
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <iframe
+          src="https://docs.google.com/viewer?url=$url$&embedded=true"
+          width="100%"
+          height="600px">
+          <p>Your browser does not support iframes.</p>
+      </iframe>
+    </div>
+  ''';
+  FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
+//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;
 
 end.

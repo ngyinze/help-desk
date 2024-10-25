@@ -12,6 +12,8 @@ type
     FHTML: string;
     FEdgeBrowser: TEdgeBrowser;
     procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
+    procedure LoadImage(url: String);
+    procedure LoadPDF(url: String);
     function CalcSecs(timeFrame: string): Integer;
   public
     { Public declarations }
@@ -89,6 +91,35 @@ begin
   ''';
   FHTML := StringReplace(FHTML, '$vidID$', vidID, [rfReplaceAll]);
   FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
+end;
+
+procedure TBrowser.LoadImage(url: String);
+begin
+  FHTML :=
+  '''
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img style="height: 95vh; width: 100vw;" src="$url$" alt="Add Record">
+    </div>
+  ''';
+  FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
+//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
+end;
+
+procedure TBrowser.LoadPDF(url: String);
+begin
+  FHTML :=
+  '''
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <iframe
+          src="https://docs.google.com/viewer?url=$url$&embedded=true"
+          width="100%"
+          height="600px">
+          <p>Your browser does not support iframes.</p>
+      </iframe>
+    </div>
+  ''';
+  FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
+//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;
 
 procedure TBrowser.Navigate;

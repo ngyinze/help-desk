@@ -8,23 +8,20 @@ uses
 type
   TBrowser = class
   private
-    { Private declarations }
     FHTML: string;
     FEdgeBrowser: TEdgeBrowser;
     procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
+    procedure LoadVideoId(vid: TVideoEntry);
     procedure LoadImage(url: String);
     procedure LoadPDF(url: String);
     function CalcSecs(timeFrame: string): Integer;
   public
-    { Public declarations }
     constructor Create (ABrowser: TEdgeBrowser);
-    procedure LoadVideoId(vid: TVideoEntry);
+    procedure View(const URL: string);
     procedure Navigate();
   end;
 
 implementation
-
-{ Browser }
 
 function TBrowser.CalcSecs(timeframe: string): Integer;
   var M, S: Integer;
@@ -42,6 +39,18 @@ begin
   end;
 
   Result := (M * 60) + S;
+end;
+
+procedure TBrowser.View(const URL: string);
+var
+  FileType: string;
+begin
+  FileType := '';
+
+  if (Pos('.gif', URL) > 0) or (Pos('.png', URL) > 0) or (Pos('.webp', URL) > 0) then
+    LoadImage(URl)
+  else if Pos('.pdf', URL) > 0 then
+    LoadPdf(URL)
 end;
 
 procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
@@ -102,7 +111,6 @@ begin
     </div>
   ''';
   FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
-//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;
 
 procedure TBrowser.LoadPDF(url: String);
@@ -119,7 +127,6 @@ begin
     </div>
   ''';
   FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
-//  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;
 
 procedure TBrowser.Navigate;

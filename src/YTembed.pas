@@ -10,13 +10,12 @@ uses
 type
   TForm3 = class(TForm)
   EdgeBrowser: TEdgeBrowser;
+  procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  procedure FormDestroy(Sender: TObject);
   private
-    { Private declarations }
     FBrowser: TBrowser;
   public
-    { Public declarations }
     constructor Create(AOwner: TComponent; AUrl: string); reintroduce;
-    destructor Destroy; override;
   end;
 
 implementation
@@ -27,14 +26,20 @@ constructor TForm3.Create(AOwner: TComponent; AUrl: string);
 begin
   inherited Create(AOwner);
   FBrowser := TBrowser.Create(EdgeBrowser);
-  FBrowser.LoadVideoId(c_Vid1[0]);
+  FBrowser.View(AUrl);
   FBrowser.Navigate;
-  end;
+end;
 
-destructor TForm3.Destroy;
+procedure TForm3.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   FBrowser.Free;
   inherited Destroy;
+end;
+
+procedure TForm3.FormDestroy(Sender: TObject);
+begin
+  FBrowser.Free;
+  inherited Destroy
 end;
 
 end.

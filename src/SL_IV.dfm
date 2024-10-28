@@ -1012,7 +1012,6 @@ object SL_IV: TSL_IV
     end
     object Video1: TMenuItem
       Caption = 'Video'
-      OnClick = Video1Click
     end
   end
   object dxBarManager1: TdxBarManager

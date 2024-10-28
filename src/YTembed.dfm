@@ -10,6 +10,8 @@ object Form3: TForm3
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
+  OnDestroy = FormDestroy
   TextHeight = 15
   object EdgeBrowser: TEdgeBrowser
     Left = 5

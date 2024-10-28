@@ -30,9 +30,7 @@ type
     FImagesLoaded: Boolean;
     FBrowser: TBrowser;
     FDescription, FImageURL, FLink: TArray<string>;
-    FVideo: TArray<TVideoEntry>;
     procedure InitializeComponents;
-    procedure GetRelevantMedia(Form: Integer);
     procedure SetBadgeValue(Value: Integer);
     procedure UpdateUIState;
   public
@@ -51,8 +49,7 @@ implementation
 {$R *.dfm}
 constructor TForm2.Create(AOwner: TObject; aFormIdx: Integer);
 begin
-  FImagesLoaded := False;;
-  GetRelevantMedia(aFormIdx);
+  FImagesLoaded := False;
 end;
 
 destructor TForm2.Destroy;
@@ -62,36 +59,6 @@ begin
   FBrowser.Free;
   inherited Destroy;
 end;
-
-
-procedure TForm2.GetRelevantMedia(Form: Integer);
-begin
-  FIndex := Form;
-  case FIndex of   //TODO
-    0:
-    begin
-      FImageURL := c_ImageURL1;
-      FDescription := c_Description1;
-      FVideo := c_Vid1;
-      FLink := c_Link1;
-    end;
-    1:
-    begin
-      FImageURL := c_ImageURL2;
-      FDescription := c_Description2;
-      FVideo := c_Vid2;
-      FLink := c_Link2;
-    end;
-    2:
-    begin
-      FImageURL := c_ImageURL3;
-      FDescription := c_Description3;
-      FVideo := nil;
-    end;
-  end;
-  InitializeComponents;
-end;
-
 
 procedure TForm2.InitializeComponents;       //TODO: OPTIMISE THIS PART
 var

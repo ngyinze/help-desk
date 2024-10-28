@@ -67,6 +67,7 @@ var
   Myobj: TObject;
 begin
   Myobj := TObject.Create;
+  listView.Clear;
   for I := 0 to ConfigArray.Count - 1 do
   begin
     TopicObj := ConfigArray.Items[I] as TJSONObject;
@@ -91,26 +92,9 @@ begin
     //Load the desire json item based on the item index
     FMainForm.ApplyAdornerConfig(Item.Index, FConfig);
     if Assigned(FAdornerManager) then FAdornerManager.Badges.Active := True;
-
-//    if Item.Caption = 'Create Invoice' then ManagerToEnable := amManager1          //TODO: USE NUMERIC TO COMPARE
-//    else if Item.Caption = 'E-Invoice Cancellation' then ManagerToEnable := amManager2
-//    else if Item.Caption = 'Common Usage' then      //CASE: No badge to be displayed
-//    begin
-//      HelpScreen := TForm2.Create(nil, 2);
-//      HelpScreen.BadgeValue := 0;
-//      HelpScreen.Show;
-//    end
-//    else
-//      Exit;
-//    if Assigned(FOnDataEntrySelected) then begin
-//      FOnDataEntrySelected(Self, ManagerToEnable);  //Execute the procedure
-      FConfig.Free;
-      Close;
-
+    Close;
   end;
 end;
-
-
 
 procedure TForm4.StaticText1DblClick(Sender: TObject);
 begin

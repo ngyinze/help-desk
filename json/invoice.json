@@ -4,61 +4,45 @@
         "subtopic": [
             {
                 "title": "Step1: Select Customer",
-                "id": "", 
                 "targetElement": "cxDBCombobox1",
                 "text": "1",
-                "url": "https://github.com/ngyinze/help-desk/blob/main/img/select%20customer.gif?raw=true"
+                "url": "invoice/create-invoice/1.webp"
             },
             {
                 "title": "Step2: Insert Details",
                 "targetElement": "LabeledEdit1",
                 "text": "2",
-                "url": "https://github.com/ngyinze/help-desk/blob/main/img/SQLxRHB-BulkPayment.pdf?raw=true"
+                "url": "invoice/create-invoice/2.webp"
             },
             {
-                "title": "Step3: Write Description",
-                "targetElement": "DBLabeledEdit1",
-                "text": "3",
-                "url": "https://github.com/ngyinze/help-desk/blob/main/img/enter%20details.gif?raw=true"
-
-            },
-            {
-                "title": "Step4: Add New Item Record",
+                "title": "Step3: Add New Item Record",
                 "targetElement": "cxButton2",
-                "text": "4",
-                "url": "https://raw.githubusercontent.com/ngyinze/help-desk/refs/heads/main/img/addrecord.webp"
+                "text": "3",
+                "url": "invoice/create-invoice/3.webp"
             }
         ]
     },
     {
-        "topic": "E-invoice cancellation",
+        "topic": "Test",
         "subtopic": [
             {
                 "title": "Step1: Select button",
                 "id": "", 
                 "targetElement": "cxGrid1",
                 "text": "1",
-                "url": "https://github.com/eStreamSoftware/docs-sqlacc/blob/e9b4727a6df7236ceee39847d643c6ff221e48d3/static/img/ai-cloud-backup/user-guide/3.png?raw=true"
+                "url": "invoice/test/1.png"
             },
             {
                 "title": "Step2: Insert Details",
                 "targetElement": "LabeledEdit2",
                 "text": "2",
-                "url": "https://github.com/eStreamSoftware/docs-sqlacc/blob/e9b4727a6df7236ceee39847d643c6ff221e48d3/static/img/ai-cloud-backup/user-guide/1.png?raw=true"
+                "url": "invoice/test/2.pdf"
             },
             {
                 "title": "Step3: Write Description",
                 "targetElement": "Edit1",
                 "text": "3",
-                "url": "https://github.com/eStreamSoftware/docs-sqlacc/blob/e9b4727a6df7236ceee39847d643c6ff221e48d3/static/img/ai-cloud-backup/user-guide/2.png?raw=true"
-
-            },
-            {
-                "title": "Step4: Write Description",
-                "targetElement": "DBLabeledEdit1",
-                "text": "3",
-                "url": "https://github.com/eStreamSoftware/docs-sqlacc/blob/master/static/img/troubleshooting/db-error/1.png?raw=true"
-
+                "url": "https://docs.sql.com.my/sqlacc/additional-module/job-order-purchase-order#5-stock-item-assembly-transfer-from-jo"
             }
         ]
     }

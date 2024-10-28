@@ -11,10 +11,8 @@ type
     FHTML: string;
     FEdgeBrowser: TEdgeBrowser;
     procedure ChkBrowserInitialized(Sender: TCustomEdgeBrowser; AResult: HRESULT);
-    procedure LoadVideoId(vid: TVideoEntry);
     procedure LoadImage(url: String);
     procedure LoadPDF(url: String);
-    function CalcSecs(timeFrame: string): Integer;
   public
     constructor Create (ABrowser: TEdgeBrowser);
     procedure View(const URL: string);
@@ -22,24 +20,6 @@ type
   end;
 
 implementation
-
-function TBrowser.CalcSecs(timeframe: string): Integer;
-  var M, S: Integer;
-begin
-  M := 0;
-  S := 0;
-
-  if timeframe.Contains(':') then begin
-    M := SplitString(timeframe, ':')[0].ToInteger;
-    S := SplitString(timeframe, ':')[1].ToInteger;
-  end
-  else if timeframe.Contains('.') then begin
-    M := SplitString(timeframe, '.')[0].ToInteger;
-    S := SplitString(timeframe, '.')[1].ToInteger;
-  end;
-
-  Result := (M * 60) + S;
-end;
 
 procedure TBrowser.View(const URL: string);
 var
@@ -51,6 +31,9 @@ begin
     LoadImage(URl)
   else if Pos('.pdf', URL) > 0 then
     LoadPdf(URL)
+  else if Pos('http', URL) > 0 then
+    FHTML := URL;
+
 end;
 
 procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;
@@ -65,41 +48,6 @@ begin
   FEdgeBrowser := ABrowser;
   FEdgeBrowser.CreateWebView;
   FEdgeBrowser.OnCreateWebViewCompleted := ChkBrowserInitialized;
-end;
-
-procedure TBrowser.LoadVideoId(vid: TVideoEntry);
-var
-  vidID, timeFrame: string;
-begin
-  vidID := vid.ID;
-  timeFrame := vid.Timestamp;
-  FHTML :=
-  '''
-  <style>
-  .yt {
-  position: fixed;
-  display: block;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  margin: 0;
-  }
-  .yt iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  }
-  </style>
-
-  <div class="yt">
-    <iframe id="ytplayer" type="text/html" width="1280" height="720"
-    src="https://www.youtube.com/embed/$vidID$?autoplay=0&fs=0&modestbranding=1&start=$time$"
-    frameborder="0" allowfullscreen>
-  </div>
-  ''';
-  FHTML := StringReplace(FHTML, '$vidID$', vidID, [rfReplaceAll]);
-  FHTML := StringReplace(FHTML, '$time$', CalcSecs(timeFrame).ToString, [rfReplaceAll]);
 end;
 
 procedure TBrowser.LoadImage(url: String);

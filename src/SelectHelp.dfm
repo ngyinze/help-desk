@@ -12,14 +12,14 @@ object Form4: TForm4
   Font.Style = []
   OnShow = FormShow
   TextHeight = 15
-  object StaticText1: TStaticText
+  object StaticTxt: TStaticText
     Left = 8
     Top = 8
     Width = 68
     Height = 19
     Caption = 'Hide Guides'
     TabOrder = 0
-    OnDblClick = StaticText1DblClick
+    OnDblClick = StaticTxtDblClick
   end
   object listView: TdxListViewControl
     Left = 8
@@ -32,6 +32,7 @@ object Form4: TForm4
     Fonts.Item.Height = -12
     Fonts.Item.Name = 'Segoe UI'
     Fonts.Item.Style = []
+    ReadOnly = True
     TabOrder = 1
     ViewStyle = List
     OnDblClick = listViewDblClick

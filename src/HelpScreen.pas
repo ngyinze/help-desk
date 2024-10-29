@@ -29,8 +29,6 @@ type
     FBadgeValue: Integer;
     FImagesLoaded: Boolean;
     FBrowser: TBrowser;
-    FDescription, FImageURL, FLink: TArray<string>;
-    procedure InitializeComponents;
     procedure SetBadgeValue(Value: Integer);
     procedure UpdateUIState;
   public
@@ -58,23 +56,6 @@ begin
   FImageRetriever.Free;
   FBrowser.Free;
   inherited Destroy;
-end;
-
-procedure TForm2.InitializeComponents;       //TODO: OPTIMISE THIS PART
-var
-  ICachePath: String;
-begin
-  if Assigned(FSliderUpdater) then          //Free up the object when changing node
-  begin
-    FSliderUpdater.Free;
-  end
-  else
-  begin
-    ICachePath := TPath.Combine(TPath.GetHomePath, 'SQL', 'ImageCache');
-    FImageRetriever := TImageRetriever.Create(ICachePath);
-    FBrowser := TBrowser.Create(EdgeBrowser);
-    EdgeBrowser.Visible := False;
-  end;
 end;
 
 procedure TForm2.UpdateUIState;

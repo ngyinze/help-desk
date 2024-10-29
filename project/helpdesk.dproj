@@ -129,11 +129,6 @@
         <DCCReference Include="..\src\SL_IV.pas">
             <Form>SL_IV</Form>
         </DCCReference>
-        <DCCReference Include="..\src\HelpScreen.pas">
-            <Form>Form2</Form>
-        </DCCReference>
-        <DCCReference Include="..\src\SliderUpdater.pas"/>
-        <DCCReference Include="..\src\ImageRetriever.pas"/>
         <DCCReference Include="..\src\YTembed.pas">
             <Form>Form3</Form>
         </DCCReference>

@@ -3,7 +3,7 @@ unit SL_IV;
 interface
 
 uses
-  cxButtons, SelectHelp, HelpScreen, YTEmbed, Vcl.ComCtrls, dxCoreGraphics,
+  cxButtons, SelectHelp, YTEmbed, Vcl.ComCtrls, dxCoreGraphics,
   cxClasses, dxUIAdorners, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxEdit,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.Buttons,
@@ -15,7 +15,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils,System.Variants, dxBar,
   System.ImageList, Vcl.ImgList, cxLookAndFeels, cxLookAndFeelPainters,
   cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
-  dxDateRanges, dxScrollbarAnnotations, cxDBData, System.JSON;
+  dxDateRanges, dxScrollbarAnnotations, cxDBData, System.JSON, System.Generics.Collections;
 
 type
   TSL_IV = class(TForm)
@@ -129,7 +129,7 @@ type
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     DBLabeledEdit1: TDBLabeledEdit;
-    dxUIAdornerManager1: TdxUIAdornerManager;
+    AdornerMng: TdxUIAdornerManager;
     dxUIAdornerManager1Guide1: TdxGuide;
     Edit1: TDBEdit;
     Label1: TLabel;
@@ -150,33 +150,23 @@ type
     dxBarManager1Bar1: TdxBar;
     dxBarButton1: TdxBarButton;
     cxButton2: TcxButton;
-    dxUIAdornerManager2: TdxUIAdornerManager;
-    dxUIAdornerManager2Badge1: TdxBadge;
-    dxUIAdornerManager2Badge2: TdxBadge;
-    dxUIAdornerManager2Badge3: TdxBadge;
-    dxGuide1: TdxGuide;
-    dxUIAdornerManager3: TdxUIAdornerManager;
-    dxBadge1: TdxBadge;
-    dxBadge2: TdxBadge;
-    dxBadge3: TdxBadge;
-    dxBadge4: TdxBadge;
-    dxBadge5: TdxBadge;
-    dxGuide2: TdxGuide;
+    AdornerMngBadge1: TdxBadge;
+    procedure FormDestroy(Sender: TObject);
     procedure Guide1Click(Sender: TObject);
-    procedure createNewForm(AUrl: string);
-    procedure dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
+    procedure AdornerMngBadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxBarButton1Click(Sender: TObject);
   private
   var
     FTopicObj: TJSONObject;
     FSubtopicsArray: TJSONArray;
+    ConfigArray: TJSONArray;
   public
     procedure ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
+    procedure HideBadges;
   end;
 
 var
   Form1: TSL_IV;
-  Form2: TForm2;
   Form3: TForm3;
   Form4: TForm4;
 
@@ -187,10 +177,9 @@ implementation
 uses
   Adorner, System.Net.HttpClient, MediaConst;
 
-procedure TSL_IV.createNewForm(AUrl: string);
+procedure TSL_IV.FormDestroy(Sender: TObject);
 begin
-  Form3 := TForm3.Create(nil, AUrl);
-  Form3.Show;
+  ConfigArray.Free;
 end;
 
 procedure TSL_IV.Guide1Click(Sender: TObject);
@@ -198,19 +187,20 @@ var
   IState: boolean;
   IBadges: TdxBadges;
 begin
-  IState := dxUIAdornerManager1.Badges.Active;
-  IBadges := dxUIAdornerManager1.Badges;
+  IState := AdornerMng.Badges.Active;
+  IBadges := AdornerMng.Badges;
   if IState = True then IBadges.Active := False else IBadges.Active := True;
 end;
 
 procedure TSL_IV.dxBarButton1Click(Sender: TObject);
-var
-  ConfigArray: TJSONArray;
 begin
   Form4 := TForm4.Create(Self);
   try
-    ConfigArray := TAdorner.FetchAdornerConfig('https://raw.githubusercontent.com/ngyinze/help-desk/refs/heads/yinze/badges/json/invoice.json');
-    Form4.AdornerManager := dxUIAdornerManager1;
+    if not Assigned(ConfigArray) then
+    begin
+      ConfigArray := TAdorner.FetchAdornerConfig(c_Config);
+      Form4.AdornerManager := AdornerMng;
+    end;
     Form4.ConfigArray := ConfigArray;
     Form4.ShowModal;
   finally
@@ -223,45 +213,51 @@ var
   AdornerObj: TJSONObject;
   Adorner: TdxBadge;
   Component: TComponent;
-  I, J: Integer;
-  TargetElementName, Text, Title: string;
+  TargetElementName, Text: string;
 begin
+  AdornerMng.Badges.Clear;
+  FTopicObj := ConfigArray.Items[AItem] as TJSONObject;
+  if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
   begin
-    dxUIAdornerManager1.Badges.Clear;
-    FTopicObj := ConfigArray.Items[AItem] as TJSONObject;
-    if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
+    for var I := 0 to FSubtopicsArray.Count - 1 do
     begin
-      for J := 0 to FSubtopicsArray.Count - 1 do
+      AdornerObj := FSubtopicsArray.Items[I] as TJSONObject;
+      TargetElementName := AdornerObj.GetValue<string>('targetElement');
+      Component := FindComponent(TargetElementName);
+      if Assigned(Component) and (Component is TWinControl) then
       begin
-        AdornerObj := FSubtopicsArray.Items[J] as TJSONObject;
-        TargetElementName := AdornerObj.GetValue<string>('targetElement');
-        Component := FindComponent(TargetElementName);
-        if Assigned(Component) and (Component is TWinControl) then
-        begin
-          Adorner := TdxBadge.Create(Self);
-          Adorner := dxUIAdornerManager1.Badges.Add;
-          (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
-          Adorner.Text := AdornerObj.GetValue<string>('text', Text);
-          Adorner.Tag := J;
-          Adorner.OnClick := dxUIAdornerManager1BadgeClick;
-        end
+        Adorner := AdornerMng.Badges.Add;
+        (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
+        Adorner.Text := AdornerObj.GetValue<string>('text', Text);
+        Adorner.Tag := I;
+        Adorner.OnClick := AdornerMngBadgeClick;
       end
-    end;
+    end
   end;
 end;
 
-procedure TSL_IV.dxUIAdornerManager1BadgeClick(AManager: TdxUIAdornerManager;
+procedure TSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 var
   A: TJsonObject;
-  IURL: string;
+  IURL, ITitle, v: string;
 begin
- if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
- begin
-  A := FSubtopicsArray.Items[AAdorner.Tag] as TJSONObject;
-  IURL := c_Url + A.GetValue<string>('url');
-  createNewForm(IURL);
- end;
+  if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
+  begin
+    A := FSubtopicsArray.Items[AAdorner.Tag] as TJSONObject;
+    v := A.GetValue<string>('url');
+    ITitle := A.GetValue<string>('title');
+    if Pos('http', v) > 0 then
+      IURL := v
+    else
+      IURL := c_Url + v;
+    TForm3.Create(Application, IURl, ITitle).Show;
+  end;
+end;
+
+procedure TSL_IV.HideBadges;
+begin
+  AdornerMng.Badges.Active := false;
 end;
 
 end.

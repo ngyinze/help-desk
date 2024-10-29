@@ -3,38 +3,28 @@ unit SelectHelp;
 interface
 
 uses
-  HelpScreen, Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, cxGraphics, cxControls,
-  cxContainer, cxEdit, cxListView, System.JSON,
+  cxContainer, cxEdit, cxListView, System.JSON, System.Generics.Collections,
   Vcl.Menus, Vcl.StdCtrls, cxLookAndFeels, cxLookAndFeelPainters, dxListView,
   cxCustomListBox, cxListBox, dxImageSlider, dxUIAdorners;
 
 type
-  TAdornerManagerToEnable = (null, amManager1, amManager2);      //NOTE: Null reference to no adorner to enable, thus opening the help screen
-  TDataEntrySelectedEvent = reference to procedure(Sender: TObject; ManagerToEnable: TAdornerManagerToEnable);   //NOTE: Anonymous type used for called back at Main Form
-  TCloseBadgeEvent = procedure of object;
   TForm4 = class(TForm)
-    StaticText1: TStaticText;
+    StaticTxt: TStaticText;
     listView: TdxListViewControl;
     procedure FormShow(Sender: TObject);
     procedure listViewDblClick(Sender: TObject);
-    procedure StaticText1DblClick(Sender: TObject);
+    procedure StaticTxtDblClick(Sender: TObject);
     procedure initListView(ConfigArray: TJSONArray);
   private
-    FOnDataEntrySelected: TDataEntrySelectedEvent;
-    FOnCloseBadgeEvent: TCloseBadgeEvent;
     FConfig: TJSONArray;
     FAdornerManager: TdxUIAdornerManager;
   public
     constructor Create(AOwner: TComponent); override;
-    property OnDataEntrySelected: TDataEntrySelectedEvent read FOnDataEntrySelected write FOnDataEntrySelected;
-    property OnCloseBadgeEvent: TCloseBadgeEvent read FOnCloseBadgeEvent write FOnCloseBadgeEvent;
     property ConfigArray: TJsonArray read FConfig write FConfig;
     property AdornerManager: TdxUIAdornerManager read FAdornerManager write FAdornerManager;
   end;
-
-var
-  HelpScreen: TForm2;
 
 implementation
 
@@ -53,6 +43,7 @@ begin
     FMainForm := TSL_IV(Application.MainForm);
 end;
 
+
 procedure TForm4.FormShow(Sender: TObject);
 begin
   initListView(FConfig);
@@ -60,29 +51,24 @@ end;
 
 procedure TForm4.initListView(ConfigArray: TJSONArray);
 var
-  TopicObj, AdornerObj: TJSONObject;
-  TopicsArray: TJSONArray;
-  Component: TComponent;
-  I, J: Integer;
-  Myobj: TObject;
+  TopicObj: TJSONObject;
+  O: TObject;
 begin
-  Myobj := TObject.Create;
+  O := TObject.Create;
   listView.Clear;
-  for I := 0 to ConfigArray.Count - 1 do
+  for var I := 0 to ConfigArray.Count - 1 do
   begin
     TopicObj := ConfigArray.Items[I] as TJSONObject;
-    listView.AddItem(TopicObj.GetValue<string>('topic'),Myobj);
+    listView.AddItem(TopicObj.GetValue<string>('topic'),O);
   end;
-  MyObj.Free;
+  O.Free;
 end;
 
 procedure TForm4.listViewDblClick(Sender: TObject);
 var
   Item: TdxListItem;
   P: TPoint;
-  ManagerToEnable: TAdornerManagerToEnable;
 begin
-  ManagerToEnable := null;
   GetCursorPos(P);
   P := listView.ScreenToClient(P);
   Item := listView.GetItemAt(P.X, P.Y);
@@ -96,12 +82,10 @@ begin
   end;
 end;
 
-procedure TForm4.StaticText1DblClick(Sender: TObject);
+procedure TForm4.StaticTxtDblClick(Sender: TObject);
 begin
-  if Assigned(FOnCloseBadgeEvent) then begin
-    FOnCloseBadgeEvent;
-    Close;
-  end;
+  FMainForm.HideBadges;
+  Close;
 end;
 
 end.

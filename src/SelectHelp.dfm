@@ -1,4 +1,4 @@
-object Form4: TForm4
+object FormSelectHelp: TFormSelectHelp
   Left = 0
   Top = 0
   Caption = 'Select Help'

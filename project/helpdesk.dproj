@@ -130,12 +130,12 @@
             <Form>SL_IV</Form>
         </DCCReference>
         <DCCReference Include="..\src\YTembed.pas">
-            <Form>Form3</Form>
+            <Form>FormBrowser</Form>
         </DCCReference>
         <DCCReference Include="..\src\Browser.pas"/>
         <DCCReference Include="..\src\MediaConst.pas"/>
         <DCCReference Include="..\src\SelectHelp.pas">
-            <Form>Form4</Form>
+            <Form>FormSelectHelp</Form>
         </DCCReference>
         <DCCReference Include="..\src\Adorner.pas"/>
         <BuildConfiguration Include="Base">

@@ -1,4 +1,4 @@
-object Form3: TForm3
+object FormBrowser: TFormBrowser
   Left = 0
   Top = 0
   ClientHeight = 527

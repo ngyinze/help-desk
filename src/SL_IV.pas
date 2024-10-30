@@ -15,7 +15,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils,System.Variants, dxBar,
   System.ImageList, Vcl.ImgList, cxLookAndFeels, cxLookAndFeelPainters,
   cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
-  dxDateRanges, dxScrollbarAnnotations, cxDBData, System.JSON, System.Generics.Collections;
+  dxDateRanges, dxScrollbarAnnotations, cxDBData, System.JSON, System.Generics.Collections,
+  Adorner;
 
 type
   TSL_IV = class(TForm)
@@ -157,29 +158,26 @@ type
     procedure dxBarButton1Click(Sender: TObject);
   private
   var
-    FTopicObj: TJSONObject;
-    FSubtopicsArray: TJSONArray;
-    ConfigArray: TJSONArray;
+    FAdornerConfig: TAdornerConfiguration;
+    FAdorner: TAdornerManager;
   public
     procedure ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
-    procedure HideBadges;
   end;
 
-var
-  Form1: TSL_IV;
-  Form3: TForm3;
-  Form4: TForm4;
+  var
+    FormSL_IV: TSL_IV;
 
 implementation
 
 {$R *.dfm}
 
 uses
-  Adorner, System.Net.HttpClient, MediaConst;
+  System.Net.HttpClient, MediaConst;
 
 procedure TSL_IV.FormDestroy(Sender: TObject);
 begin
-  ConfigArray.Free;
+  FAdorner.Free;
+  FAdornerConfig.Free;
 end;
 
 procedure TSL_IV.Guide1Click(Sender: TObject);
@@ -193,71 +191,67 @@ begin
 end;
 
 procedure TSL_IV.dxBarButton1Click(Sender: TObject);
+var
+  FormSelectHelp: TFormSelectHelp;
 begin
-  Form4 := TForm4.Create(Self);
+  if not Assigned(FAdornerConfig) then
+  begin
+    FAdornerConfig := TAdornerConfiguration.Create;
+    FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
+    FAdorner.FetchAdornerConfig(c_Config);
+  end;
+
+  FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);
   try
-    if not Assigned(ConfigArray) then
-    begin
-      ConfigArray := TAdorner.FetchAdornerConfig(c_Config);
-      Form4.AdornerManager := AdornerMng;
-    end;
-    Form4.ConfigArray := ConfigArray;
-    Form4.ShowModal;
+    FormSelectHelp.ShowModal;
   finally
-    Form4.Free;
+    FormSelectHelp.Free;
   end;
 end;
 
 procedure TSL_IV.ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
 var
   AdornerObj: TJSONObject;
+  ISubtopicArr: TJSONArray;
   Adorner: TdxBadge;
   Component: TComponent;
   TargetElementName, Text: string;
 begin
   AdornerMng.Badges.Clear;
-  FTopicObj := ConfigArray.Items[AItem] as TJSONObject;
-  if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
+  FAdorner.Topic := ConfigArray.Items[AItem] as TJSONObject;
+  ISubtopicArr := FAdorner.GetJsonArray('subtopic');
+  for var I := 0 to ISubtopicArr.Count - 1 do
   begin
-    for var I := 0 to FSubtopicsArray.Count - 1 do
+    AdornerObj := ISubtopicArr.Items[I] as TJSONObject;
+    TargetElementName := AdornerObj.GetValue<string>('targetElement');
+    Component := FindComponent(TargetElementName);
+    if Assigned(Component) and (Component is TWinControl) then
     begin
-      AdornerObj := FSubtopicsArray.Items[I] as TJSONObject;
-      TargetElementName := AdornerObj.GetValue<string>('targetElement');
-      Component := FindComponent(TargetElementName);
-      if Assigned(Component) and (Component is TWinControl) then
-      begin
-        Adorner := AdornerMng.Badges.Add;
-        (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
-        Adorner.Text := AdornerObj.GetValue<string>('text', Text);
-        Adorner.Tag := I;
-        Adorner.OnClick := AdornerMngBadgeClick;
-      end
-    end
+      Adorner := AdornerMng.Badges.Add;
+      (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
+      Adorner.Text := AdornerObj.GetValue<string>('text', Text);
+      Adorner.Tag := I;
+      Adorner.OnClick := AdornerMngBadgeClick;
+    end;
   end;
 end;
 
 procedure TSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 var
-  A: TJsonObject;
+  ITopic, A: TJsonObject;
+  ISubtopicArr: TJSONArray;
   IURL, ITitle, v: string;
 begin
-  if FTopicObj.TryGetValue<TJSONArray>('subtopic', FSubtopicsArray) then
-  begin
-    A := FSubtopicsArray.Items[AAdorner.Tag] as TJSONObject;
-    v := A.GetValue<string>('url');
-    ITitle := A.GetValue<string>('title');
-    if Pos('http', v) > 0 then
-      IURL := v
-    else
-      IURL := c_Url + v;
-    TForm3.Create(Application, IURl, ITitle).Show;
-  end;
-end;
-
-procedure TSL_IV.HideBadges;
-begin
-  AdornerMng.Badges.Active := false;
+  ISubtopicArr := FAdorner.GetJsonArray('subtopic');
+  A := ISubtopicArr.Items[AAdorner.Tag] as TJSONObject;
+  v := A.GetValue<string>('url');
+  ITitle := A.GetValue<string>('title');
+  if Pos('http', v) > 0 then
+    IURL := v
+  else
+    IURL := c_Url + v;
+  TFormBrowser.Create(Application, IURl, ITitle).Show;
 end;
 
 end.

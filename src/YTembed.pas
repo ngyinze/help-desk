@@ -8,7 +8,7 @@ uses
   Vcl.Edge, Browser;
 
 type
-  TForm3 = class(TForm)
+  TFormBrowser = class(TForm)
   EdgeBrowser: TEdgeBrowser;
   procedure FormDestroy(Sender: TObject);
   private
@@ -21,7 +21,7 @@ implementation
 
 {$R *.dfm}
 
-constructor TForm3.Create(AOwner: TComponent; AUrl, ATitle: string);
+constructor TFormBrowser.Create(AOwner: TComponent; AUrl, ATitle: string);
 begin
   inherited Create(AOwner);
   Self.Caption := ATitle;
@@ -29,7 +29,7 @@ begin
   FBrowser.Load(AUrl);
 end;
 
-procedure TForm3.FormDestroy(Sender: TObject);
+procedure TFormBrowser.FormDestroy(Sender: TObject);
 begin
   FBrowser.Free;
 end;

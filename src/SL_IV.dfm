@@ -2,7 +2,7 @@ object SL_IV: TSL_IV
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 658
+  ClientHeight = 670
   ClientWidth = 1182
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,7 +13,7 @@ object SL_IV: TSL_IV
   OnDestroy = FormDestroy
   DesignSize = (
     1182
-    658)
+    670)
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -27,7 +27,7 @@ object SL_IV: TSL_IV
     Left = 0
     Top = 308
     Width = 1182
-    Height = 417
+    Height = 429
     Cursor = crArrow
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelKind = bkFlat
@@ -45,92 +45,72 @@ object SL_IV: TSL_IV
       OptionsView.GroupByBox = False
       object cxGrid1DBTableView1DTLKEY: TcxGridDBColumn
         DataBinding.FieldName = 'DTLKEY'
-        Visible = False
       end
       object cxGrid1DBTableView1DOCKEY: TcxGridDBColumn
         DataBinding.FieldName = 'DOCKEY'
-        Visible = False
       end
       object cxGrid1DBTableView1SEQ: TcxGridDBColumn
         DataBinding.FieldName = 'SEQ'
-        Visible = False
       end
       object cxGrid1DBTableView1STYLEID: TcxGridDBColumn
         DataBinding.FieldName = 'STYLEID'
-        Visible = False
       end
       object cxGrid1DBTableView1NUMBER: TcxGridDBColumn
         DataBinding.FieldName = 'NUMBER'
-        Visible = False
       end
       object cxGrid1DBTableView1ITEMCODE: TcxGridDBColumn
         DataBinding.FieldName = 'ITEMCODE'
       end
       object cxGrid1DBTableView1LOCATION: TcxGridDBColumn
         DataBinding.FieldName = 'LOCATION'
-        Visible = False
       end
       object cxGrid1DBTableView1BATCH: TcxGridDBColumn
         DataBinding.FieldName = 'BATCH'
-        Visible = False
-      end
-      object cxGrid1DBTableView1DESCRIPTION: TcxGridDBColumn
-        DataBinding.FieldName = 'DESCRIPTION'
-        Width = 426
       end
       object cxGrid1DBTableView1PROJECT: TcxGridDBColumn
         DataBinding.FieldName = 'PROJECT'
-        Visible = False
+      end
+      object cxGrid1DBTableView1DESCRIPTION: TcxGridDBColumn
+        DataBinding.FieldName = 'DESCRIPTION'
       end
       object cxGrid1DBTableView1DESCRIPTION2: TcxGridDBColumn
         DataBinding.FieldName = 'DESCRIPTION2'
-        Visible = False
       end
       object cxGrid1DBTableView1DESCRIPTION3: TcxGridDBColumn
         DataBinding.FieldName = 'DESCRIPTION3'
-        Visible = False
       end
       object cxGrid1DBTableView1PERMITNO: TcxGridDBColumn
         DataBinding.FieldName = 'PERMITNO'
-        Visible = False
       end
       object cxGrid1DBTableView1QTY: TcxGridDBColumn
         DataBinding.FieldName = 'QTY'
       end
       object cxGrid1DBTableView1UOM: TcxGridDBColumn
         DataBinding.FieldName = 'UOM'
-        Visible = False
       end
       object cxGrid1DBTableView1RATE: TcxGridDBColumn
         DataBinding.FieldName = 'RATE'
-        Visible = False
       end
       object cxGrid1DBTableView1SQTY: TcxGridDBColumn
         DataBinding.FieldName = 'SQTY'
-        Visible = False
       end
       object cxGrid1DBTableView1SUOMQTY: TcxGridDBColumn
         DataBinding.FieldName = 'SUOMQTY'
-        Visible = False
       end
       object cxGrid1DBTableView1UNITPRICE: TcxGridDBColumn
         DataBinding.FieldName = 'UNITPRICE'
-        Visible = False
       end
       object cxGrid1DBTableView1DELIVERYDATE: TcxGridDBColumn
         DataBinding.FieldName = 'DELIVERYDATE'
-        Visible = False
       end
       object cxGrid1DBTableView1DISC: TcxGridDBColumn
         DataBinding.FieldName = 'DISC'
-        Visible = False
       end
       object cxGrid1DBTableView1TAX: TcxGridDBColumn
         DataBinding.FieldName = 'TAX'
       end
       object cxGrid1DBTableView1TARIFF: TcxGridDBColumn
         DataBinding.FieldName = 'TARIFF'
-        Visible = False
       end
       object cxGrid1DBTableView1TAXRATE: TcxGridDBColumn
         DataBinding.FieldName = 'TAXRATE'
@@ -143,63 +123,171 @@ object SL_IV: TSL_IV
       end
       object cxGrid1DBTableView1TAXINCLUSIVE: TcxGridDBColumn
         DataBinding.FieldName = 'TAXINCLUSIVE'
-        Visible = False
       end
       object cxGrid1DBTableView1AMOUNT: TcxGridDBColumn
         DataBinding.FieldName = 'AMOUNT'
-        Visible = False
       end
       object cxGrid1DBTableView1LOCALAMOUNT: TcxGridDBColumn
         DataBinding.FieldName = 'LOCALAMOUNT'
-        Visible = False
       end
       object cxGrid1DBTableView1TAXABLEAMT: TcxGridDBColumn
         DataBinding.FieldName = 'TAXABLEAMT'
-        Visible = False
       end
       object cxGrid1DBTableView1ACCOUNT: TcxGridDBColumn
         DataBinding.FieldName = 'ACCOUNT'
-        Visible = False
       end
       object cxGrid1DBTableView1PRINTABLE: TcxGridDBColumn
         DataBinding.FieldName = 'PRINTABLE'
-        Visible = False
       end
       object cxGrid1DBTableView1FROMDOCTYPE: TcxGridDBColumn
         DataBinding.FieldName = 'FROMDOCTYPE'
-        Visible = False
       end
       object cxGrid1DBTableView1FROMDOCKEY: TcxGridDBColumn
         DataBinding.FieldName = 'FROMDOCKEY'
-        Visible = False
       end
       object cxGrid1DBTableView1FROMDTLKEY: TcxGridDBColumn
         DataBinding.FieldName = 'FROMDTLKEY'
-        Visible = False
       end
       object cxGrid1DBTableView1TRANSFERABLE: TcxGridDBColumn
         DataBinding.FieldName = 'TRANSFERABLE'
-        Visible = False
       end
       object cxGrid1DBTableView1REMARK1: TcxGridDBColumn
         DataBinding.FieldName = 'REMARK1'
-        Visible = False
       end
       object cxGrid1DBTableView1REMARK2: TcxGridDBColumn
         DataBinding.FieldName = 'REMARK2'
-        Visible = False
       end
       object cxGrid1DBTableView1INITIALPURCHASECOST: TcxGridDBColumn
         DataBinding.FieldName = 'INITIALPURCHASECOST'
-        Visible = False
       end
       object cxGrid1DBTableView1CHANGED: TcxGridDBColumn
         DataBinding.FieldName = 'CHANGED'
-        Visible = False
       end
       object cxGrid1DBTableView1CompanyItemCode: TcxGridDBColumn
         DataBinding.FieldName = 'CompanyItemCode'
-        Visible = False
+      end
+      object cxGrid1DBTableView1DTLKEY1: TcxGridDBColumn
+        DataBinding.FieldName = 'DTLKEY'
+      end
+      object cxGrid1DBTableView1DOCKEY1: TcxGridDBColumn
+        DataBinding.FieldName = 'DOCKEY'
+      end
+      object cxGrid1DBTableView1SEQ1: TcxGridDBColumn
+        DataBinding.FieldName = 'SEQ'
+      end
+      object cxGrid1DBTableView1STYLEID1: TcxGridDBColumn
+        DataBinding.FieldName = 'STYLEID'
+      end
+      object cxGrid1DBTableView1NUMBER1: TcxGridDBColumn
+        DataBinding.FieldName = 'NUMBER'
+      end
+      object cxGrid1DBTableView1ITEMCODE1: TcxGridDBColumn
+        DataBinding.FieldName = 'ITEMCODE'
+      end
+      object cxGrid1DBTableView1LOCATION1: TcxGridDBColumn
+        DataBinding.FieldName = 'LOCATION'
+      end
+      object cxGrid1DBTableView1BATCH1: TcxGridDBColumn
+        DataBinding.FieldName = 'BATCH'
+      end
+      object cxGrid1DBTableView1PROJECT1: TcxGridDBColumn
+        DataBinding.FieldName = 'PROJECT'
+      end
+      object cxGrid1DBTableView1DESCRIPTION1: TcxGridDBColumn
+        DataBinding.FieldName = 'DESCRIPTION'
+      end
+      object cxGrid1DBTableView1DESCRIPTION21: TcxGridDBColumn
+        DataBinding.FieldName = 'DESCRIPTION2'
+      end
+      object cxGrid1DBTableView1DESCRIPTION31: TcxGridDBColumn
+        DataBinding.FieldName = 'DESCRIPTION3'
+      end
+      object cxGrid1DBTableView1PERMITNO1: TcxGridDBColumn
+        DataBinding.FieldName = 'PERMITNO'
+      end
+      object cxGrid1DBTableView1QTY1: TcxGridDBColumn
+        DataBinding.FieldName = 'QTY'
+      end
+      object cxGrid1DBTableView1UOM1: TcxGridDBColumn
+        DataBinding.FieldName = 'UOM'
+      end
+      object cxGrid1DBTableView1RATE1: TcxGridDBColumn
+        DataBinding.FieldName = 'RATE'
+      end
+      object cxGrid1DBTableView1SQTY1: TcxGridDBColumn
+        DataBinding.FieldName = 'SQTY'
+      end
+      object cxGrid1DBTableView1SUOMQTY1: TcxGridDBColumn
+        DataBinding.FieldName = 'SUOMQTY'
+      end
+      object cxGrid1DBTableView1UNITPRICE1: TcxGridDBColumn
+        DataBinding.FieldName = 'UNITPRICE'
+      end
+      object cxGrid1DBTableView1DELIVERYDATE1: TcxGridDBColumn
+        DataBinding.FieldName = 'DELIVERYDATE'
+      end
+      object cxGrid1DBTableView1DISC1: TcxGridDBColumn
+        DataBinding.FieldName = 'DISC'
+      end
+      object cxGrid1DBTableView1TAX1: TcxGridDBColumn
+        DataBinding.FieldName = 'TAX'
+      end
+      object cxGrid1DBTableView1TARIFF1: TcxGridDBColumn
+        DataBinding.FieldName = 'TARIFF'
+      end
+      object cxGrid1DBTableView1TAXRATE1: TcxGridDBColumn
+        DataBinding.FieldName = 'TAXRATE'
+      end
+      object cxGrid1DBTableView1TAXAMT1: TcxGridDBColumn
+        DataBinding.FieldName = 'TAXAMT'
+      end
+      object cxGrid1DBTableView1LOCALTAXAMT1: TcxGridDBColumn
+        DataBinding.FieldName = 'LOCALTAXAMT'
+      end
+      object cxGrid1DBTableView1TAXINCLUSIVE1: TcxGridDBColumn
+        DataBinding.FieldName = 'TAXINCLUSIVE'
+      end
+      object cxGrid1DBTableView1AMOUNT1: TcxGridDBColumn
+        DataBinding.FieldName = 'AMOUNT'
+      end
+      object cxGrid1DBTableView1LOCALAMOUNT1: TcxGridDBColumn
+        DataBinding.FieldName = 'LOCALAMOUNT'
+      end
+      object cxGrid1DBTableView1TAXABLEAMT1: TcxGridDBColumn
+        DataBinding.FieldName = 'TAXABLEAMT'
+      end
+      object cxGrid1DBTableView1ACCOUNT1: TcxGridDBColumn
+        DataBinding.FieldName = 'ACCOUNT'
+      end
+      object cxGrid1DBTableView1PRINTABLE1: TcxGridDBColumn
+        DataBinding.FieldName = 'PRINTABLE'
+      end
+      object cxGrid1DBTableView1FROMDOCTYPE1: TcxGridDBColumn
+        DataBinding.FieldName = 'FROMDOCTYPE'
+      end
+      object cxGrid1DBTableView1FROMDOCKEY1: TcxGridDBColumn
+        DataBinding.FieldName = 'FROMDOCKEY'
+      end
+      object cxGrid1DBTableView1FROMDTLKEY1: TcxGridDBColumn
+        DataBinding.FieldName = 'FROMDTLKEY'
+      end
+      object cxGrid1DBTableView1TRANSFERABLE1: TcxGridDBColumn
+        DataBinding.FieldName = 'TRANSFERABLE'
+      end
+      object cxGrid1DBTableView1REMARK11: TcxGridDBColumn
+        DataBinding.FieldName = 'REMARK1'
+      end
+      object cxGrid1DBTableView1REMARK21: TcxGridDBColumn
+        DataBinding.FieldName = 'REMARK2'
+      end
+      object cxGrid1DBTableView1INITIALPURCHASECOST1: TcxGridDBColumn
+        DataBinding.FieldName = 'INITIALPURCHASECOST'
+      end
+      object cxGrid1DBTableView1CHANGED1: TcxGridDBColumn
+        DataBinding.FieldName = 'CHANGED'
+      end
+      object cxGrid1DBTableView1CompanyItemCode1: TcxGridDBColumn
+        DataBinding.FieldName = 'CompanyItemCode'
       end
     end
     object cxGrid1Level1: TcxGridLevel
@@ -467,6 +555,15 @@ object SL_IV: TSL_IV
     Caption = #10133
     TabOrder = 14
   end
+  object cxButton3: TcxButton
+    Left = 928
+    Top = 49
+    Width = 75
+    Height = 25
+    Caption = 'Open'
+    TabOrder = 18
+    OnClick = cxButton3Click
+  end
   object AdornerMng: TdxUIAdornerManager
     Badges.Font.Charset = DEFAULT_CHARSET
     Badges.Font.Color = clWindowText
@@ -474,8 +571,8 @@ object SL_IV: TSL_IV
     Badges.Font.Name = 'Segoe UI'
     Badges.Font.Style = []
     Badges.ParentFont = False
-    Left = 512
-    Top = 360
+    Left = 840
+    Top = 48
     object AdornerMngBadge1: TdxBadge
     end
     object dxUIAdornerManager1Guide1: TdxGuide

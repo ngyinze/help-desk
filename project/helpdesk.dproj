@@ -138,6 +138,9 @@
             <Form>FormSelectHelp</Form>
         </DCCReference>
         <DCCReference Include="..\src\Adorner.pas"/>
+        <DCCReference Include="..\src\ST_ITEM.pas">
+            <Form>ST_ITEM</Form>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

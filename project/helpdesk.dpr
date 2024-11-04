@@ -7,7 +7,8 @@ uses
   Browser in '..\src\Browser.pas',
   MediaConst in '..\src\MediaConst.pas',
   SelectHelp in '..\src\SelectHelp.pas' {FormSelectHelp},
-  Adorner in '..\src\Adorner.pas';
+  Adorner in '..\src\Adorner.pas',
+  ST_ITEM in '..\src\ST_ITEM.pas' {ST_ITEM};
 
 {$R *.res}
 

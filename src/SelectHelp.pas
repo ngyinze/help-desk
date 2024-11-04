@@ -11,6 +11,8 @@ uses
   Adorner;
 
 type
+  TConfig = procedure(AItem: Integer; ConfigArray: TJSONArray) of object;
+
   TFormSelectHelp = class(TForm)
     StaticTxt: TStaticText;
     listView: TdxListViewControl;
@@ -18,33 +20,24 @@ type
     procedure listViewDblClick(Sender: TObject);
     procedure StaticTxtDblClick(Sender: TObject);
   private
+    FApplyAdorner: TConfig;
     FAdornerManager: TAdornerManager;
-    procedure initListView;
   public
     constructor Create(AOwner: TComponent; AAdorner: TAdornerManager); reintroduce;
+    property Config: TConfig read FApplyAdorner write FApplyAdorner;
   end;
 
 implementation
-
-uses SL_IV;
-
-var FMainForm: TSL_IV;
 
 {$R *.dfm}
 
 constructor TFormSelectHelp.Create(AOwner: TComponent; AAdorner: TAdornerManager);
 begin
   inherited Create(AOwner);
-  FMainForm := TSL_IV(AOwner);
   FAdornerManager := AAdorner;
 end;
 
-procedure TFormSelectHelp.FormShow(Sender: TObject);
-begin
-  initListView;
-end;
-
-procedure TFormSelectHelp.initListView;
+procedure TFormSelectHelp.FormShow(Sender: TObject);        //Initialize list view
 var
   TopicObj: TJSONObject;
   O: TObject;
@@ -71,10 +64,9 @@ begin
   P := listView.ScreenToClient(P);
   Item := listView.GetItemAt(P.X, P.Y);
 
-  if Assigned(Item) and Assigned(FMainForm) then
+  if Assigned(Item) then
   begin
-    //Load the desire json item based on the item index
-    FMainForm.ApplyAdornerConfig(Item.Index, FAdornerManager.Config);
+    FApplyAdorner(Item.Index, FAdornerManager.Config);
     if Assigned(FAdornerManager) then FAdornerManager.Show;
   end;
   Close;

@@ -6,19 +6,25 @@
                 "title": "Step1: Select Customer",
                 "targetElement": "cxDBCombobox1",
                 "text": "1",
-                "url": "invoice/create-invoice/1.webp"
+                "url": "invoice/create_invoice/1.webp"
             },
             {
                 "title": "Step2: Insert Details",
                 "targetElement": "LabeledEdit1",
                 "text": "2",
-                "url": "invoice/create-invoice/2.webp"
+                "url": "invoice/create_invoice/2.webp"
             },
             {
                 "title": "Step3: Add New Item Record",
                 "targetElement": "cxButton2",
                 "text": "3",
-                "url": "invoice/create-invoice/3.webp"
+                "url": "invoice/create_invoice/3.webp"
+            },
+            {
+                "title": "Step4: Add ",
+                "targetElement": "cxGrid1DBTableView1SEQ",
+                "text": "4",
+                "url": "invoice/create_invoice/3.webp"
             }
         ]
     },
@@ -27,7 +33,6 @@
         "subtopic": [
             {
                 "title": "Step1: Select button",
-                "id": "", 
                 "targetElement": "cxGrid1",
                 "text": "1",
                 "url": "invoice/test/1.png"

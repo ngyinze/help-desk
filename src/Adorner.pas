@@ -44,7 +44,6 @@ end;
 destructor TAdornerConfiguration.Destroy;
 begin
   FArray.Free;
-//  FTopicObj.Free;
   inherited;
 end;
 
@@ -79,12 +78,12 @@ end;
 constructor TAdornerManager.Create(AAdornerMng: TdxUIAdornerManager; AConfig: TAdornerConfiguration);
 begin
   FAdornerMng := AAdornerMng;
-  FConfiguration := AConfig;  // Dependency Injection: manager uses configuration instead of inheriting from it
+  FConfiguration := AConfig;
 end;
 
 destructor TAdornerManager.Destroy;
 begin
-  inherited; //call the parent's class destroy
+  inherited;
 end;
 
 procedure TAdornerManager.Hide;

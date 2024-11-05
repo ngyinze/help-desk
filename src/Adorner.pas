@@ -23,7 +23,7 @@ type
   TAdornerManager = class(TAdornerConfiguration)
   private
     FAdornerMng: TdxUIAdornerManager;
-    FConfiguration: TAdornerConfiguration; //Has-a relationship
+    FConfiguration: TAdornerConfiguration;
   public
     constructor Create(AAdornerMng: TdxUIAdornerManager; AConfig: TAdornerConfiguration);
     destructor Destroy; override;

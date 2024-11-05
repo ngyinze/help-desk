@@ -21,11 +21,12 @@
                 "url": "invoice/create_invoice/3.webp"
             },
             {
-                "title": "Step4: Add ",
-                "targetElement": "cxGrid1DBTableView1SEQ",
-                "text": "4",
+                "title": "Step4: Add New Item Record",
+                "targetElement": "DBLabeledEdit1",
+                "text": "3",
                 "url": "invoice/create_invoice/3.webp"
             }
+
         ]
     },
     {

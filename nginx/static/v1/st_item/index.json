@@ -5,26 +5,26 @@
             {
                 "title": "Step1: Enter Item Code",
                 "targetElement": "DBEdit1",
-                "text": "1",
-                "url": "stock_item/create_stock_item/1.png"
+                "text": "10",
+                "url": "http://localhost/v1/st_item/create_stock_item/1.png"
             },
             {
                 "title": "Step2: Write Description",
                 "targetElement": "DBEdit2",
-                "text": "2",
-                "url": "stock_item/create_stock_item/1.png"
+                "text": "20",
+                "url": "http://localhost/v1/st_item/create_stock_item/1.png"
             },
             {
                 "title": "Step3: Select Item Group",
                 "targetElement": "DBEdit3",
-                "text": "3",
-                "url": "stock_item/create_stock_item/1.png"
+                "text": "30",
+                "url": "http://localhost/v1/st_item/create_stock_item/1.png"
             },
             {
                 "title": "Step4: Set Item Price",
                 "targetElement": "DBEdit4",
-                "text": "4",
-                "url": "stock_item/create_stock_item/1.png"
+                "text": "40",
+                "url": "http://localhost/v1/st_item/create_stock_item/1.png"
             }
         ]
     }

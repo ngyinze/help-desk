@@ -115,8 +115,6 @@ implementation
 
 {$R *.dfm}
 
-uses MediaConst;
-
 procedure TST_ITEM.FormDestroy(Sender: TObject);
 begin
   FAdorner.Free;
@@ -131,7 +129,7 @@ begin
   begin
     FAdornerConfig := TAdornerConfiguration.Create;
     FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
-    FAdorner.FetchAdornerConfig(c_STITEM_cfg);
+    FAdorner.FetchAdornerConfig(self.Name);
   end;
 
   FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);
@@ -175,16 +173,12 @@ procedure TST_ITEM.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
 var
   ITopic, A: TJsonObject;
   ISubtopicArr: TJSONArray;
-  IURL, ITitle, v: string;
+  IURL, ITitle: string;
 begin
   ISubtopicArr := FAdorner.GetJsonArray('subtopic');
   A := ISubtopicArr.Items[AAdorner.Tag] as TJSONObject;
-  v := A.GetValue<string>('url');
+  IURL := A.GetValue<string>('url');
   ITitle := A.GetValue<string>('title');
-  if Pos('http', v) > 0 then   //URL in json is http
-    IURL := v
-  else
-    IURL := c_Url + v;  //URL in json is path
   TFormBrowser.Create(Self, IURl, ITitle).Show;
 end;
 

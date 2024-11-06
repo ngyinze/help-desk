@@ -27,5 +27,7 @@ object FormBrowser: TFormBrowser
     AllowSingleSignOnUsingOSPrimaryAccount = False
     TargetCompatibleBrowserVersion = '117.0.2045.28'
     UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
+    ExplicitLeft = -5
+    ExplicitTop = -5
   end
 end

@@ -1,0 +1,11 @@
+server {
+    listen 80;
+
+    root /var/www/static;
+
+    location  / {
+        
+        try_files /$http_app_version/$http_form$uri /$http_app_version/$http_form$uri/ index.json;
+    }
+}
+

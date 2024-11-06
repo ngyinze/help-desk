@@ -19,7 +19,7 @@ uses
   Adorner, YTEmbed;
 
 type
-  TSL_IV = class(TForm)
+  TFormSL_IV = class(TForm)
     Address: TDBLabeledEdit;
     ClientDataSet1: TClientDataSet;
     ClientDataSet1ADDRESS1: TWideStringField;
@@ -208,22 +208,22 @@ type
   end;
 
   var
-    FormSL_IV: TSL_IV;
+    FormSL_IV: TFormSL_IV;
 
 implementation
 
 {$R *.dfm}
 
 uses
-  System.Net.HttpClient, MediaConst, St_item;
+  System.Net.HttpClient, St_item;
 
-procedure TSL_IV.FormDestroy(Sender: TObject);
+procedure TFormSL_IV.FormDestroy(Sender: TObject);
 begin
   FAdorner.Free;
   FAdornerConfig.Free;
 end;
 
-procedure TSL_IV.Guide1Click(Sender: TObject);
+procedure TFormSL_IV.Guide1Click(Sender: TObject);
 var
   IState: boolean;
   IBadges: TdxBadges;
@@ -233,7 +233,7 @@ begin
   if IState = True then IBadges.Active := False else IBadges.Active := True;
 end;
 
-procedure TSL_IV.dxBarButton1Click(Sender: TObject);
+procedure TFormSL_IV.dxBarButton1Click(Sender: TObject);
 var
   FormSelectHelp: TFormSelectHelp;
 begin
@@ -241,7 +241,7 @@ begin
   begin
     FAdornerConfig := TAdornerConfiguration.Create;
     FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
-    FAdorner.FetchAdornerConfig(c_SLIV_Cfg);
+    FAdorner.FetchAdornerConfig('invoice');  //self.name
   end;
 
   FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);
@@ -253,7 +253,7 @@ begin
   end;
 end;
 
-procedure TSL_IV.ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
+procedure TFormSL_IV.ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
 var
   AdornerObj: TJSONObject;
   ISubtopicArr: TJSONArray;
@@ -280,7 +280,7 @@ begin
   end;
 end;
 
-procedure TSL_IV.cxButton3Click(Sender: TObject);
+procedure TFormSL_IV.cxButton3Click(Sender: TObject);
 var
   MyClass: TST_Item;
 begin
@@ -293,21 +293,17 @@ begin
 
 end;
 
-procedure TSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
+procedure TFormSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 var
   A: TJsonObject;
   ISubtopicArr: TJSONArray;
-  IURL, ITitle, v: string;
+  IURL, ITitle: string;
 begin
   ISubtopicArr := FAdorner.GetJsonArray('subtopic');
   A := ISubtopicArr.Items[AAdorner.Tag] as TJSONObject;
-  v := A.GetValue<string>('url');
+  IURL := A.GetValue<string>('url');
   ITitle := A.GetValue<string>('title');
-  if Pos('http', v) > 0 then
-    IURL := v
-  else
-    IURL := c_Url + v;
   TFormBrowser.Create(Application, IURl, ITitle).Show;
 end;
 

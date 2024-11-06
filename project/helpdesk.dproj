@@ -127,13 +127,12 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="..\src\SL_IV.pas">
-            <Form>SL_IV</Form>
+            <Form>FormSL_IV</Form>
         </DCCReference>
         <DCCReference Include="..\src\YTembed.pas">
             <Form>FormBrowser</Form>
         </DCCReference>
         <DCCReference Include="..\src\Browser.pas"/>
-        <DCCReference Include="..\src\MediaConst.pas"/>
         <DCCReference Include="..\src\SelectHelp.pas">
             <Form>FormSelectHelp</Form>
         </DCCReference>

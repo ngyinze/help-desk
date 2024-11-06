@@ -3,7 +3,8 @@ unit Browser;
 interface
 
 uses
-  MediaConst, Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes, VCL.Edge;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils,
+  System.Variants, System.Classes, VCL.Edge;
 
 type
   TBrowser = class

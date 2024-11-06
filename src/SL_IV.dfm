@@ -1,4 +1,4 @@
-object SL_IV: TSL_IV
+object FormSL_IV: TFormSL_IV
   Left = 0
   Top = 0
   Caption = 'Form1'
@@ -501,7 +501,7 @@ object SL_IV: TSL_IV
   end
   object DBEdit2: TDBEdit
     Left = 80
-    Top = 174
+    Top = 167
     Width = 853
     Height = 23
     BorderStyle = bsNone

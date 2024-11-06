@@ -14,7 +14,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure FetchAdornerConfig(const URL: string);
+    procedure FetchAdornerConfig(const AFormName: string);
     function GetJsonArray(AKey: string): TJSONArray;
     property Topic: TJSONObject read FTopicObj write FTopicObj;
     property Config: TJSONArray read FArray write FArray;
@@ -47,7 +47,7 @@ begin
   inherited;
 end;
 
-procedure TAdornerConfiguration.FetchAdornerConfig(const URL: string);
+procedure TAdornerConfiguration.FetchAdornerConfig(const AFormName: string);
 var
   HttpClient: THttpClient;
   Response: IHTTPResponse;
@@ -55,7 +55,9 @@ var
 begin
   HttpClient := THttpClient.Create;
   try
-    Response := HttpClient.Get(URL);
+    HttpClient.CustomHeaders['App-Version'] := 'v1';
+    HttpClient.CustomHeaders['Form'] := AFormName;
+    Response := HttpClient.Get('http://localhost/index.json');
     if Response.StatusCode = 200 then
     begin
       JSONData := Response.ContentAsString();

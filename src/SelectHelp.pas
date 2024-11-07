@@ -3,15 +3,16 @@ unit SelectHelp;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, cxGraphics, cxControls,
-  cxContainer, cxEdit, cxListView, System.JSON, System.Generics.Collections,
-  Vcl.Menus, Vcl.StdCtrls, cxLookAndFeels, cxLookAndFeelPainters, dxListView,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ComCtrls, cxGraphics, cxControls,cxContainer, cxEdit, cxListView,
+  System.JSON, System.Generics.Collections, Vcl.Menus, Vcl.StdCtrls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxListView,
   cxCustomListBox, cxListBox, dxImageSlider, dxUIAdorners,
   Adorner;
 
 type
-  TConfig = procedure(AItem: Integer; ConfigArray: TJSONArray) of object;
+  TConfig = procedure(AItem: Integer; ATopic: string) of object;
 
   TFormSelectHelp = class(TForm)
     StaticTxt: TStaticText;
@@ -37,7 +38,7 @@ begin
   FAdornerManager := AAdorner;
 end;
 
-procedure TFormSelectHelp.FormShow(Sender: TObject);        //Initialize list view
+procedure TFormSelectHelp.FormShow(Sender: TObject);
 var
   TopicObj: TJSONObject;
   O: TObject;
@@ -47,8 +48,8 @@ begin
     listView.Clear;
     for var I := 0 to FAdornerManager.Config.Count - 1 do
     begin
-      TopicObj := FAdornerManager.Config.Items[I] as TJSONObject;
-      listView.AddItem(TopicObj.GetValue<string>('topic'),O);
+      TopicObj := FAdornerManager.Config.Items[I] as TJSONObject;   //Initialize list view
+      listView.AddItem(TopicObj.GetValue<string>('name'),O);
     end;
   finally
     O.Free;
@@ -66,7 +67,7 @@ begin
 
   if Assigned(Item) then
   begin
-    FApplyAdorner(Item.Index, FAdornerManager.Config);
+    FApplyAdorner(Item.Index, Item.Caption);
     if Assigned(FAdornerManager) then FAdornerManager.Show;
   end;
   Close;

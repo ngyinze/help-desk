@@ -24,11 +24,11 @@ implementation
 
 procedure TBrowser.Load(const URL: string);
 begin
-  if (Pos('.gif', URL) > 0) or (Pos('.png', URL) > 0) or (Pos('.webp', URL) > 0) then
-    LoadImage(URl)
-  else if Pos('.pdf', URL) > 0 then
-    LoadPdf(URL)
-  else if Pos('http', URL) > 0 then
+//  if (Pos('.gif', URL) > 0) or (Pos('.png', URL) > 0) or (Pos('.webp', URL) > 0) then
+//    LoadImage(URl)
+//  else if Pos('.pdf', URL) > 0 then
+//    LoadPdf(URL)
+//  else if Pos('http', URL) > 0 then
     FEdgeBrowser.Navigate(URL);
 end;
 
@@ -60,19 +60,8 @@ end;
 
 procedure TBrowser.LoadPDF(url: String);
 begin
-  FHTML :=
-  '''
-    <div style="display: flex; align-items: center; justify-content: center;">
-      <iframe
-          src="https://docs.google.com/viewer?url=$url$&embedded=true"
-          width="100%"
-          height="700px">
-          <p>Your browser does not support iframes.</p>
-      </iframe>
-    </div>
-  ''';
-  FHTML := StringReplace(FHTML, '$url$', url, [rfReplaceAll]);
-  FEdgeBrowser.NavigateToString(FHTML);
+  FHTML := url;
+  FEdgeBrowser.Navigate(FHTML);
 end;
 
 procedure TBrowser.Navigate;

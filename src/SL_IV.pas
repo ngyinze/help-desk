@@ -203,8 +203,9 @@ type
   var
     FAdornerConfig: TAdornerConfiguration;
     FAdorner: TAdornerManager;
+    FBuiltJson: TJsonArray; //TODO: CHANGE BETTER NAME
   public
-    procedure ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
+    procedure ApplyAdornerConfig(AItem: Integer; ATopic: string);
   end;
 
   var
@@ -220,7 +221,7 @@ uses
 procedure TFormSL_IV.FormDestroy(Sender: TObject);
 begin
   FAdorner.Free;
-  FAdornerConfig.Free;
+  FBuiltJson.Free;
 end;
 
 procedure TFormSL_IV.Guide1Click(Sender: TObject);
@@ -237,11 +238,11 @@ procedure TFormSL_IV.dxBarButton1Click(Sender: TObject);
 var
   FormSelectHelp: TFormSelectHelp;
 begin
-  if not Assigned(FAdornerConfig) then
+  if not Assigned(FAdorner) then
   begin
     FAdornerConfig := TAdornerConfiguration.Create;
     FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
-    FAdorner.FetchAdornerConfig('invoice');  //self.name
+    FAdorner.FetchAdornerConfig(Self.Name);
   end;
 
   FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);
@@ -253,20 +254,20 @@ begin
   end;
 end;
 
-procedure TFormSL_IV.ApplyAdornerConfig(AItem: Integer; ConfigArray: TJSONArray);
+procedure TFormSL_IV.ApplyAdornerConfig(AItem: Integer; ATopic: string);
 var
   AdornerObj: TJSONObject;
-  ISubtopicArr: TJSONArray;
   Adorner: TdxBadge;
   Component: TComponent;
   TargetElementName, Text: string;
 begin
   AdornerMng.Badges.Clear;
-  FAdorner.Topic := ConfigArray.Items[AItem] as TJSONObject;
-  ISubtopicArr := FAdorner.GetJsonArray('subtopic');
-  for var I := 0 to ISubtopicArr.Count - 1 do
+  if Assigned(FBuiltJson) then FBuiltJson.Free;    //When user changing guide
+  FBuiltJson := FAdorner.BuildJsonArray(Self.Name, ATopic);
+
+  for var I := 0 to FBuiltJson.Count - 1 do
   begin
-    AdornerObj := ISubtopicArr.Items[I] as TJSONObject;
+    AdornerObj := FBuiltJson.Items[I] as TJSONObject;
     TargetElementName := AdornerObj.GetValue<string>('targetElement');
     Component := FindComponent(TargetElementName);
     if Assigned(Component) and (Component is TWinControl) then
@@ -290,18 +291,15 @@ begin
   finally
     MyClass.Free;
   end;
-
 end;
 
 procedure TFormSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 var
   A: TJsonObject;
-  ISubtopicArr: TJSONArray;
   IURL, ITitle: string;
 begin
-  ISubtopicArr := FAdorner.GetJsonArray('subtopic');
-  A := ISubtopicArr.Items[AAdorner.Tag] as TJSONObject;
+  A := FBuiltJson.Items[AAdorner.Tag] as TJSONObject;
   IURL := A.GetValue<string>('url');
   ITitle := A.GetValue<string>('title');
   TFormBrowser.Create(Application, IURl, ITitle).Show;

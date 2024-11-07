@@ -9,7 +9,7 @@
                 "url": "http://localhost/v1/invoice/create_invoice/1.webp"
             },
             {
-                "title": "Step2: Insert TUSDF Details",
+                "title": "Step2: Insert Details",
                 "targetElement": "LabeledEdit1",
                 "text": "2",
                 "url": "http://localhost/v1/invoice/create_invoice/2.webp"

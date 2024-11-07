@@ -3,9 +3,21 @@ server {
 
     root /var/www/static;
 
-    location  / {
-        
-        try_files /$http_app_version/$http_form$uri /$http_app_version/$http_form$uri/ index.json;
+    location  /list {
+        autoindex on;
+        autoindex_format json;
+        alias /var/www/static/$http_app_version/$http_form;
+    }
+
+    location /media {
+        autoindex on;
+        autoindex_format json;
+        alias /var/www/static/$http_app_version/$http_form/$http_topic/;
+    }
+
+    location / {
+        add_header Content-Disposition 'inline';
+        default_type application/pdf;
     }
 }
 

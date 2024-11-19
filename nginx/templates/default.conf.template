@@ -3,7 +3,7 @@ server {
 
     root /var/www/static;
 
-    location  /list {
+    location /list {
         autoindex on;
         autoindex_format json;
         alias /var/www/static/$http_app_version/$http_form;
@@ -15,9 +15,24 @@ server {
         alias /var/www/static/$http_app_version/$http_form/$http_topic/;
     }
 
-    location / {
-        add_header Content-Disposition 'inline';
-        default_type application/pdf;
+    location ~* \.pdf$ {
+        add_header Content-Type application/pdf;
+        add_header Content-Disposition "inline";
+        add_header Cache-Control "public, max-age=3600, must-revalidate, no-transform";
+    }
+
+    location ~* \.mp4$ {
+        mp4;                                   # Enable MP4 streaming module
+        mp4_buffer_size       1m;             # Buffer size for MP4 streaming
+        mp4_max_buffer_size   5m;
+
+        add_header Cache-Control "public, max-age=3600, must-revalidate, no-transform";
+        add_header Accept-Ranges bytes;
+    }
+
+    location ~* \.(webp|png|jpg) {
+        add_header Cache-Control "public, max-age=3600, must-revalidate, no-transform";
     }
 }
+
 

@@ -11,21 +11,16 @@ object FormSelectHelp: TFormSelectHelp
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnShow = FormShow
+  DesignSize = (
+    385
+    294)
   TextHeight = 15
-  object StaticTxt: TStaticText
-    Left = 8
-    Top = 8
-    Width = 68
-    Height = 19
-    Caption = 'Hide Guides'
-    TabOrder = 0
-    OnDblClick = StaticTxtDblClick
-  end
   object listView: TdxListViewControl
     Left = 8
     Top = 33
     Width = 369
-    Height = 224
+    Height = 253
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Fonts.AssignedValues = [Item]
     Fonts.Item.Charset = DEFAULT_CHARSET
     Fonts.Item.Color = clDefault
@@ -33,8 +28,18 @@ object FormSelectHelp: TFormSelectHelp
     Fonts.Item.Name = 'Segoe UI'
     Fonts.Item.Style = []
     ReadOnly = True
-    TabOrder = 1
+    TabOrder = 0
     ViewStyle = List
     OnDblClick = listViewDblClick
+  end
+  object cxButton1: TcxButton
+    Left = 302
+    Top = 8
+    Width = 75
+    Height = 25
+    Anchors = [akTop, akRight]
+    Caption = 'Hide'
+    TabOrder = 1
+    OnClick = StaticTxtDblClick
   end
 end

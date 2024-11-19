@@ -7,7 +7,8 @@ uses
   Browser in '..\src\Browser.pas',
   SelectHelp in '..\src\SelectHelp.pas' {FormSelectHelp},
   Adorner in '..\src\Adorner.pas',
-  ST_ITEM in '..\src\ST_ITEM.pas' {ST_ITEM};
+  ST_ITEM in '..\src\ST_ITEM.pas' {ST_ITEM},
+  MidasLib;
 
 {$R *.res}
 

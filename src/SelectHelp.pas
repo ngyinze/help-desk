@@ -9,14 +9,14 @@ uses
   System.JSON, System.Generics.Collections, Vcl.Menus, Vcl.StdCtrls,
   cxLookAndFeels, cxLookAndFeelPainters, dxListView,
   cxCustomListBox, cxListBox, dxImageSlider, dxUIAdorners,
-  Adorner;
+  Adorner, cxButtons;
 
 type
   TConfig = procedure(AItem: Integer; ATopic: string) of object;
 
   TFormSelectHelp = class(TForm)
-    StaticTxt: TStaticText;
     listView: TdxListViewControl;
+    cxButton1: TcxButton;
     procedure FormShow(Sender: TObject);
     procedure listViewDblClick(Sender: TObject);
     procedure StaticTxtDblClick(Sender: TObject);

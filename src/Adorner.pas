@@ -63,6 +63,7 @@ begin
     H.CustomHeaders['App-Version'] := 'v1';
     H.CustomHeaders['Form'] := AFormName;
     H.CustomHeaders['Topic'] := ATopic;
+//    R := H.Get('http://az.yinze.eu.org/media');
     R := H.Get('http://localhost/media');
 
     if R.StatusCode = 200 then
@@ -92,6 +93,7 @@ begin
           New.AddPair('title', T);
           New.AddPair('targetElement', A[2]);
           New.AddPair('text', A[0]);
+//          New.AddPair('url', Format('http://az.yinze.eu.org/%s/%s/%s/%s',    //TODO: ENDPOINT
           New.AddPair('url', Format('http://localhost/%s/%s/%s/%s',
             [ H.CustomHeaders['App-Version'],
               H.CustomHeaders['Form'],
@@ -121,6 +123,7 @@ begin
   try
     HttpClient.CustomHeaders['App-Version'] := 'v1';
     HttpClient.CustomHeaders['Form'] := AFormName;
+//    Response := HttpClient.Get('http://az.yinze.eu.org/list');
     Response := HttpClient.Get('http://localhost/list');
     if Response.StatusCode = 200 then
     begin

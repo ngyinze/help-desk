@@ -18,7 +18,7 @@ object FormSelectHelp: TFormSelectHelp
   object listView: TdxListViewControl
     Left = 8
     Top = 33
-    Width = 369
+    Width = 367
     Height = 253
     Anchors = [akLeft, akTop, akRight, akBottom]
     Fonts.AssignedValues = [Item]
@@ -31,9 +31,11 @@ object FormSelectHelp: TFormSelectHelp
     TabOrder = 0
     ViewStyle = List
     OnDblClick = listViewDblClick
+    ExplicitWidth = 365
+    ExplicitHeight = 245
   end
   object cxButton1: TcxButton
-    Left = 302
+    Left = 300
     Top = 8
     Width = 75
     Height = 25
@@ -41,5 +43,6 @@ object FormSelectHelp: TFormSelectHelp
     Caption = 'Hide'
     TabOrder = 1
     OnClick = StaticTxtDblClick
+    ExplicitLeft = 298
   end
 end

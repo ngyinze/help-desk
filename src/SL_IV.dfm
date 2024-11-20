@@ -557,15 +557,6 @@ object FormSL_IV: TFormSL_IV
     Caption = #10133
     TabOrder = 14
   end
-  object cxButton3: TcxButton
-    Left = 928
-    Top = 49
-    Width = 75
-    Height = 25
-    Caption = 'Open'
-    TabOrder = 18
-    OnClick = cxButton3Click
-  end
   object AdornerMng: TdxUIAdornerManager
     Badges.Font.Charset = DEFAULT_CHARSET
     Badges.Font.Color = clWindowText

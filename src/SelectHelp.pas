@@ -12,7 +12,7 @@ uses
   Adorner, cxButtons;
 
 type
-  TConfig = procedure(AItem: Integer; ATopic: string) of object;
+  TConfig = procedure(AInterface, AItem: Integer) of object;
 
   TFormSelectHelp = class(TForm)
     listView: TdxListViewControl;
@@ -23,8 +23,10 @@ type
   private
     FApplyAdorner: TConfig;
     FAdornerManager: TAdornerManager;
+    FName: string;
   public
-    constructor Create(AOwner: TComponent; AAdorner: TAdornerManager); reintroduce;
+    constructor Create(AOwner: TComponent; AAdorner: TAdornerManager;
+                        AFormName: string); reintroduce;
     property Config: TConfig read FApplyAdorner write FApplyAdorner;
   end;
 
@@ -32,24 +34,35 @@ implementation
 
 {$R *.dfm}
 
-constructor TFormSelectHelp.Create(AOwner: TComponent; AAdorner: TAdornerManager);
+var FormIDX: Integer;
+
+constructor TFormSelectHelp.Create(AOwner: TComponent;
+              AAdorner: TAdornerManager; AFormName: string);
 begin
   inherited Create(AOwner);
   FAdornerManager := AAdorner;
+  FName := AFormName;
 end;
 
 procedure TFormSelectHelp.FormShow(Sender: TObject);
 var
-  TopicObj: TJSONObject;
   O: TObject;
 begin
+  var D := FAdornerManager.Config.Dataset;
   O := TObject.Create;
   try
     listView.Clear;
-    for var I := 0 to FAdornerManager.Config.Count - 1 do
+    for var I := 0 to High(D) do
     begin
-      TopicObj := FAdornerManager.Config.Items[I] as TJSONObject;   //Initialize list view
-      listView.AddItem(TopicObj.GetValue<string>('name'),O);
+      if D[i].interface_ = FName then
+      begin
+        for var J := 0 to High(D[I].Topic) do
+        begin
+          FormIdx := I;
+          listView.AddItem(D[I].Topic[J].Name, O);
+        end;
+        Exit;
+      end;
     end;
   finally
     O.Free;
@@ -67,7 +80,7 @@ begin
 
   if Assigned(Item) then
   begin
-    FApplyAdorner(Item.Index, Item.Caption);
+    FApplyAdorner(FormIdx, Item.Index);
     if Assigned(FAdornerManager) then FAdornerManager.Show;
   end;
   Close;

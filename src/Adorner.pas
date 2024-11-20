@@ -5,21 +5,21 @@ interface
 uses
   System.Net.HttpClient, System.JSON, System.Classes,
   System.SysUtils, Vcl.Controls,
-  dxUIAdorners;
+  dxUIAdorners, AdornerJSON;
 
 type
   TAdornerConfiguration = class
   private
     FTopicObj: TJSONObject;
-    FArray: TJSONArray;
+    FArray: TFormArray;
   public
     constructor Create;
     destructor Destroy; override;
     function BuildJsonArray(AFormName, ATopic: string): TJsonArray;
-    procedure FetchAdornerConfig(const AFormName: string);
+    procedure FetchAdornerConfig;
     function GetJsonArray(AKey: string): TJSONArray;
     property Topic: TJSONObject read FTopicObj write FTopicObj;
-    property Config: TJSONArray read FArray write FArray;
+    property Config: TFormArray read FArray write FArray;
   end;
 
   TAdornerManager = class(TAdornerConfiguration)
@@ -113,7 +113,7 @@ begin
 
 end;
 
-procedure TAdornerConfiguration.FetchAdornerConfig(const AFormName: string);
+procedure TAdornerConfiguration.FetchAdornerConfig;
 var
   HttpClient: THttpClient;
   Response: IHTTPResponse;
@@ -121,14 +121,12 @@ var
 begin
   HttpClient := THttpClient.Create;
   try
-    HttpClient.CustomHeaders['App-Version'] := 'v1';
-    HttpClient.CustomHeaders['Form'] := AFormName;
-//    Response := HttpClient.Get('http://az.yinze.eu.org/list');
-    Response := HttpClient.Get('http://localhost/list');
+    Response := HttpClient.Get('http://localhost/');     //change to github link
     if Response.StatusCode = 200 then
     begin
       JSONData := Response.ContentAsString();
-      FArray := TJSONObject.ParseJSONValue(JSONData) as TJSONArray;
+      TJSONMapper<TFormArray>.SetDefaultLibrary('System.JSON.Serializers');
+      FArray := TFormArray.FromJSON(JSONData);
     end
     else
       FArray := nil;

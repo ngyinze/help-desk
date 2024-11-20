@@ -7,8 +7,8 @@ uses
   Browser in '..\src\Browser.pas',
   SelectHelp in '..\src\SelectHelp.pas' {FormSelectHelp},
   Adorner in '..\src\Adorner.pas',
-  ST_ITEM in '..\src\ST_ITEM.pas' {ST_ITEM},
-  MidasLib;
+  MidasLib,
+  AdornerJSON in '..\src\AdornerJSON.pas';
 
 {$R *.res}
 
@@ -17,5 +17,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFormSL_IV, FormSL_IV);
+  //  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

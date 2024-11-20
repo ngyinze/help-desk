@@ -1,7 +1,9 @@
 server {
     listen 80;
 
-    root /var/www/static;
+    root /var/www/static/;
+
+    server_name az.yinze.eu.org;
 
     location /list {
         autoindex on;
@@ -32,6 +34,12 @@ server {
 
     location ~* \.(webp|png|jpg) {
         add_header Cache-Control "public, max-age=3600, must-revalidate, no-transform";
+    }
+
+    location /resource {
+        alias /var/www/static;
+        autoindex off;
+        try_files $uri =404;   
     }
 }
 

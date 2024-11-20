@@ -193,19 +193,16 @@ type
     cxGrid1DBTableView1INITIALPURCHASECOST1: TcxGridDBColumn;
     cxGrid1DBTableView1CHANGED1: TcxGridDBColumn;
     cxGrid1DBTableView1CompanyItemCode1: TcxGridDBColumn;
-    cxButton3: TcxButton;
     procedure FormDestroy(Sender: TObject);
     procedure Guide1Click(Sender: TObject);
     procedure AdornerMngBadgeClick(AManager: TdxUIAdornerManager; AAdorner: TdxCustomAdorner);
     procedure dxBarButton1Click(Sender: TObject);
-    procedure cxButton3Click(Sender: TObject);
   private
   var
     FAdornerConfig: TAdornerConfiguration;
     FAdorner: TAdornerManager;
-    FBuiltJson: TJsonArray; //TODO: CHANGE BETTER NAME
   public
-    procedure ApplyAdornerConfig(AItem: Integer; ATopic: string);
+    procedure ApplyAdornerConfig(AInterface, AItem: Integer);
   end;
 
   var
@@ -216,12 +213,13 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Net.HttpClient, St_item;
+  System.Net.HttpClient;
+
+var FormIdx, TopicIdx: integer;
 
 procedure TFormSL_IV.FormDestroy(Sender: TObject);
 begin
   FAdorner.Free;
-  FBuiltJson.Free;
 end;
 
 procedure TFormSL_IV.Guide1Click(Sender: TObject);
@@ -242,10 +240,9 @@ begin
   begin
     FAdornerConfig := TAdornerConfiguration.Create;
     FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
-    FAdorner.FetchAdornerConfig(Self.Name);
+    FAdorner.FetchAdornerConfig;
   end;
-
-  FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);
+  FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner, Self.Name);
   FormSelectHelp.Config := ApplyAdornerConfig;
   try
     FormSelectHelp.ShowModal;
@@ -254,54 +251,44 @@ begin
   end;
 end;
 
-procedure TFormSL_IV.ApplyAdornerConfig(AItem: Integer; ATopic: string);
+procedure TFormSL_IV.ApplyAdornerConfig(AInterface, AItem: Integer);
 var
   AdornerObj: TJSONObject;
   Adorner: TdxBadge;
   Component: TComponent;
   TargetElementName, Text: string;
 begin
+  var ITopic := FAdorner.Config.Dataset[AInterface].Topic[AItem];
+  FormIdx := AInterface;
+  TopicIdx := AItem;
   AdornerMng.Badges.Clear;
-  if Assigned(FBuiltJson) then FBuiltJson.Free;    //When user changing guide
-  FBuiltJson := FAdorner.BuildJsonArray(Self.Name, ATopic);
 
-  for var I := 0 to FBuiltJson.Count - 1 do
+  for var I := 0 to High(ITopic.Content) do
   begin
-    AdornerObj := FBuiltJson.Items[I] as TJSONObject;
-    TargetElementName := AdornerObj.GetValue<string>('targetElement');
-    Component := FindComponent(TargetElementName);
-    if Assigned(Component) and (Component is TWinControl) then
     begin
-      Adorner := AdornerMng.Badges.Add;
-      (Adorner.TargetElement as TdxAdornerTargetElementControl).Control := TWinControl(Component);
-      Adorner.Text := AdornerObj.GetValue<string>('text', Text);
-      Adorner.Tag := I;
-      Adorner.OnClick := AdornerMngBadgeClick;
+      TargetElementName := ITopic.Content[I].Component;
+      Component := FindComponent(TargetElementName);
+      if Assigned(Component) and (Component is TWinControl) then
+      begin
+        Adorner := AdornerMng.Badges.Add;
+        (Adorner.TargetElement as TdxAdornerTargetElementControl).Control :=
+                                                    TWinControl(Component);
+        Adorner.Text := (I+1).ToString;
+        Adorner.Tag := I;
+        Adorner.OnClick := AdornerMngBadgeClick;
+      end;
     end;
-  end;
-end;
-
-procedure TFormSL_IV.cxButton3Click(Sender: TObject);
-var
-  MyClass: TST_Item;
-begin
-  MyClass := TSt_item.Create(Self);
-  try
-    MyClass.ShowModal;
-  finally
-    MyClass.Free;
   end;
 end;
 
 procedure TFormSL_IV.AdornerMngBadgeClick(AManager: TdxUIAdornerManager;
     AAdorner: TdxCustomAdorner);
 var
-  A: TJsonObject;
   IURL, ITitle: string;
 begin
-  A := FBuiltJson.Items[AAdorner.Tag] as TJSONObject;
-  IURL := A.GetValue<string>('url');
-  ITitle := A.GetValue<string>('title');
+  var A := FAdorner.Config.Dataset[FormIdx].Topic[TopicIdx].Content[AAdorner.Tag];
+  IURL := A.object_;
+  ITitle := A.name;
   TFormBrowser.Create(Application, IURl, ITitle).Show;
 end;
 

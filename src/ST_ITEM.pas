@@ -131,7 +131,7 @@ begin
   begin
     FAdornerConfig := TAdornerConfiguration.Create;
     FAdorner := TAdornerManager.Create(AdornerMng, FAdornerConfig);
-    FAdorner.FetchAdornerConfig(Self.Name);
+    FAdorner.FetchAdornerConfig;
   end;
 
   FormSelectHelp := TFormSelectHelp.Create(Self, FAdorner);

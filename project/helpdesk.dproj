@@ -4,7 +4,7 @@
         <ProjectVersion>20.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <ProjectName Condition="'$(ProjectName)'==''">helpdesk</ProjectName>
         <TargetedPlatforms>3</TargetedPlatforms>
@@ -137,9 +137,7 @@
             <Form>FormSelectHelp</Form>
         </DCCReference>
         <DCCReference Include="..\src\Adorner.pas"/>
-        <DCCReference Include="..\src\ST_ITEM.pas">
-            <Form>ST_ITEM</Form>
-        </DCCReference>
+        <DCCReference Include="..\src\AdornerJSON.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

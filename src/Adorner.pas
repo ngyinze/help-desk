@@ -5,7 +5,7 @@ interface
 uses
   System.Net.HttpClient, System.JSON, System.Classes,
   System.SysUtils, Vcl.Controls,
-  dxUIAdorners, AdornerJSON;
+  dxUIAdorners, AdornerJSON, System.IOUtils;
 
 type
   TAdornerConfiguration = class
@@ -116,20 +116,40 @@ end;
 procedure TAdornerConfiguration.FetchAdornerConfig;
 var
   HttpClient: THttpClient;
+  FileStream: TFileStream;
   Response: IHTTPResponse;
-  JSONData: string;
+  URL, Filepath, JSONData: string;
 begin
   HttpClient := THttpClient.Create;
+  URL := 'https://raw.githubusercontent.com/ngyinze/help-desk-static/refs/heads/main/output.json?ref=v2.0.0';
+  Filepath :=  TPath.Combine(TPath.GetTempPath(), 'output.json');
   try
-    Response := HttpClient.Get('https://raw.githubusercontent.com/ngyinze/help-desk-static/refs/heads/main/output.json?ref=v2.0.0/');     //change to github link
-    if Response.StatusCode = 200 then
-    begin
-      JSONData := Response.ContentAsString();
-      TJSONMapper<TFormArray>.SetDefaultLibrary('System.JSON.Serializers');
-      FArray := TFormArray.FromJSON(JSONData);
-    end
-    else
-      FArray := nil;
+    try
+      Response := HttpClient.Get(URL);     //change to github link
+
+      if Response.StatusCode = 200 then
+      begin
+        JSONData := Response.ContentAsString();
+        TJSONMapper<TFormArray>.SetDefaultLibrary('System.JSON.Serializers');
+        FArray := TFormArray.FromJSON(JSONData);
+        FileStream := TFileStream.Create(Filepath, fmCreate);
+        try
+          FileStream.WriteBuffer(Pointer(JSONData)^, Length(JSONData) * SizeOf(Char));
+        finally
+          FileStream.Free;
+        end;
+      end
+    except
+      if TFile.Exists(Filepath) then
+      begin
+        JSONData := TFile.ReadAllText(Filepath, TEncoding.UTF8);
+        JSONData := StringReplace(JSONData, #0, '', [rfReplaceAll]);
+        TJSONMapper<TFormArray>.SetDefaultLibrary('System.JSON.Serializers');
+        FArray := TFormArray.FromJSON(JSONData);
+      end
+      else
+        FArray :=  TFormArray.Create;
+    end;
   finally
     HttpClient.Free;
   end;

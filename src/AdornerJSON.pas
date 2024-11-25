@@ -14,10 +14,12 @@ type
   TContent = class(TPersistent)
   private
     Fname: string;
+    FSequence: string;
     Fcomponent: string;
     Fobject_: string;
   public
     property name: string read Fname write Fname;
+    property sequence: string read FSequence write FSequence;
     property component: string read Fcomponent write Fcomponent;
     [JsonName('object')]
     property object_: string read Fobject_ write Fobject_;

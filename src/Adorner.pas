@@ -121,7 +121,7 @@ var
 begin
   HttpClient := THttpClient.Create;
   try
-    Response := HttpClient.Get('http://localhost/');     //change to github link
+    Response := HttpClient.Get('https://raw.githubusercontent.com/ngyinze/help-desk-static/refs/heads/main/output.json?ref=v2.0.0/');     //change to github link
     if Response.StatusCode = 200 then
     begin
       JSONData := Response.ContentAsString();

@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils,
-  System.Variants, System.Classes, VCL.Edge;
+  System.Variants, System.IOUtils, System.Classes, VCL.Edge,
+  System.Net.HttpClient;
 
 type
   TBrowser = class
@@ -17,6 +18,7 @@ type
   public
     constructor Create (ABrowser: TEdgeBrowser);
     procedure Load(AURL: string);
+    procedure CheckAndDownloadFile(const AURL, AFilePath: string);
 //    procedure Navigate();
   end;
 
@@ -24,8 +26,35 @@ implementation
 
 procedure TBrowser.Load(AURL: string);
 begin
-  var URL := 'https://az.yinze.eu.org/' + AURL;
-  FEdgeBrowser.Navigate(URL);
+  var lFilepath :=  TPath.Combine(TPath.GetTempPath(), AURL);
+  CheckAndDownloadFile(AURL, lFilepath);
+  FEdgeBrowser.Navigate(lFilepath);
+end;
+
+procedure TBrowser.CheckAndDownloadFile(const AURL, AFilePath: string);
+var
+  HttpClient: THttpClient;
+  FileStream: TFileStream;
+const
+  SourceLink: String = 'https://az.yinze.eu.org/';
+begin
+  if TFile.Exists(aFilePath) then
+  begin
+    Exit;
+  end;
+
+  // File doesn't exist, download it
+  HttpClient := THttpClient.Create;
+  try
+    FileStream := TFileStream.Create(aFilePath, fmCreate);
+    try
+      HttpClient.Get(SourceLink + AURL, FileStream);
+    finally
+      FileStream.Free;
+    end;
+  finally
+    HttpClient.Free;
+  end;
 end;
 
 procedure TBrowser.ChkBrowserInitialized(Sender: TCustomEdgeBrowser;

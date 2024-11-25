@@ -273,7 +273,7 @@ begin
         Adorner := AdornerMng.Badges.Add;
         (Adorner.TargetElement as TdxAdornerTargetElementControl).Control :=
                                                     TWinControl(Component);
-        Adorner.Text := (I+1).ToString;
+        Adorner.Text := ITopic.Content[I].Sequence;
         Adorner.Tag := I;
         Adorner.OnClick := AdornerMngBadgeClick;
       end;
